@@ -1,0 +1,96 @@
+#
+#                              ITF1788
+#
+#   Interval Test Framework for IEEE 1788 Standard for Interval Arithmetic
+#
+#
+#   Copyright 2014
+#
+#   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+#   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#
+#   Department of Computer Science
+#   University of Wuerzburg, Germany
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+#
+# The full name of the language.
+#
+name:
+
+#
+# The file extension of the generated tests,
+# preceded by a dot, e.g. '.cpp'.
+#
+extension:
+
+#
+# Translation of the boolean values.
+#
+boolean_true:
+boolean_false:
+
+#
+# Translation of different data types.
+#
+double_type:
+float_type :
+long_double_type:
+
+#
+# The prefix which initiates a single line comment.
+#
+line_comment_token:
+
+#
+# The prefix of a block comment.
+#
+block_comment_start:
+
+#
+# The prefix of the various lines in a block comment.
+#
+block_comment_intermediate:
+
+#
+# The suffix which ends a block comment.
+#
+block_comment_end:
+
+#
+# The suffix of a statement, e.g. an assert statement.
+#
+line_end_token:
+
+#
+# Imports specific to the language
+#
+imports:
+
+#
+# Tokens used for proper indentation.
+# The ITF supports three levels of indentation:
+#   - the basic level where imports are inserted
+#   - a second level where testcases start
+#   - a third level where assert statements are inserted
+#
+# The token "spaces_indent" specifies the number of whitespace
+# charakters a block shall be indented as a natural number.
+# The tokens "indent_testcases" and "indent_tests" may be either
+# "true" or "false", depending on whether or not these blocks
+# shall be indented or not.
+#
+spaces_indent:
+indent_testcases:
+indent_tests:
