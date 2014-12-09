@@ -148,7 +148,7 @@ class ConsoleParser(optparse.OptionParser):
                               if os.path.isfile(os.path.join(options.sourceDir,
                                                              f))
                               if re.match(options.fileRegex, f)]
-            testFiles = list(filter(lambda f: f.endswith('.tst'), testFiles))
+            testFiles = list(filter(lambda f: f.endswith('.itl'), testFiles))
             return testFiles
             
         def _checkSrcDir(self, options):
