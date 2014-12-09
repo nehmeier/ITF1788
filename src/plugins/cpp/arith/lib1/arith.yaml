@@ -1,0 +1,175 @@
+#
+#                              ITF1788
+#
+#   Interval Test Framework for IEEE 1788 Standard for Interval Arithmetic
+#
+#
+#   Copyright 2014
+#
+#   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+#   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#
+#   Department of Computer Science
+#   University of Wuerzburg, Germany
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+# intervals
+nai_interval_double: I<double>::nai()
+nai_interval_float: I<float>::nai()
+
+empty_interval_double: I<double>::empty()
+empty_interval_float: I<float>::empty()
+
+entire_interval_double: I<double>::entire()
+entire_interval_float: I<float>::entire()
+
+decorated_empty_interval_double: I<double>::empty($DEC)
+decorated_empty_interval_float: I<float>::empty($DEC)
+
+decorated_entire_interval_double: I<double>::entire($DEC)
+decorated_entire_interval_float: I<float>::entire($DEC)
+
+point_interval_double: I<double>(${ARG1})
+point_interval_float: I<float>($ARG1})
+
+inf_sup_interval_double: I<double>(${ARG1}, ${ARG2})
+inf_sup_interval_float: I<float>($ARG1, $ARG2)
+
+decorated_point_interval_double: I<double>(${ARG1}, ${DEC})
+decorated_point_interval_float: I<float>($ARG1, $DEC)
+
+decorated_inf_sup_interval_double: I<double>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_float: I<float>($ARG1, $ARG2, $DEC)
+
+
+# interval decorators
+decorator_com: p1788::decoration::decoration::com
+decorator_def: p1788::decoration::decoration::def
+decorator_dac: p1788::decoration::decoration::dac
+decorator_ill: p1788::decoration::decoration::ill
+decorator_trv: p1788::decoration::decoration::trv
+
+
+# overlap literal translations
+overlap_bothEmpty: Overlap.BothEmpty
+overlap_firstEmpty: Overlap.FirstEmpty
+overlap_secondEmpty: Overlap.SecondEmpty
+overlap_before: Overlap.Before
+overlap_meets: Overlap.Meets
+overlap_overlaps: Overlap.Overlaps
+overlap_starts: Overlap.Starts
+overlap_containedBy: Overlap.ContainedBy
+overlap_finishes: Overlap.Finishes
+overlap_equal: Overlap.Equal
+overlap_finishedBy: Overlap.FinishedBy
+overlap_contains: Overlap.Contains
+overlap_startedBy: Overlap.StartedBy
+overlap_overlappedBy: Overlap.OverlappedBy
+overlap_metBy: Overlap.MetBy
+overlap_after: Overlap.After
+
+
+# operations
+op_pos*: |
+    pos($ARG1)
+    +$ARG1
+op_neg*: |
+    neg($ARG1)
+    -$ARG1
+op_add*: |
+    add($ARG1, $ARG2)
+    $ARG1 + $ARG2
+op_sub*: |
+    sub($ARG1, $ARG2)
+    $ARG1 - $ARG2
+op_mul*: |
+    mul($ARG1, $ARG2)
+    $ARG1 * $ARG2
+op_div*: |
+    div($ARG1, $ARG2)
+    $ARG1 / $ARG2
+op_recip*: recip($ARG1)
+op_sqr*: sqr($ARG1)
+op_sqrt*: sqrt($ARG1)
+op_fma*: fma($ARG1, $ARG2, $ARG3)
+op_pown*: pown($ARG1, $ARG2)
+op_exp*: exp($ARG1)
+op_exp2*: exp2($ARG1)
+op_exp10*: exp10($ARG1)
+op_log*: log($ARG1)
+op_log2*: log2($ARG1)
+op_log10*: log10($ARG1)
+op_sin*: sin($ARG1)
+op_cos*: cos($ARG1)
+op_tan*: tan($ARG1)
+op_asin*: asin($ARG1)
+op_acos*: acos($ARG1)
+op_atan*: atan($ARG1)
+op_sinh*: sinh($ARG1)
+op_cosh*: cosh($ARG1)
+op_tanh*: tanh($ARG1)
+op_asinh*: asinh($ARG1)
+op_acosh*: acosh($ARG1)
+op_atanh*: atanh($ARG1)
+op_sign*: sign($ARG1)
+op_ceil*: ceil($ARG1)
+op_floor*: floor($ARG1)
+op_trunc*: trunc($ARG1)
+op_round_ties_to_even*: round_ties_to_even($ARG1)
+op_round_ties_to_away*: round_ties_to_away($ARG1)
+op_abs*: abs($ARG1)
+op_min*: min($ARG1, $ARG2)
+op_max*: max($ARG1, $ARG2)
+
+op_subset*: subset($ARG1, $ARG2)
+
+op_divpair<<interval<double>,interval<float>>><interval<float>,interval<double>>: |
+    dffd_div_to_pair($ARG1, $ARG2).first
+    ---NO
+    dffd_div_to_pair($ARG1, $ARG2).second
+
+op_divpair<<interval<double>,interval<double>>><*>: |
+    double_out_div_to_pair($ARG1, $ARG2).first
+    ---NO
+    double_out_div_to_pair($ARG1, $ARG2).second
+    
+op_divpair<<*>><interval<float>,interval<float>>: |
+    float_in_div_to_pair($ARG1, $ARG2).first
+    ---NO
+    float_in_div_to_pair($ARG1, $ARG2).second
+    
+op_divpair<<*>>><interval<double>,interval<double>>: |
+    double_in_div_to_pair($ARG1, $ARG2).first
+    ---NO
+    double_in_div_to_pair($ARG1, $ARG2).second
+
+op_divpair*: |
+    div_to_pair($ARG1, $ARG2).first
+    ---NO
+    div_to_pair($ARG1, $ARG2).second
+#infinity
+infinity_plus_double: INF
+infinity_plus_float: ((float) INF)
+infinity_minus_double: (-INF)
+infinity_minus_float: (-(float) INF)
+
+# misc
+imports: |
+    template<typename T>
+    using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
+
+    template<typename T>
+    using I = p1788::infsup::interval<T, flavor>;
+    
+    const double INF = std::numeric_limits<double>::infinity();

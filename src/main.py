@@ -1,3 +1,29 @@
+#
+#                              ITF1788
+#
+#   Interval Test Framework for IEEE 1788 Standard for Interval Arithmetic
+#
+#
+#   Copyright 2014
+#
+#   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+#   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#
+#   Department of Computer Science
+#   University of Wuerzburg, Germany
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
 import dslparser
 import testAST
 import discovery
@@ -23,7 +49,8 @@ class ConsoleParser(optparse.OptionParser):
             '''
             super(ConsoleParser, self).__init__()
             self.add_option("-s", "--sourceDirectory", dest="sourceDir",
-                     default='.',#??? check for operating systems other than linux
+                     # TODO: check for operating systems other than linux
+                     default='.',
                      help="Directory with DSL tests")
 
             self.add_option("-f", "--fileRegex", dest="fileRegex",
@@ -36,6 +63,9 @@ class ConsoleParser(optparse.OptionParser):
             self.add_option("-o", "--outputDirectory", dest="outDir",
                             default="out",
                             help="Output directory for generated files")
+                            
+            self.add_option("-v", "--verbose", action="store_true",
+                            dest="verbose")
         
                      
         def processConsoleParameters(self):
@@ -48,6 +78,7 @@ class ConsoleParser(optparse.OptionParser):
             self.specList = self._buildSpecList(options)
             self.testFiles = self._buildTestFileList(options)
             self.outDir = options.outDir
+            self.verbose = options.verbose
         
         def _buildSpecList(self, options):
             '''
@@ -149,6 +180,9 @@ class ConsoleParser(optparse.OptionParser):
                     Examples:
                     -- print help
                     python3 main.py -h
+                    
+                    -- verbose output
+                    python3 main.py -v ...
 
                     -- generate tests for all source files in "/tests/" and all
                        configurations
@@ -204,14 +238,13 @@ def main():
             writeFile = '.'.join(ntpath.basename(testfile).split('.')[:-1]) + \
                         out.lang_extension
             
-            print('Generating', writeFile, 'for specification', str((language,
-                                                                      testlib,
-                                                                      arithlib)),
-                  '...')    
+            if optParser.verbose:
+                print('Generating', writeFile, 'for specification',
+                      str((language, testlib, arithlib)), '...')    
             
             # generate output content by visiting the ast
             v = testAST.ASTVisitor(out, cbPath)
-            content = ast.accept(v)           
+            (content, warnings) = ast.accept(v)           
 
             # create output directory if it does not exist
             if not os.path.exists(writeDir):
@@ -219,12 +252,16 @@ def main():
 
             # write content
             open(writeDir + '/' + writeFile, 'w+').write(content)
-            print('Done.\n')
+            if optParser.verbose:
+                for warn in warnings:
+                    print(warn)
+                print('Done.\n')
             
     endTime = time.clock()
-    print('-'*80)
-    print('Generated output for', len(testFiles), 'testfiles in',
-          "%.2f" % round(endTime - startTime, 2), 'seconds.')
+    if optParser.verbose:
+        print('-'*80)
+        print('Generated output for', len(testFiles), 'testfiles in',
+              "%.2f" % round(endTime - startTime, 2), 'seconds.')
 
 # Run main method if this script is called directly
 if __name__ == '__main__':

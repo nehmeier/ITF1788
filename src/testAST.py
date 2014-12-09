@@ -1,3 +1,29 @@
+#
+#                              ITF1788
+#
+#   Interval Test Framework for IEEE 1788 Standard for Interval Arithmetic
+#
+#
+#   Copyright 2014
+#
+#   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+#   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#
+#   Department of Computer Science
+#   University of Wuerzburg, Germany
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
 """This module contains classes to model an AST."""
 
 from string import Template
@@ -512,6 +538,7 @@ class ASTVisitor(object):
         self.out = outputSpecification
         self.cbPath = cbPath
         self.cbs = None
+        self.warnings = set()
 
         # import callback methods if callbacks.py exists
         if cbPath is not None:
@@ -819,15 +846,31 @@ class ASTVisitor(object):
         # build a list of inputs
         inputList = node.inputs.accept(self)
         
-        # concatenate input types to identify matching operations later
+        # concatenate input and output types to identify matching operations
         inputTypes = ','.join(n.getType() for n in node.inputs.literals)
+        
+        accurateTypes = None
+        tightestTypes = None
+        if node.accurateOutputs:
+            accurateTypes = ','.join(n.getType()
+                                     for n in node.accurateOutputs.literals)
+                                     
+        if node.tightestOutputs:
+            tightestTypes = ','.join(n.getType()
+                                     for n in node.tightestOutputs.literals)
+                                     
+        if accurateTypes and tightestTypes:
+            if accurateTypes != tightestTypes:
+                raise IOError('''types of accurate and tightest outputs may not
+                               differ''')
+        outputTypes = accurateTypes if accurateTypes else tightestTypes
 
-        # the constant part of an operation name
+        # the constant part of an operation name, e.g. 'arith_op_add'
         opPrefix = 'arith_op_' + node.opName.accept(self)
         
         # the full operation name, i.e. opPrefix followed by the types of
         # the parameters enclosed by angle brackets
-        opName = opPrefix + '<' + inputTypes + '>'
+        opName = opPrefix + '<<' + outputTypes + '>>' + '<' + inputTypes + '>'
         
         # if there is no exact match for the operation, try to find
         # a matching function which uses wildcards
@@ -1022,7 +1065,7 @@ class ASTVisitor(object):
 
         tmp = self.replaceTokenList(tmp, 'TESTCASES', rplList, delim="\n\n")
 
-        return tmp
+        return (tmp, self.warnings)
 
     def replaceToken(self, text, token, replacement):
         """
@@ -1145,6 +1188,6 @@ class ASTVisitor(object):
             if re.match(el.replace('*', '.*'), opName):
                 return el
 
-        print('WARNING: no matching operation found for operation ' + opName +
-              ', language ' + self.out.lang_name)
+        self.warnings.add('WARNING: no matching operation found for operation '+
+                          opName + ', language ' + self.out.lang_name)
         return None
