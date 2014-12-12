@@ -134,7 +134,7 @@ op_max*: max($ARG1, $ARG2)
 op_subset*: subset($ARG1, $ARG2)
 op_divpair*: |
     div_to_pair($ARG1, $ARG2).first
-    ---NO
+    *** next output
     div_to_pair($ARG1, $ARG2).second
 #infinity
 infinity_plus_double: INF

@@ -889,7 +889,7 @@ class ASTVisitor(object):
             opText = self.replaceToken(opText, 'ARG' + str(i + 1), inputList[i])
         
         # group the operation text by the output
-        xxs = opText.split('\n---NO\n')
+        xxs = opText.split('\n*** next output\n')
         
         xxs = [list(filter(lambda s: s != "", el.split('\n')))
                for el in xxs]       
