@@ -131,29 +131,7 @@ op_round_ties_to_away*: round_ties_to_away($ARG1)
 op_abs*: abs($ARG1)
 op_min*: min($ARG1, $ARG2)
 op_max*: max($ARG1, $ARG2)
-
 op_subset*: subset($ARG1, $ARG2)
-
-op_divpair<<interval<double>,interval<float>>><interval<float>,interval<double>>: |
-    dffd_div_to_pair($ARG1, $ARG2).first
-    ---NO
-    dffd_div_to_pair($ARG1, $ARG2).second
-
-op_divpair<<interval<double>,interval<double>>><*>: |
-    double_out_div_to_pair($ARG1, $ARG2).first
-    ---NO
-    double_out_div_to_pair($ARG1, $ARG2).second
-    
-op_divpair<<*>><interval<float>,interval<float>>: |
-    float_in_div_to_pair($ARG1, $ARG2).first
-    ---NO
-    float_in_div_to_pair($ARG1, $ARG2).second
-    
-op_divpair<<*>>><interval<double>,interval<double>>: |
-    double_in_div_to_pair($ARG1, $ARG2).first
-    ---NO
-    double_in_div_to_pair($ARG1, $ARG2).second
-
 op_divpair*: |
     div_to_pair($ARG1, $ARG2).first
     ---NO
