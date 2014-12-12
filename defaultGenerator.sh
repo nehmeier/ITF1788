@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ITF1788_HOME=$(pwd)
 cd ${ITF1788_HOME}/src
