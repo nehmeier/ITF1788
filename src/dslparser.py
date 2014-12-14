@@ -437,22 +437,22 @@ def p_emptyInterval(t):
     t[0] = EmptyIntervalNode()
     suffix = t[2][-1]
     if suffix == 'F':
-        t[0].setDataType('float')
+        t[0].setDataType('interval<float>')
     elif suffix == 'L':
-        t[0].setDataType('long_double')
+        t[0].setDataType('interval<long_double>')
     else:
-        t[0].setDataType('double')
+        t[0].setDataType('interval<double>')
 
 def p_entireInterval(t):
     '''entireInterval : "[" ENTIRE "]"'''
     t[0] = EntireIntervalNode()
     suffix = t[2][-1]
     if suffix == 'F':
-        t[0].setDataType('float')
+        t[0].setDataType('interval<float>')
     elif suffix == 'L':
-        t[0].setDataType('long_double')
+        t[0].setDataType('interval<long_double>')
     else:
-        t[0].setDataType('double')
+        t[0].setDataType('interval<double>')
 
 
 def p_notAnInterval(t):
@@ -460,11 +460,11 @@ def p_notAnInterval(t):
     t[0] = NotAnIntervalNode()
     suffix = t[2][-1]
     if suffix == 'F':
-        t[0].setDataType('float')
+        t[0].setDataType('interval<float>')
     elif suffix == 'L':
-        t[0].setDataType('long_double')
+        t[0].setDataType('interval<long_double>')
     else:
-        t[0].setDataType('double')
+        t[0].setDataType('interval<double>')
 
 
 def p_decorationLiteral(t):

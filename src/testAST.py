@@ -264,7 +264,7 @@ class NotAnIntervalNode(Node):
 
     def getType(self):
         """Return 'interval<double>' as the type of the node."""
-        return 'interval<double>'
+        return self.dataType
 
 
 class EmptyIntervalNode(Node):
@@ -295,7 +295,7 @@ class EmptyIntervalNode(Node):
 
     def getType(self):
         """Return 'interval<double>' as the type of the node."""
-        return 'interval<double>'
+        return self.dataType
 
 
 class EntireIntervalNode(Node):
@@ -326,7 +326,7 @@ class EntireIntervalNode(Node):
 
     def getType(self):
         """Return 'interval<double>' as the type of the node."""
-        return 'interval<double>'
+        return self.dataType
 
 
 class InfSupIntervalNode(Node):
@@ -687,7 +687,10 @@ class ASTVisitor(object):
         Arguments:
         node -- a NotAnIntervalNode object
         """
-        return getattr(self.out, 'arith_nai_interval_' + node.dataType)
+        # remove 'interval<' at the beginning and '>' at the end
+        innerDataType = node.getType()[9:][:-1]
+        
+        return getattr(self.out, 'arith_nai_interval_' + innerDataType)
 
     def visitEmptyIntervalNode(self, node):
         """
@@ -702,11 +705,14 @@ class ASTVisitor(object):
         Arguments:
         node -- an EmptyIntervalNode object.
         """
+        # remove 'interval<' at the beginning and '>' at the end
+        innerDataType = node.getType()[9:][:-1]
+        
         if node.decoration:
             tmpl = getattr(self.out,
-                           'arith_decorated_empty_interval_' + node.dataType)
+                           'arith_decorated_empty_interval_' + innerDataType)
             return self.replaceToken(tmpl, 'DEC', node.decoration.accept(self))
-        return getattr(self.out, 'arith_empty_interval_' + node.dataType)
+        return getattr(self.out, 'arith_empty_interval_' + innerDataType)
 
     def visitEntireIntervalNode(self, node):
         """
@@ -721,11 +727,14 @@ class ASTVisitor(object):
         Arguments:
         node -- an EntireIntervalNode object.
         """
+        # remove 'interval<' at the beginning and '>' at the end
+        innerDataType = node.getType()[9:][:-1]
+        
         if node.decoration:
             tmpl = getattr(self.out,
-                           'arith_decorated_entire_interval_' + node.dataType)
+                           'arith_decorated_entire_interval_' + innerDataType)
             return self.replaceToken(tmpl, 'DEC', node.decoration.accept(self))
-        return getattr(self.out, 'arith_entire_interval_' + node.dataType)
+        return getattr(self.out, 'arith_entire_interval_' + innerDataType)
 
     def visitInfSupIntervalNode(self, node):
         """
@@ -864,6 +873,7 @@ class ASTVisitor(object):
                 raise IOError('''types of accurate and tightest outputs may not
                                differ''')
         outputTypes = accurateTypes if accurateTypes else tightestTypes
+        print('Output types:', outputTypes)
 
         # the constant part of an operation name, e.g. 'arith_op_add'
         opPrefix = 'arith_op_' + node.opName.accept(self)
