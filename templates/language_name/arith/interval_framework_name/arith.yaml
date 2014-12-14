@@ -26,6 +26,15 @@
 
 #
 # Imports, constant definitions etc. for the header of the file
+# Example: "
+#           template<typename T>
+#           using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
+#           
+#           template<typename T>
+#           using I = p1788::infsup::interval<T, flavor>;
+#           
+#           const double INF = std::numeric_limits<double>::infinity();
+#          "
 #
 # TODO: rename this token
 #
@@ -33,6 +42,7 @@ imports:
 
 #
 # NaI constant for different data types.
+# Example: "I<double>::nai()" and "I<float>::nai()"
 #
 nai_interval_double: 
 nai_interval_float: 
@@ -61,6 +71,7 @@ infinity_minus_float:
 # Decorated empty interval for different data types.
 # Use the token ${DEC} where the translation of the decoration shall be
 # inserted.
+# Example: "I<double>::empty($DEC)" and "I<float>::empty($DEC)"
 #
 decorated_empty_interval_double:
 decorated_empty_interval_float:
@@ -84,6 +95,7 @@ point_interal_float:
 # Infsup interval for different data types.
 # Use the tokens ${ARG1} and ${ARG2} where the values of the boundaries shall
 # be inserted.
+# Example: "I<double>(${ARG1}, ${ARG2})" and "I<float>(${ARG1}, ${ARG2})"
 #
 inf_sup_interval_double:
 inf_sup_interval_float:

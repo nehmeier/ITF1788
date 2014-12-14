@@ -26,6 +26,9 @@
 
 #
 # Imports specific to the test library.
+# Write the imports the way you would write them in a source file of the target
+# language.
+# Example: "#include "test/util/boost_test_wrapper.hpp""
 #
 imports:
 
@@ -34,6 +37,12 @@ imports:
 # Use the tokens ${LANGUAGE_IMPORTS}, ${TESTLIB_IMPORTS} and ${ARITHLIB_IMPORTS}
 # where the respective imports shall be inserted.
 # Use the token ${TESTCASES} where the testcases shall be inserted.
+# Example: "
+#           $LANGUAGE_IMPORTS    
+#           $TESTLIB_IMPORTS
+#           $ARITHLIB_IMPORTS  
+#           $TESTCASES
+#          "
 #
 testfile_seq:
 
@@ -43,6 +52,13 @@ testfile_seq:
 # shall be inserted.
 # Use the token ${TC_NAME} where the name of the test case shall be inserted.
 # Use ${TESTS} where the sequence of tests in that testcase shall be inserted.
+# Example: "
+#           $COMMENTS
+#           BOOST_AUTO_TESTCASE($TC_NAME)
+#           {
+#           $TESTS
+#           }
+#          "
 #
 testcase_seq:
 
@@ -51,12 +67,17 @@ testcase_seq:
 # Use the token ${COMMENTS} where the comments of the test (if any) shall be
 # inserted.
 # Use the token ${ASSERTS} where the assert statements shall be inserted.
+# Example: "
+#           $COMMENTS
+#           $ASSERTS
+#          "
 #
 test_seq:
 
 #
 # Equality check of two values.
 # Use the tokens ${ARG1} and ${ARG2} for the arguments.
+# Example: "BOOST_CHECK_EQUAL($ARG1, $ARG2)"
 #
 assert_equals:
 
@@ -64,11 +85,13 @@ assert_equals:
 # Equality check of two values which, instead of aborting, merely genereates a
 # warning.
 # Use the tokens ${ARG1} and ${ARG2} for the arguments.
+# Example: "BOOST_WARN_EQUAL($ARG1, $ARG2)"
 #
 assert_equals_warning:
 
 #
 # Checks if a value is the boolean true.
 # Use ${ARG1} for the argument.
+# Example: "BOOST_CHECK($ARG1)"
 #
 assert_true:

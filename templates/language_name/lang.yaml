@@ -26,23 +26,27 @@
 
 #
 # The full name of the language.
+# Example: "C++"
 #
 name:
 
 #
 # The file extension of the generated tests,
-# preceded by a dot, e.g. '.cpp'.
+# preceded by a dot.
+# Example: ".cpp"
 #
 extension:
 
 #
 # Translation of the boolean values.
+# Example: "true" and "false"
 #
 boolean_true:
 boolean_false:
 
 #
 # Translation of different data types.
+# Example: "double", "float" and "long double"
 #
 double_type:
 float_type :
@@ -50,31 +54,39 @@ long_double_type:
 
 #
 # The prefix which initiates a single line comment.
+# Example: "//"
 #
 line_comment_token:
 
 #
 # The prefix of a block comment.
+# Example: "/*"
 #
 block_comment_start:
 
 #
 # The prefix of the various lines in a block comment.
+# Example: "*"
 #
 block_comment_intermediate:
 
 #
 # The suffix which ends a block comment.
+# Example: "*/"
 #
 block_comment_end:
 
 #
 # The suffix of a statement, e.g. an assert statement.
+# Example: ";"
 #
 line_end_token:
 
 #
 # Imports specific to the language
+# Write the imports the way you would write them in a source file of the target
+# language.
+# Example: "#include <cmath>"
 #
 imports:
 
