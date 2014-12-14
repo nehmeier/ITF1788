@@ -132,7 +132,7 @@ op_abs*: abs($ARG1)
 op_min*: min($ARG1, $ARG2)
 op_max*: max($ARG1, $ARG2)
 op_subset*: subset($ARG1, $ARG2)
-op_divpair*: |
+op_divToPair*: |
     div_to_pair($ARG1, $ARG2).first
     *** next output
     div_to_pair($ARG1, $ARG2).second
