@@ -93,10 +93,10 @@ class ConsoleParser(optparse.OptionParser):
             
             # regexes that are used to interpret the 'configurations'
             # console parameter
-            identRegex = r"'[a-zA-Z][a-zA-Z0-9_]*'"
+            identRegex = r"'[a-zA-Z](\s?[a-zA-Z0-9_])*'"
             wildcardRegex = r"'\*'"
-            specListRegex = r"\s*\(\s*'.+'\s*,\s*'.+'\s*,\s*'.+'\s*\)\s*" + \
-                            r"(\s*;\s*\(\s*'.+'\s*,\s*'.+'\s*,\s*'.+'\s*\)\s*)*"
+            specListRegex = r"\s*\(\s*.+\s*,\s*.+\s*,\s*.+\s*\)\s*" + \
+                            r"(\s*;\s*\(\s*.+\s*,\s*.+\s*,\s*.+\s*\)\s*)*"
             LTARegex = r"\s*\(\s*" + identRegex + r"\s*,\s*" + identRegex + \
                        r"\s*,\s*" + identRegex + r"\s*\)\s*"
             LTWRegex = r"\s*\(\s*" + identRegex + r"\s*,\s*" + identRegex + \
@@ -109,7 +109,20 @@ class ConsoleParser(optparse.OptionParser):
             if re.match(specListRegex, options.configurations):
                 # use configurations list parameter
                 tmp = options.configurations.split(';')
-                
+
+                # enclose tuple values in quotation marks, required for
+                # the makeTuple method
+                for i in range(0, len(tmp)):
+                    conf = tmp[i].strip()
+                    # remove parentheses and leading/trailing whitespace
+                    conf = conf[1:][:-1].strip()
+                    # get tuple values and remove leading/trailing whitespace
+                    vals = [v.strip() for v in conf.split(',')]
+                    # add quotation marks and concat again
+                    conf = '(' + ','.join(["'" + v + "'" for v in vals]) + ')'
+                    # replace original config
+                    tmp[i] = conf
+
                 try:
                     tmp = [makeTuple(el.strip()) for el in tmp]
                     valid = True
