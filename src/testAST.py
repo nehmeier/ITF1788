@@ -149,7 +149,7 @@ class IntegerLiteralNode(Node):
         """
         self.val = val
 
-    def setDataType(self, t):
+    def setType(self, t):
         """
         Set the data type of the node.
 
@@ -186,7 +186,7 @@ class FloatingPointNode(Node):
         """
         self.val = val
 
-    def setDataType(self, t):
+    def setType(self, t):
         """
         Set the data type of the node.
 
@@ -220,7 +220,7 @@ class InfinityLiteralNode(Node):
         """Initialize an InfinityLiteralNode by sign."""
         self.sign = sign
 
-    def setDataType(self, t):
+    def setType(self, t):
         """
         Set the datatype of the node.
 
@@ -253,7 +253,7 @@ class NotAnIntervalNode(Node):
 
     """A Node which represents NaI in the AST."""
 
-    def setDataType(self, t):
+    def setType(self, t):
         """
         Set the datatype of the node.
 
@@ -284,7 +284,7 @@ class EmptyIntervalNode(Node):
         """
         self.decoration = dec
 
-    def setDataType(self, t):
+    def setType(self, t):
         """
         Set the datatype of the node.
 
@@ -315,7 +315,7 @@ class EntireIntervalNode(Node):
         """
         self.decoration = dec
 
-    def setDataType(self, t):
+    def setType(self, t):
         """
         Set the datatype of the node.
 
@@ -873,7 +873,6 @@ class ASTVisitor(object):
                 raise IOError('''types of accurate and tightest outputs may not
                                differ''')
         outputTypes = accurateTypes if accurateTypes else tightestTypes
-        print('Output types:', outputTypes)
 
         # the constant part of an operation name, e.g. 'arith_op_add'
         opPrefix = 'arith_op_' + node.opName.accept(self)
