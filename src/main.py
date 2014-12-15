@@ -219,19 +219,19 @@ class ConsoleParser(optparse.OptionParser):
                     available option for that position shall be used.
 
                     -- generate tests for C++ only
-                    python3 main.py -s "../ITL files" -c "('cpp','*','*')"
+                    python3 main.py -s "../ITL files" -c "(cpp, *, *)"
 
                     -- generate tests for C++ and BOOST Test Library only
-                    python3 main.py -s "../ITL files" -c "('cpp','BOOST','*')"
+                    python3 main.py -s "../ITL files" -c "(cpp, BOOST, *)"
 
                     --generate tests for C++ and libieeep1788 only
-                    python3 main.py -s "../ITL files" -c "('cpp','*','libieeep1788')"
+                    python3 main.py -s "../ITL files" -c "(cpp, *, libieeep1788)"
 
-                    --generate tests for C++, BOOST Test library and lib1
-                    python3 main.py -s "../ITL files" -c "('cpp','BOOST','lib1')"
+                    --generate tests for C++, BOOST Test library and libieee1788
+                    python3 main.py -s "../ITL files" -c "(cpp, BOOST, libieee1788)"
 
                     --generate tests for C++ and Octave only
-                    python3 main.py -s "../ITL files" -c "('cpp','*','*');('octave','*','*')"
+                    python3 main.py -s "../ITL files" -c "(cpp, *, *); (octave, *, *)"
                     """)
 
 def main():            
