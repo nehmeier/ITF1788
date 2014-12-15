@@ -32,6 +32,7 @@ testfile_seq: |
     $LANGUAGE_IMPORTS    
     $TESTLIB_IMPORTS
     $ARITHLIB_IMPORTS  
+    $PREAMBLE
     $TESTCASES
 testcase_seq: |
     $COMMENTS

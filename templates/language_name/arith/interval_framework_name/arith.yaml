@@ -25,7 +25,12 @@
 #   limitations under the License.
 
 #
-# Imports, constant definitions etc. for the header of the file
+# Imports required for the IEEE 1788 implementation
+#
+imports:
+
+#
+# Anything else that your code requires, e.g. definitions of constants
 # Example: "
 #           template<typename T>
 #           using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
@@ -35,10 +40,7 @@
 #           
 #           const double INF = std::numeric_limits<double>::infinity();
 #          "
-#
-# TODO: rename this token
-#
-imports:
+preamble:
 
 #
 # NaI constant for different data types.

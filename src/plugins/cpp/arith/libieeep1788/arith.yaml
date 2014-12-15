@@ -143,7 +143,8 @@ infinity_minus_double: (-INF)
 infinity_minus_float: (-(float) INF)
 
 # misc
-imports: |
+imports: |  
+preamble: |
     template<typename T>
     using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
 

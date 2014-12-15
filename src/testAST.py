@@ -1047,6 +1047,7 @@ class ASTVisitor(object):
             "Test library imports"
         arithlibImportComment = self.out.lang_line_comment_token + \
             "Arithmetic library imports"
+        preambleComment = self.out.lang_line_comment_token + "Preamble"
 
         tmp = self.replaceToken(tmp, 'LANGUAGE_IMPORTS',
                                 (languageImportComment + '\n' +
@@ -1059,6 +1060,10 @@ class ASTVisitor(object):
         tmp = self.replaceToken(tmp, 'ARITHLIB_IMPORTS',
                                 (arithlibImportComment + '\n' +
                                     self.out.arith_imports).strip() + '\n')
+                                    
+        tmp = self.replaceToken(tmp, 'PREAMBLE',
+                                (preambleComment + '\n' +
+                                    self.out.arith_preamble).strip() + '\n')
 
         tmp = self.replaceToken(tmp, 'NAME',
                                 node.fileName.split('.')[0].title())
