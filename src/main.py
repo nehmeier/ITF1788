@@ -50,7 +50,7 @@ class ConsoleParser(optparse.OptionParser):
             super(ConsoleParser, self).__init__()
             self.add_option("-s", "--sourceDirectory", dest="sourceDir",
                      # TODO: check for operating systems other than linux
-                     default='.',
+                     default='../ITL files',
                      help="Directory with DSL tests")
 
             self.add_option("-f", "--fileRegex", dest="fileRegex",
@@ -61,7 +61,7 @@ class ConsoleParser(optparse.OptionParser):
                             help="""Specify the plugin configurations.""")
 
             self.add_option("-o", "--outputDirectory", dest="outDir",
-                            default="out",
+                            default="../output",
                             help="Output directory for generated files")
                             
             self.add_option("-v", "--verbose", action="store_true",
@@ -181,8 +181,11 @@ class ConsoleParser(optparse.OptionParser):
                     -- print help
                     python3 main.py -h
                     
-                    -- verbose output
-                    python3 main.py -v ...
+                    -- run ITF1788 with default source and output folder
+                    python3 main.py
+                    
+                    -- use verbose output
+                    python3 main.py -v
 
                     -- generate tests for all source files in "../ITL files" and
                        all configurations
@@ -217,6 +220,8 @@ class ConsoleParser(optparse.OptionParser):
 def main():            
     # measure run time
     startTime = time.clock()
+    
+    # parse console parameters
     optParser = ConsoleParser()
     optParser.processConsoleParameters()
     specList = optParser.specList
@@ -228,7 +233,7 @@ def main():
         # parse the current ITL file and build an abstract syntax tree
         ast = dslparser.parse(testfile)
         
-        # iterate over specification combinations
+        # iterate over configurations
         for language, testlib, arithlib in specList:
             spec = discovery.getSpecification(language, testlib, arithlib)
             out = lang.OutputSpecification(spec[0], spec[1], spec[2])
@@ -243,7 +248,7 @@ def main():
                 print('Generating', writeFile, 'for specification',
                       str((language, testlib, arithlib)), '...')    
             
-            # generate output content by visiting the ast
+            # generate output content by visiting the AST
             v = testAST.ASTVisitor(out, cbPath)
             (content, warnings) = ast.accept(v)           
 
