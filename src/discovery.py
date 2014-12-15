@@ -175,7 +175,6 @@ def getSpecListByLanguageAndTestLibrary(lang, testLib):
     ariths = getSubLibs(arithPath)
 
     for arith in ariths:
-        print(arith)
         specs += [(lang, testLib, arith)]
 
     return specs
