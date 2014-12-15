@@ -58,6 +58,7 @@ def getCbPath(lang):
     """
     path = '/'.join([PLUGIN_PATH, lang, 'callbacks.py'])
     if not exists(path):
+        # no error, callbacks are simply not used
         return None
     modulePath = path.replace('/', '.')
     modulePathStrippedExt = '.'.join(modulePath.split('.')[:-1])
@@ -78,10 +79,12 @@ def getLanguageSpecification(lang):
     """
     dirPath = '/'.join([PLUGIN_PATH, lang])
     if not exists(dirPath):
-        raise IOError(dirPath + ' does not exist.')
+        print('ERROR:', dirPath, 'dir not found.')
+        raise IOError()
     filePath = '/'.join([dirPath, 'lang.yaml'])
     if not exists(filePath):
-        raise IOError('lang.yaml file not found for language ' + lang)
+        print('ERROR: lang.yaml file not found for language', lang)
+        raise IOError()
     return yaml.load(open(filePath).read().strip())
 
 
@@ -100,11 +103,13 @@ def getTestLibSpecification(lang, testLib):
     """
     dirPath = '/'.join([PLUGIN_PATH, lang, 'test', testLib])
     if not exists(dirPath):
-        raise IOError(lang + ' dir not found.')
+        print('ERROR:', dirPath, 'dir not found.')
+        raise IOError()
     filePath = '/'.join([dirPath, 'test.yaml'])
     if not exists(filePath):
-        raise IOError('test.yaml file not found for language ' + lang +
-                      ', testlib ' + testLib)
+        print('ERROR: test.yaml file not found for language ', lang,
+                      ', testing framework ', testLib)
+        raise IOError()
     return yaml.load(open(filePath).read().strip())
 
 
@@ -123,11 +128,13 @@ def getArithLibSpecification(lang, arithLib):
     """
     dirPath = '/'.join([PLUGIN_PATH, lang, 'arith', arithLib])
     if not exists(dirPath):
-        raise IOError(lang + ' dir not found.')
+        print('ERROR:', dirPath, 'dir not found.')
+        raise IOError()
     filePath = '/'.join([dirPath, 'arith.yaml'])
     if not exists(filePath):
-        raise IOError('test.yaml file not found for language ' + lang +
-                      ', arithlib ' + arithLib)
+        print('ERROR: test.yaml file not found for language', lang,
+                      ', IEEE 1788 library ', arithLib)
+        raise IOError()
     return yaml.load(open(filePath).read().strip())
 
 
@@ -146,9 +153,15 @@ def getSpecList():
 
     for lang in langs:
         arithPath = PLUGIN_PATH + "/" + lang + "/arith/"
+        if not exists(arithPath):
+            print('ERROR: Can not get speclist: Path', arithPath, 'does not exist')
+            raise IOError()
         ariths = getSubLibs(arithPath)
 
         testPath = PLUGIN_PATH + "/" + lang + "/test/"
+        if not exists(testPath):
+            print('ERROR: Can not get speclist: Path', testPath, 'does not exist')
+            raise IOError()
         tests = getSubLibs(testPath)
 
         for test in tests:
@@ -172,6 +185,9 @@ def getSpecListByLanguageAndTestLibrary(lang, testLib):
     specs = []
 
     arithPath = PLUGIN_PATH + "/" + lang + "/arith/"
+    if not exists(arithPath):
+        raise IOError('Can not get speclist: Path', arithPath, 'does not exist')
+    
     ariths = getSubLibs(arithPath)
 
     for arith in ariths:
@@ -195,6 +211,9 @@ def getSpecListByLanguageAndArithmeticLibrary(lang, arithLib):
     specs = []
 
     testPath = PLUGIN_PATH + "/" + lang + "/test/"
+    if not exists(testPath):
+        raise IOError('Can not get speclist: Path', testPath, 'does not exist')
+        
     tests = getSubLibs(testPath)
 
     for test in tests:
@@ -217,9 +236,14 @@ def getSpecListByLanguage(lang):
     specs = []
 
     arithPath = PLUGIN_PATH + "/" + lang + "/arith/"
+    if not exists(arithPath):
+        raise IOError('Can not get speclist: Path', arithPath, 'does not exist')
+        
     ariths = getSubLibs(arithPath)
 
     testPath = PLUGIN_PATH + "/" + lang + "/test/"
+    if not exists(testPath):
+        raise IOError('Can not get speclist: Path', testPath, 'does not exist')
     tests = getSubLibs(testPath)
 
     for test in tests:
