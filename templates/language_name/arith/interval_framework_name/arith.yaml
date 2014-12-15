@@ -45,27 +45,32 @@ imports:
 # Example: "I<double>::nai()" and "I<float>::nai()"
 #
 nai_interval_double: 
-nai_interval_float: 
+nai_interval_float:
+nai_interval_long_double:
 
 #
 # Empty interval for different data types.
 #
 empty_interval_double:
-empty_interval_float: 
+empty_interval_float:
+empty_interval_long_double:
 
 #
 # Entire interval for different data types.
 #
 entire_interval_double: 
 entire_interval_float: 
+entire_interval_long_double:
 
 #
 # Positive and negative infinity literals for different data types
 #
 infinity_plus_double:
 infinity_plus_float:
+infinity_plus_long_double:
 infinity_minus_double:
 infinity_minus_float:
+infinity_minus_long_double:
 
 #
 # Decorated empty interval for different data types.
@@ -75,6 +80,7 @@ infinity_minus_float:
 #
 decorated_empty_interval_double:
 decorated_empty_interval_float:
+decorated_empty_interval_long_double:
 
 #
 # Decorated entire interval for different data types.
@@ -83,6 +89,7 @@ decorated_empty_interval_float:
 #
 decorated_entire_interval_double:
 decorated_entire_interval_float:
+decorated_entire_interval_long_double:
 
 #
 # Point interval for different data types.
@@ -90,6 +97,7 @@ decorated_entire_interval_float:
 #
 point_interval_double:
 point_interal_float:
+point_interal_long_double:
 
 #
 # Infsup interval for different data types.
@@ -99,6 +107,7 @@ point_interal_float:
 #
 inf_sup_interval_double:
 inf_sup_interval_float:
+inf_sup_interval_long_double:
 
 #
 # Decorated point interval for different data types.
@@ -107,6 +116,7 @@ inf_sup_interval_float:
 #
 decorated_point_interval_double:
 decorated_point_interval_float:
+decorated_point_interval_long_double:
 
 #
 # Decorated infsup interval for different data types.
@@ -115,6 +125,7 @@ decorated_point_interval_float:
 #
 decorated_inf_sup_interval_double:
 decorated_inf_sup_interval_float:
+decorated_inf_sup_interval_long_double:
 
 #
 # Interval decorations
