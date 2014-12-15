@@ -85,29 +85,33 @@ class ConsoleParser(optparse.OptionParser):
             Use the passed arguments and build a list of he configurations that
             shall be generated.
             '''
-            # these regexes are used to interpret the 'configurations'
+            # if no specific configurations are given, generate tests for all
+            # configurations
+            if options.configurations is None or options.configurations == '*':
+                return discovery.getSpecList()
+            
+            
+            # regexes that are used to interpret the 'configurations'
             # console parameter
             identRegex = r"'[a-zA-Z][a-zA-Z0-9_]*'"
             wildcardRegex = r"'\*'"
-            specListRegex = r"\('.+','.+','.+'\)(;\('.+','.+','.+'\))*"
-            LTARegex = r"\(" + identRegex + r", " + identRegex + r", " + \
-                identRegex + r"\)"
-            LTWRegex = r"\(" + identRegex + r", " + identRegex + r", " + \
-                wildcardRegex + r"\)"
-            LWARegex = r"\(" + identRegex + r", " + wildcardRegex + r", " + \
-                identRegex + r"\)"
-            LWWRegex = r"\(" + identRegex + r", " + wildcardRegex + r", " + \
-                wildcardRegex + r"\)"
+            specListRegex = r"\s*\(\s*'.+'\s*,\s*'.+'\s*,\s*'.+'\s*\)\s*" + \
+                            r"(\s*;\s*\(\s*'.+'\s*,\s*'.+'\s*,\s*'.+'\s*\)\s*)*"
+            LTARegex = r"\s*\(\s*" + identRegex + r"\s*,\s*" + identRegex + \
+                       r"\s*,\s*" + identRegex + r"\s*\)\s*"
+            LTWRegex = r"\s*\(\s*" + identRegex + r"\s*,\s*" + identRegex + \
+                       r"\s*,\s*" + wildcardRegex + r"\s*\)\s*"
+            LWARegex = r"\s*\(\s*" + identRegex + r"\s*,\s*" + wildcardRegex + \
+                       r"\s*,\s*" + identRegex + r"\s*\)\s*"
+            LWWRegex = r"\s*\(\s*" + identRegex + r"\s*,\s*" + wildcardRegex + \
+                       r"\s*,\s*" + wildcardRegex + r"\s*\)\s*"
 
-            if options.configurations is None or options.configurations == '*':
-                # generate tests for all specifications
-                specList = discovery.getSpecList()
-
-            elif re.match(specListRegex, options.configurations):
+            if re.match(specListRegex, options.configurations):
                 # use configurations list parameter
                 tmp = options.configurations.split(';')
+                
                 try:
-                    tmp = [makeTuple(el) for el in tmp]
+                    tmp = [makeTuple(el.strip()) for el in tmp]
                     valid = True
                 except:
                     valid = False
