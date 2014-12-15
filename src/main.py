@@ -184,33 +184,34 @@ class ConsoleParser(optparse.OptionParser):
                     -- verbose output
                     python3 main.py -v ...
 
-                    -- generate tests for all source files in "/tests/" and all
-                       configurations
-                    python3 main.py -s "/tests"
+                    -- generate tests for all source files in "../ITL files" and
+                       all configurations
+                    python3 main.py -s "../ITL files"
 
-                    -- like above, but use only tests starting with 'test'
-                    python3 main.py -s "/tests" -f "test.*"
+                    -- like above, but use only test files whose name starts
+                       with 'test'
+                    python3 main.py -s "../ITL files" -f "test.*"
 
-                    -- use output directory "/output"
-                    python3 main.py -s "/tests" -o "/outputs"
+                    -- use output directory "../outputs"
+                    python3 main.py -s "../ITL files" -o "../outputs"
 
                     In the following examples, a wildcard denotes that every
-                    possible option for that position shall be used.
+                    available option for that position shall be used.
 
                     -- generate tests for C++ only
-                    python3 main.py -s "/tests" -c "('cpp','*','*')"
+                    python3 main.py -s "../ITL files" -c "('cpp','*','*')"
 
                     -- generate tests for C++ and BOOST Test Library only
-                    python3 main.py -s "/tests" -c "('cpp','BOOST','*')"
+                    python3 main.py -s "../ITL files" -c "('cpp','BOOST','*')"
 
-                    --generate tests for C++ and the interval library "lib1" only
-                    python3 main.py -s "/tests" -c "('cpp','*','lib1')"
+                    --generate tests for C++ and libieeep1788 only
+                    python3 main.py -s "../ITL files" -c "('cpp','*','libieeep1788')"
 
                     --generate tests for C++, BOOST Test library and lib1
-                    python3 main.py -s "/tests" -c "('cpp','BOOST','lib1')"
+                    python3 main.py -s "../ITL files" -c "('cpp','BOOST','lib1')"
 
-                    --generate tests for C++ and Haskell only
-                    python3 main.py -s "/tests" -c "('cpp','*','*');('haskell','*','*')"
+                    --generate tests for C++ and Octave only
+                    python3 main.py -s "../ITL files" -c "('cpp','*','*');('octave','*','*')"
                     """)
 
 def main():            
