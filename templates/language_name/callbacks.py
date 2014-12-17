@@ -40,6 +40,13 @@ def cb_fpNum(val):
     return val
 
 #
+# Input: a string as defined in the ITL file
+# Output: the required representation of the string in the target test file
+#
+def cb_string(val):
+    return val
+
+#
 # Input: the string of a qualified identifier as defined in the ITL file
 # Output: the required representation for the target test file as a string
 #   
