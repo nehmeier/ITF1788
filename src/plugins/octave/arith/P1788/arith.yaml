@@ -1,0 +1,132 @@
+#
+#                              ITF1788
+#
+#   Interval Test Framework for IEEE 1788 Standard for Interval Arithmetic
+#
+#
+#   Copyright 2014
+#
+#   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+#   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#
+#   Department of Computer Science
+#   University of Wuerzburg, Germany
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+# intervals
+nai_interval_double: nai () 
+nai_interval_float: nai () 
+
+empty_interval_double: infsup ()
+empty_interval_float: infsup ()
+
+entire_interval_double: infsup (-inf, inf)
+entire_interval_float: infsup (-inf, inf)
+
+decorated_empty_interval_double: empty ($DEC)
+decorated_empty_interval_float: empty ($DEC)
+
+decorated_entire_interval_double: entire ($DEC)
+decorated_entire_interval_float: entire ($DEC)
+
+point_interval_double: infsup (${ARG1})
+point_interval_float: infsup ($ARG1})
+
+inf_sup_interval_double: infsup (${ARG1}, ${ARG2})
+inf_sup_interval_float: infsup ($ARG1, $ARG2)
+
+decorated_point_interval_double: infsup (${ARG1}, ${DEC})
+decorated_point_interval_float: infsup ($ARG1, $DEC)
+
+decorated_inf_sup_interval_double: infsup ($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_float: infsup ($ARG1, $ARG2, $DEC)
+
+
+# interval decorators
+decorator_com: decoration_com
+decorator_def: decoration_def
+decorator_dac: decoration_dac
+decorator_ill: decoration_ill
+decorator_trv: decoration_trv
+
+
+# overlap literal translations
+overlap_bothEmpty: overlap_BothEmpty
+overlap_firstEmpty: overlap_FirstEmpty
+overlap_secondEmpty: overlap_SecondEmpty
+overlap_before: overlap_Before
+overlap_meets: overlap_Meets
+overlap_overlap_: overlap_Overlaps
+overlap_starts: overlap_Starts
+overlap_containedBy: overlap_ContainedBy
+overlap_finishes: overlap_Finishes
+overlap_equal: overlap_Equal
+overlap_finishedBy: overlap_FinishedBy
+overlap_contains: overlap_Contains
+overlap_startedBy: overlap_StartedBy
+overlap_overlap_edBy: overlap_OverlappedBy
+overlap_metBy: overlap_MetBy
+overlap_after: overlap_After
+
+
+# operations
+op_pos*: +$ARG1
+op_neg*: -$ARG1
+op_add*: $ARG1 + $ARG2
+op_sub*: $ARG1 - $ARG2
+op_mul*: $ARG1 * $ARG2
+op_div*: $ARG1 / $ARG2
+op_recip*: inv ($ARG1)
+op_sqr*: sqr ($ARG1)
+op_sqrt*: sqrt ($ARG1)
+op_fma*: fma ($ARG1, $ARG2, $ARG3)
+op_pown*: pown ($ARG1, $ARG2)
+op_exp*: exp ($ARG1)
+op_exp2*: exp2 ($ARG1)
+op_exp10*: exp10 ($ARG1)
+op_log*: log ($ARG1)
+op_log2*: log2 ($ARG1)
+op_log10*: log10 ($ARG1)
+op_sin*: sin ($ARG1)
+op_cos*: cos ($ARG1)
+op_tan*: tan ($ARG1)
+op_asin*: asin ($ARG1)
+op_acos*: acos ($ARG1)
+op_atan*: atan ($ARG1)
+op_sinh*: sinh ($ARG1)
+op_cosh*: cosh ($ARG1)
+op_tanh*: tanh ($ARG1)
+op_asinh*: asinh ($ARG1)
+op_acosh*: acosh ($ARG1)
+op_atanh*: atanh ($ARG1)
+op_sign*: sign ($ARG1)
+op_ceil*: ceil ($ARG1)
+op_floor*: floor ($ARG1)
+op_trunc*: fix ($ARG1)
+op_round_ties_to_even*: roundb ($ARG1)
+op_round_ties_to_away*: round ($ARG1)
+op_abs*: abs ($ARG1)
+op_min*: min ($ARG1, $ARG2)
+op_max*: max ($ARG1, $ARG2)
+
+op_subset*: subset ($ARG1, $ARG2)
+
+#infinity
+infinity_plus_double: inf 
+infinity_plus_float: inf 
+infinity_minus_double: (-inf)
+infinity_minus_float: (-inf)
+
+imports: |
+preamble: |

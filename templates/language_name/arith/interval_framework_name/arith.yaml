@@ -1,0 +1,212 @@
+#
+#                              ITF1788
+#
+#   Interval Test Framework for IEEE 1788 Standard for Interval Arithmetic
+#
+#
+#   Copyright 2014
+#
+#   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+#   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#
+#   Department of Computer Science
+#   University of Wuerzburg, Germany
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+#
+# Imports required for the IEEE 1788 implementation
+#
+imports:
+
+#
+# Anything else that your code requires, e.g. definitions of constants
+# Example: "
+#           template<typename T>
+#           using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
+#           
+#           template<typename T>
+#           using I = p1788::infsup::interval<T, flavor>;
+#           
+#           const double INF = std::numeric_limits<double>::infinity();
+#          "
+preamble:
+
+#
+# NaI constant for different data types.
+# Example: "I<double>::nai()" and "I<float>::nai()"
+#
+nai_interval_double: 
+nai_interval_float:
+nai_interval_long_double:
+
+#
+# Empty interval for different data types.
+#
+empty_interval_double:
+empty_interval_float:
+empty_interval_long_double:
+
+#
+# Entire interval for different data types.
+#
+entire_interval_double: 
+entire_interval_float: 
+entire_interval_long_double:
+
+#
+# Positive and negative infinity literals for different data types
+#
+infinity_plus_double:
+infinity_plus_float:
+infinity_plus_long_double:
+infinity_minus_double:
+infinity_minus_float:
+infinity_minus_long_double:
+
+#
+# Decorated empty interval for different data types.
+# Use the token ${DEC} where the translation of the decoration shall be
+# inserted.
+# Example: "I<double>::empty($DEC)" and "I<float>::empty($DEC)"
+#
+decorated_empty_interval_double:
+decorated_empty_interval_float:
+decorated_empty_interval_long_double:
+
+#
+# Decorated entire interval for different data types.
+# Use the token ${DEC} where the translation of the decoration shall be
+# inserted.
+#
+decorated_entire_interval_double:
+decorated_entire_interval_float:
+decorated_entire_interval_long_double:
+
+#
+# Point interval for different data types.
+# Use the token ${ARG1} where the value of the point interval shall be inserted.
+#
+point_interval_double:
+point_interal_float:
+point_interal_long_double:
+
+#
+# Infsup interval for different data types.
+# Use the tokens ${ARG1} and ${ARG2} where the values of the boundaries shall
+# be inserted.
+# Example: "I<double>(${ARG1}, ${ARG2})" and "I<float>(${ARG1}, ${ARG2})"
+#
+inf_sup_interval_double:
+inf_sup_interval_float:
+inf_sup_interval_long_double:
+
+#
+# Decorated point interval for different data types.
+# Use the tokens ${ARG1} and ${DEC} for the value and the decoration of the
+# point interval respectively.
+#
+decorated_point_interval_double:
+decorated_point_interval_float:
+decorated_point_interval_long_double:
+
+#
+# Decorated infsup interval for different data types.
+# Use the tokens ${ARG1}, ${ARG2} and ${DEC} for the boundaries and the
+# decoration of the interval respectively.
+#
+decorated_inf_sup_interval_double:
+decorated_inf_sup_interval_float:
+decorated_inf_sup_interval_long_double:
+
+#
+# Interval decorations
+#
+decorator_com:
+decorator_def:
+decorator_dac:
+decorator_ill:
+decorator_trv:
+
+
+#
+# Overlap literals
+#
+overlap_bothEmpty:
+overlap_firstEmpty:
+overlap_secondEmpty:
+overlap_before:
+overlap_meets:
+overlap_overlaps:
+overlap_starts:
+overlap_containedBy:
+overlap_finishes:
+overlap_equal:
+overlap_finishedBy:
+overlap_contains:
+overlap_startedBy:
+overlap_overlappedBy:
+overlap_metBy:
+overlap_after:
+
+
+#
+# Translations of operations.
+# Arguments are consecutively numbered, i.e. ${ARG1}, ${ARG2}, ${ARG3}, ...
+# 
+# Note that since some functions in IEEE 1788 are optional, tests in an ITL file
+# which require an operation that is not present in a config file will merely
+# generate a warning and not abort the test generation.
+#
+# TODO: find a reasonable set of operations for this template
+#
+op_pos*:
+op_neg*:
+op_add*:
+op_sub*:
+op_mul*:
+op_div*:
+op_recip*:
+op_sqr*:
+op_sqrt*:
+op_fma*:
+op_pown*:
+op_exp*:
+op_exp2*:
+op_exp10*:
+op_log*:
+op_log2*:
+op_log10*:
+op_sin*:
+op_cos*:
+op_tan*:
+op_asin*:
+op_acos*:
+op_atan*:
+op_sinh*:
+op_cosh*:
+op_tanh*:
+op_asinh*:
+op_acosh*:
+op_atanh*:
+op_sign*:
+op_ceil*:
+op_floor*:
+op_trunc*:
+op_round_ties_to_even*:
+op_round_ties_to_away*:
+op_abs*:
+op_min*:
+op_max*:
+op_subset*:
+op_divpair*:
