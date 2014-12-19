@@ -415,12 +415,6 @@ def p_bareInterval(t):
                     | specialInterval'''
     t[0] = t[1]
 
-
-def p_infSupInterval_1(t):
-    '''infSupInterval : "[" numberLiteral "]"'''
-    t[0] = InfSupIntervalNode(t[2], None)
-
-
 def p_infSupInterval_2(t):
     '''infSupInterval : "[" numberLiteral "," numberLiteral "]"'''
     t[0] = InfSupIntervalNode(t[2], t[4])
