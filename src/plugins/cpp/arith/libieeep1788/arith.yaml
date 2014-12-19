@@ -24,6 +24,17 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+# misc
+imports: |  
+preamble: |
+    template<typename T>
+    using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
+
+    template<typename T>
+    using I = p1788::infsup::interval<T, flavor>;
+    
+    const double INF = std::numeric_limits<double>::infinity();
+
 # intervals
 nai_interval_double: I<double>::nai()
 nai_interval_float: I<float>::nai()
@@ -141,14 +152,3 @@ infinity_plus_double: INF
 infinity_plus_float: ((float) INF)
 infinity_minus_double: (-INF)
 infinity_minus_float: (-(float) INF)
-
-# misc
-imports: |  
-preamble: |
-    template<typename T>
-    using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
-
-    template<typename T>
-    using I = p1788::infsup::interval<T, flavor>;
-    
-    const double INF = std::numeric_limits<double>::infinity();
