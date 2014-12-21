@@ -51,14 +51,8 @@ decorated_empty_interval_float: I<float>::empty($DEC)
 decorated_entire_interval_double: I<double>::entire($DEC)
 decorated_entire_interval_float: I<float>::entire($DEC)
 
-point_interval_double: I<double>(${ARG1})
-point_interval_float: I<float>($ARG1})
-
 inf_sup_interval_double: I<double>(${ARG1}, ${ARG2})
 inf_sup_interval_float: I<float>($ARG1, $ARG2)
-
-decorated_point_interval_double: I<double>(${ARG1}, ${DEC})
-decorated_point_interval_float: I<float>($ARG1, $DEC)
 
 decorated_inf_sup_interval_double: I<double>($ARG1, $ARG2, $DEC)
 decorated_inf_sup_interval_float: I<float>($ARG1, $ARG2, $DEC)

@@ -94,14 +94,6 @@ decorated_entire_interval_float:
 decorated_entire_interval_long_double:
 
 #
-# Point interval for different data types.
-# Use the token ${ARG1} where the value of the point interval shall be inserted.
-#
-point_interval_double:
-point_interal_float:
-point_interal_long_double:
-
-#
 # Infsup interval for different data types.
 # Use the tokens ${ARG1} and ${ARG2} where the values of the boundaries shall
 # be inserted.
@@ -110,15 +102,6 @@ point_interal_long_double:
 inf_sup_interval_double:
 inf_sup_interval_float:
 inf_sup_interval_long_double:
-
-#
-# Decorated point interval for different data types.
-# Use the tokens ${ARG1} and ${DEC} for the value and the decoration of the
-# point interval respectively.
-#
-decorated_point_interval_double:
-decorated_point_interval_float:
-decorated_point_interval_long_double:
 
 #
 # Decorated infsup interval for different data types.

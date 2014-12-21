@@ -335,8 +335,7 @@ class InfSupIntervalNode(Node):
 
     def __init__(self, inf, sup):
         """
-        Initialize an InfSupIntervalNode. One may create a point interval by
-        specifying 'sup' as None.
+        Initialize an InfSupIntervalNode. 
 
         Arguments:
         inf -- the lower border of the interval
@@ -347,10 +346,9 @@ class InfSupIntervalNode(Node):
         self.decoration = None
 
         # check if types of inf and sup are the same
-        if sup is not None:
-            if inf.getType() != sup.getType():
-                raise IOError('''can not instantiate infsup interval with two
-                    different data types''')
+        if inf.getType() != sup.getType():
+            raise IOError('''can not instantiate infsup interval with two
+                different data types''')
 
     def setDecoration(self, dec):
         """
@@ -739,56 +737,30 @@ class ASTVisitor(object):
     def visitInfSupIntervalNode(self, node):
         """
         Return the translation of an InfSupIntervalNode.
-
-        This method handles actual inf sup intervals and point intervals,
-        depending on whether node.sup is None or not.
-        The attribute name of the output specification to be used starts with
-        'arith_decorated_' for decorated intervals, or 'arith_' for undecorated
-        ones.
-        Then, either 'point_interval_' or 'inf_sup_interval_' is appended.
-        Finally, the value of node.dataType is appended.
+        
+        If the interval is decorated, we use the decorated_inf_sup_interval_TYPE
+        key, else inf_sup_interval_TYPE, where TYPE is either float, double or
+        long_double.
 
         Arguments:
         node -- an InfSupIntervalNode object
         """
-        outp1 = node.inf.accept(self)
+        inf = node.inf.accept(self)
+        sup = node.sup.accept(self)
+        arg_type = node.inf.getType()
 
-        # point interval
-        if node.sup is None:
+        if node.decoration:
+            dec = node.decoration.accept(self)
+            tmp = getattr(self.out, 'arith_decorated_inf_sup_interval_' +
+                          arg_type)
+            tmp = self.replaceToken(tmp, 'ARG1', inf)
+            tmp = self.replaceToken(tmp, 'ARG2', sup)
+            return self.replaceToken(tmp, 'DEC', dec)
 
-            # decorated
-            if node.decoration:
-                tmp = getattr(self.out, 'arith_decorated_point_interval_' +
-                              node.inf.dataType)
-                tmp = self.replaceToken(tmp, 'ARG1', outp1)
-                return self.replaceToken(tmp, 'DEC',
-                                         node.decoration.accept(self))
-
-            # undecorated
-            else:
-                tmp = getattr(self.out, 'arith_point_interval_' +
-                              node.inf.dataType)
-                return self.replaceToken(tmp, 'ARG1', outp1)
-
-        # inf sup interval
         else:
-            # decorated
-            if node.decoration:
-                outp2 = node.sup.accept(self)
-                tmp = getattr(self.out, 'arith_decorated_inf_sup_interval_' +
-                              node.inf.dataType)
-                tmp = self.replaceToken(tmp, 'ARG1', outp1)
-                tmp = self.replaceToken(tmp, 'ARG2', outp2)
-                return self.replaceToken(tmp, 'DEC',
-                                         node.decoration.accept(self))
-
-            # undecorated
-            else:
-                outp2 = node.sup.accept(self)
-                tmp = getattr(self.out, 'arith_inf_sup_interval_' +
-                              node.inf.dataType)
-                tmp = self.replaceToken(tmp, 'ARG1', outp1)
-                return self.replaceToken(tmp, 'ARG2', outp2)
+            tmp = getattr(self.out, 'arith_inf_sup_interval_' + arg_type)
+            tmp = self.replaceToken(tmp, 'ARG1', inf)
+            return self.replaceToken(tmp, 'ARG2', sup)
 
     def visitAccurateOutputsNode(self, node):
         """
