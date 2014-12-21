@@ -26,25 +26,32 @@
 
 # intervals
 nai_interval_double: nai () 
-nai_interval_float: nai () 
+nai_interval_float: nai ()
+nai_interval_long_double: nai()
 
 empty_interval_double: infsup ()
 empty_interval_float: infsup ()
+empty_interval_long_double: infsup ()
 
 entire_interval_double: infsup (-inf, inf)
 entire_interval_float: infsup (-inf, inf)
+entire_interval_long_double: infsup (-inf, inf)
 
 decorated_empty_interval_double: empty ($DEC)
 decorated_empty_interval_float: empty ($DEC)
+decorated_empty_interval_long_double: empty ($DEC)
 
 decorated_entire_interval_double: entire ($DEC)
 decorated_entire_interval_float: entire ($DEC)
+decorated_entire_interval_long_double: entire ($DEC)
 
 inf_sup_interval_double: infsup (${ARG1}, ${ARG2})
 inf_sup_interval_float: infsup ($ARG1, $ARG2)
+inf_sup_interval_long_double: infsup ($ARG1, $ARG2)
 
 decorated_inf_sup_interval_double: infsup ($ARG1, $ARG2, $DEC)
 decorated_inf_sup_interval_float: infsup ($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_long_double: infsup ($ARG1, $ARG2, $DEC)
 
 
 # interval decorators

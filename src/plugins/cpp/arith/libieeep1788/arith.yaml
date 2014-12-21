@@ -38,24 +38,31 @@ preamble: |
 # intervals
 nai_interval_double: I<double>::nai()
 nai_interval_float: I<float>::nai()
+nai_interval_long_double: I<long double>::nai()
 
 empty_interval_double: I<double>::empty()
 empty_interval_float: I<float>::empty()
+empty_interval_long_double: I<long double>::empty()
 
 entire_interval_double: I<double>::entire()
 entire_interval_float: I<float>::entire()
+entire_interval_long_double: I<long double>::entire()
 
 decorated_empty_interval_double: I<double>::empty($DEC)
 decorated_empty_interval_float: I<float>::empty($DEC)
+decorated_empty_interval_long_double: I<long double>::empty($DEC)
 
 decorated_entire_interval_double: I<double>::entire($DEC)
 decorated_entire_interval_float: I<float>::entire($DEC)
+decorated_entire_interval_long_double: I<long double>::entire($DEC)
 
 inf_sup_interval_double: I<double>(${ARG1}, ${ARG2})
 inf_sup_interval_float: I<float>($ARG1, $ARG2)
+inf_sup_interval_long_double: I<long double>($ARG1, $ARG2)
 
 decorated_inf_sup_interval_double: I<double>($ARG1, $ARG2, $DEC)
 decorated_inf_sup_interval_float: I<float>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_long_double: I<long double>($ARG1, $ARG2, $DEC)
 
 
 # interval decorators
