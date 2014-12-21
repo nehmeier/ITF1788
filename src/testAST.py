@@ -875,8 +875,6 @@ class ASTVisitor(object):
         xxs = [list(filter(lambda s: s != "", el.split('\n')))
                for el in xxs]       
         
-        opTextLines = opText.split('\n')
-
         assertList = []
 
         #
