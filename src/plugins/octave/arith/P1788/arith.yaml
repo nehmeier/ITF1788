@@ -123,9 +123,9 @@ op_min*: min ($ARG1, $ARG2)
 op_max*: max ($ARG1, $ARG2)
 op_subset*: subset ($ARG1, $ARG2)
 op_divToPair*: |
-    nthargout(1, @divtopair, $ARG1, $ARG2)
+    nthargout(1, @mulrevtopair, $ARG1, $ARG2)
     *** next output
-    nthargout(2, @divtopair, $ARG1, $ARG2)
+    nthargout(2, @mulrevtopair, $ARG1, $ARG2)
 
 #infinity
 infinity_plus_double: inf
