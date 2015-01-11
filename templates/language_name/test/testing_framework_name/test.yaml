@@ -34,11 +34,14 @@ imports:
 
 #
 # Define the structure of a test file.
+# Use the token ${COMMENTS} for the copyright statement of the testcases and
+# global file comments.
 # Use the tokens ${LANGUAGE_IMPORTS}, ${TESTLIB_IMPORTS} and ${ARITHLIB_IMPORTS}
 # where the respective imports shall be inserted. Use the ${PREAMBLE} token
 # where constant definitions etc. shall be inserted.
 # Use the token ${TESTCASES} where the testcases shall be inserted.
 # Example: "
+#           ${COMMENTS}
 #           ${LANGUAGE_IMPORTS}    
 #           ${TESTLIB_IMPORTS}
 #           ${ARITHLIB_IMPORTS}

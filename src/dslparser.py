@@ -275,9 +275,14 @@ lexer = lex.lex()
 def p_error(t):
     raise IOError("Syntax error")
 
-def p_dsl(t):
+def p_dsl_1(t):
     '''dsl : testcaseSequence'''
     t[0] = DSLNode(t[1])
+
+def p_dsl_2(t):
+    '''dsl : comment testcaseSequence'''
+    t[0] = DSLNode(t[2])
+    t[0].appendComment(t[1])
 
 
 def p_testcaseSequence_1(t):

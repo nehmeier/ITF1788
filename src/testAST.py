@@ -510,6 +510,16 @@ class DSLNode(Node):
         testcases -- a list of TestCaseNode objects
         """
         self.testcases = testcases
+        self.comments = []
+
+    def appendComment(self, comment):
+        """
+        Add a global comment to the DSL.
+
+        Arguments:
+        comment -- A LineCommentNode object or a BlockCommentNode object
+        """
+        self.comments += [comment]
 
     def setFileName(self, fileName):
         """
@@ -1009,6 +1019,9 @@ class ASTVisitor(object):
         node -- a DSLNode object
         """
         tmp = self.out.test_testfile_seq
+
+        tmp = self.replaceTokenList(tmp, 'COMMENTS', [n.accept(self) for
+                                                      n in node.comments])
 
         # imports
         languageImportComment = self.out.lang_line_comment_token + \
