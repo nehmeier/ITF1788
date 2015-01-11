@@ -40,8 +40,8 @@ long_double_type: "double"
 # comments
 line_comment_token: //
 block_comment_start: "/*"
-block_comment_intermediate: "*"
-block_comment_end: "*/"
+block_comment_intermediate: " * "
+block_comment_end: " */"
 
 # misc
 line_end_token: ";"
