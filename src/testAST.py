@@ -359,18 +359,6 @@ class InfSupIntervalNode(Node):
         """
         self.decoration = dec
 
-    def isDecorated(self):
-        """
-        Return true if the interval is decorated.
-        """
-        return bool(self.decoration)
-
-    def getDecoration(self):
-        """
-        Return the decoration of the interval or None if it is not decorated.
-        """
-        return self.decoration
-
     def getType(self):
         """
         Return the type of the interval.
