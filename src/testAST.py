@@ -359,6 +359,18 @@ class InfSupIntervalNode(Node):
         """
         self.decoration = dec
 
+    def isDecorated(self):
+        """
+        Return true if the interval is decorated.
+        """
+        return bool(self.decoration)
+
+    def getDecoration(self):
+        """
+        Return the decoration of the interval or None if it is not decorated.
+        """
+        return self.decoration
+
     def getType(self):
         """
         Return the type of the interval.
@@ -903,6 +915,9 @@ class ASTVisitor(object):
                     assertContent = self.replaceToken(assertContent, 'ARG1',
                                                       xxs[i][j])
                     assertList += [assertContent + delim]
+                    assertContent = self.replaceToken(self.out.test_assert_equals_decoration, 'ARG2', outp)
+                    assertContent = self.replaceToken(assertContent, 'ARG1', xxs[i][j])
+                    assertList += [assertContent + delim]
 
         # only accurate outputs present -- generate assertTrue statements
         elif node.tightestOutputs is None:
@@ -921,7 +936,11 @@ class ASTVisitor(object):
                     assertContent = self.replaceToken(self.out.test_assert_true,
                                                       'ARG1', subsetContent)
                     assertList += [assertContent + delim]
+                    assertContent = self.replaceToken(self.out.test_assert_equals_decoration, 'ARG1', xxs[i][j])
+                    assertContent = self.replaceToken(assertContent, 'ARG2', outp)
+                    assertList += [assertContent + delim]
         #
+	# TODO: Revise this comment
         # both present. add([1, 2], [3, 4]) = [4, 6] <= [0, 7] will be
         # translated to
         # assertTrue([4, 6].isSubset(add([1,2], [3, 4])))
@@ -941,7 +960,9 @@ class ASTVisitor(object):
                     assertContent = self.replaceToken(assertContent, 'ARG1',
                                                       xxs[i][j])
                     assertList += [assertContent + delim]
-
+                    assertContent = self.replaceToken(self.out.test_assert_equals_decoration, 'ARG1', xxs[i][j])
+                    assertContent = self.replaceToken(assertContent, 'ARG2', outp)
+                    assertList += [assertContent + delim]
             subsetOp = getattr(self.out,
                                    self.findMatchingOp('arith_op_subset',
                                                        'arith_op_subset'))
@@ -966,6 +987,9 @@ class ASTVisitor(object):
                                                       outp)
                     assertContent = self.replaceToken(self.out.test_assert_true,
                                                       'ARG1', subsetContent)
+                    assertList += [assertContent + delim]
+                    assertContent = self.replaceToken(self.out.test_assert_equals_decoration, 'ARG1', xxs[i][j])
+                    assertContent = self.replaceToken(assertContent, 'ARG2', outp)
                     assertList += [assertContent + delim]
 
         assertTexts = '\n'.join(assertList)

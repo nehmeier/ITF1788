@@ -45,5 +45,6 @@ test_seq: |
     $COMMENTS
     $ASSERTS    
 assert_equals: BOOST_CHECK_EQUAL($ARG1, $ARG2)
+assert_equals_decoration: BOOST_CHECK_EQUAL(decoration($ARG1), decoration($ARG2))
 assert_equals_warning: BOOST_WARN_EQUAL($ARG1, $ARG2)
 assert_true: BOOST_CHECK($ARG1)
