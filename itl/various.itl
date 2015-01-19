@@ -3,6 +3,7 @@ Copyright 2014
 
 Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
 Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+Oliver Heimlich (oheim@posteo.de)
 
 Department of Computer Science
 University of Wuerzburg, Germany
@@ -1462,6 +1463,33 @@ testcase minimal.abs_test {
     abs [-1.9, 0.2] = [0.0, 1.9];
     abs [-1.5, inf] = [0.0, inf];
     abs [-inf, -2.2] = [2.2, inf];
+}
+
+testcase minimal.abs_rev_test {
+    abs_rev [empty] [entire] = [empty];
+    abs_rev [0.0, 1.0] [empty] = [empty];
+    abs_rev [0.0, 1.0] [7.0, 9.0] = [empty];
+    abs_rev [empty] [0.0, 1.0] = [empty];
+    abs_rev [-2.0, -1.0] [entire] = [empty];
+    abs_rev [1.0, 1.0] [entire] = [-1.0, 1.0];
+    abs_rev [0.0, 0.0] [entire] = [0.0, 0.0];
+    abs_rev [-1.0, -1.0] [entire] = [empty];
+    abs_rev [0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023] [entire] = [-0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023];
+    abs_rev [0x1p-1022, 0x1p-1022] [entire] = [-0x1p-1022, 0x1p-1022];
+    abs_rev [-0x1p-1022, -0x1p-1022] [entire] = [empty];
+    abs_rev [-0x1.FFFFFFFFFFFFFp1023, -0x1.FFFFFFFFFFFFFp1023] [entire] = [empty];
+    abs_rev [1.0, 2.0] [entire] = [-2.0, 2.0];
+    abs_rev [1.0, 2.0] [0.0, 2.0] = [1.0, 2.0];
+    abs_rev [0.0, 1.0] [-0.5, 2.0] = [-0.5, 1.0];
+    abs_rev [-1.0, 1.0] [entire] = [-1.0, 1.0];
+    abs_rev [-1.0, 0.0] [entire] = [0.0, 0.0];
+    abs_rev [0.0, inf] [entire] = [entire];
+    abs_rev [entire] [entire] = [entire];
+    abs_rev [-inf, 0.0] [entire] = [0.0, 0.0];
+    abs_rev [1.0, inf] [-inf, 0.0] = [-inf, -1.0];
+    abs_rev [-1.0, inf] [entire] = [entire];
+    abs_rev [-inf, -1.0] [entire] = [empty];
+    abs_rev [-inf, 1.0] [entire] = [-1.0, 1.0];
 }
 
 testcase minimal.min_test {
