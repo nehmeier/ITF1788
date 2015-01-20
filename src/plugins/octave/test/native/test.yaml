@@ -36,6 +36,10 @@ imports: |
     %!        s = x;
     %!    endif
     %!endfunction
+    %
+    %!function n = decval (dec)
+    %! n = find (strcmp (dec, {"ill", "trv", "def", "dac", "com"}));
+    %!endfunction
 testfile_seq: |
     $COMMENTS
     $TESTCASES

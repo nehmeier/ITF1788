@@ -66,8 +66,8 @@ decorator_trv: '"trv"'
 decorator_get_operation: (decorationpart ($ARG1) {1})
 
 # comparison operators for decorations
-decorator_less_equals: sign ($ARG2 - $ARG1) * [4; 2; 1] <= 0
-decorator_greater_equals: sign ($ARG2 - $ARG1) * [4; 2; 1] >= 0
+decorator_less_equals: decval ($ARG1) <= decval ($ARG2)
+decorator_greater_equals: decval ($ARG1) >= decval ($ARG2)
 
 
 # overlap literal translations
