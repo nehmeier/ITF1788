@@ -166,7 +166,20 @@ overlap_after:
 #
 # TODO: find a reasonable set of operations for this template
 #
-op_pos*:
+
+# Cancellative addition and subtraction
+op_cancelMinus*:
+op_cancelPlus*:
+
+# Set operations
+op_intersection*:
+op_convexHull*:
+
+# Constructors
+op_numsToInterval*:
+op_textToInterval*:
+
+# Basic operations
 op_neg*:
 op_add*:
 op_sub*:
@@ -176,33 +189,56 @@ op_recip*:
 op_sqr*:
 op_sqrt*:
 op_fma*:
+
+# Power functions
 op_pown*:
+op_pow*:
 op_exp*:
 op_exp2*:
 op_exp10*:
 op_log*:
 op_log2*:
 op_log10*:
+
+# Trigonometric/hyperbolic functions
 op_sin*:
 op_cos*:
 op_tan*:
 op_asin*:
 op_acos*:
 op_atan*:
+op_atan2*:
 op_sinh*:
 op_cosh*:
 op_tanh*:
 op_asinh*:
 op_acosh*:
 op_atanh*:
+
+# Integer functions
 op_sign*:
 op_ceil*:
 op_floor*:
 op_trunc*:
-op_round_ties_to_even*:
-op_round_ties_to_away*:
+op_roundTiesToEven*:
+op_roundTiesToAway*:
+
+# Absmax functions
 op_abs*:
 op_min*:
 op_max*:
+
+# Numeric functions of intervals
+op_inf*:
+op_sup*:
+op_mid*:
+op_wid*:
+op_rad*:
+op_mag*:
+op_mig*:
+
+# Boolean functions of intervals
+op_equal*:
 op_subset*:
-op_divpair*:
+op_interior*:
+op_disjoint*:
