@@ -63,7 +63,7 @@ decorator_ill: '"ill"'
 decorator_trv: '"trv"'
 
 # decoration getter
-decorator_get_operation: ($ARG1).dec
+decorator_get_operation: (decorationpart ($ARG1) {1})
 
 # comparison operators for decorations
 decorator_less_equals: $ARG1 <= $ARG2
