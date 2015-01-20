@@ -62,6 +62,13 @@ decorator_dac: '"dac"'
 decorator_ill: '"ill"'
 decorator_trv: '"trv"'
 
+# decoration getter
+decorator_get_operation: ($ARG1).dec
+
+# comparison operators for decorations
+decorator_less_equals: $ARG1 <= $ARG2
+decorator_greater_equals: $ARG1 >= $ARG2
+
 
 # overlap literal translations
 overlap_bothEmpty: overlap_BothEmpty

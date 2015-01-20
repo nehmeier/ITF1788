@@ -83,6 +83,12 @@ block_comment_end:
 line_end_token:
 
 #
+# The boolean AND evaluated on two arguments.
+# Example: ${ARG1} && ${ARG2}
+#
+logical_and:
+
+#
 # Imports specific to the language
 # Write the imports the way you would write them in a source file of the target
 # language.

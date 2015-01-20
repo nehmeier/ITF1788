@@ -45,6 +45,7 @@ block_comment_end: " */"
 
 # misc
 line_end_token: ";"
+logical_and: $ARG1 && $ARG2
 imports: |
     #include<cmath>
     #include<string>

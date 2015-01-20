@@ -72,6 +72,13 @@ decorator_dac: p1788::decoration::decoration::dac
 decorator_ill: p1788::decoration::decoration::ill
 decorator_trv: p1788::decoration::decoration::trv
 
+# decoration getter
+decorator_get_operation: decoration(${ARG1})
+
+# comparison of decorations
+decorator_less_equals: ($ARG1 <= $ARG2)
+decorator_greater_equals: ($ARG1 >= $ARG2)
+
 
 # overlap literal translations
 overlap_bothEmpty: Overlap.BothEmpty

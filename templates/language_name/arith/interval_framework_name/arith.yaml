@@ -121,6 +121,19 @@ decorator_dac:
 decorator_ill:
 decorator_trv:
 
+#
+# An operation which returns the decoration of a decorated interval.
+# Example: decoration(${ARG1})
+#
+decorator_get_operation:
+
+#
+# The comparison operators <= and >= for two decorations.
+# Example: (${ARG1} <= ${ARG2})
+#          (${ARG1} >= ${ARG2})
+#
+decorator_less_equals:
+decorator_greater_equals:
 
 #
 # Overlap literals
