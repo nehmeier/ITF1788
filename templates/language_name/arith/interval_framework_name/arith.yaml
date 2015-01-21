@@ -242,3 +242,20 @@ op_equal*:
 op_subset*:
 op_interior*:
 op_disjoint*:
+
+# Reverse-mode elementary functions
+op_sqrRev*:
+op_absRev*:
+op_pownRev*:
+op_sinRev*:
+op_cosRev*:
+op_tanRev*:
+op_coshRev*:
+op_mulRev*:
+op_powRev1*:
+op_powRev2*:
+op_atan2Rev1*:
+op_atan2Rev2*:
+
+# Two output division
+op_mulRevToPair*:
