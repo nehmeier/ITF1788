@@ -404,6 +404,7 @@ def p_literal(t):
 
 def p_interval_1(t):
     '''intervalLiteral : notAnInterval
+                       | emptyInterval
                        | bareInterval'''
     t[0] = t[1]
 
@@ -416,19 +417,12 @@ def p_interval_2(t):
 
 def p_bareInterval(t):
     '''bareInterval : infSupInterval
-                    | specialInterval'''
+                    | entireInterval'''
     t[0] = t[1]
 
 def p_infSupInterval_2(t):
     '''infSupInterval : "[" numberLiteral "," numberLiteral "]"'''
     t[0] = InfSupIntervalNode(t[2], t[4])
-
-
-def p_specialInterval(t):
-    '''specialInterval : emptyInterval
-                       | entireInterval'''
-    t[0] = t[1]
-
 
 def p_emptyInterval(t):
     '''emptyInterval : "[" EMPTY "]"'''
