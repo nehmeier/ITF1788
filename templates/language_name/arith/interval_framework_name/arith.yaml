@@ -75,16 +75,6 @@ infinity_minus_float:
 infinity_minus_long_double:
 
 #
-# Decorated empty interval for different data types.
-# Use the token ${DEC} where the translation of the decoration shall be
-# inserted.
-# Example: "I<double>::empty($DEC)" and "I<float>::empty($DEC)"
-#
-decorated_empty_interval_double:
-decorated_empty_interval_float:
-decorated_empty_interval_long_double:
-
-#
 # Decorated entire interval for different data types.
 # Use the token ${DEC} where the translation of the decoration shall be
 # inserted.
