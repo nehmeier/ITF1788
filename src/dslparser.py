@@ -114,9 +114,9 @@ nonZeroDigit = r"[1-9]"
 digit = r"[0-9]"
 decimalConstant = nonZeroDigit + r"(" + digit + r")*"
 
-unsignedSuffix = r"U"
-longSuffix = r"L"
-longLongSuffix = r"(LL)"
+unsignedSuffix = r"[Uu]"
+longSuffix = r"[Ll]"
+longLongSuffix = r"((LL) | (ll))"
 integerSuffix = r"(" + unsignedSuffix + longSuffix + r"?|" + \
     unsignedSuffix + longLongSuffix + r"|" +\
     longLongSuffix + unsignedSuffix + r"?|" + \
@@ -135,8 +135,7 @@ integerConstant = (sign + r"?(" + hexadecimalConstant + integerSuffix + r"?|" +
 # into multiple regexes to increase the legibility of this file only.
 #
 
-# allow only capital suffixes to improve readability
-floatingSuffix = r"[FL]"
+floatingSuffix = r"[FLfl]"
 
 hexadecimalDigitSequence = r"(" + hexadecimalDigit + r"(" + hexadecimalDigit + \
     r")*)"
