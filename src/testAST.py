@@ -468,7 +468,7 @@ class TestNode(Node):
         Arguments:
         comment -- A LineCommentNode object or a BlockCommentNode object
         """
-        self.comments += [comment]
+        self.comments = [comment] + self.comments
 
 
 class TestcaseNode(Node):
