@@ -38,10 +38,6 @@ entire_interval_double: infsup (-inf, inf)
 entire_interval_float: infsup (-inf, inf)
 entire_interval_long_double: infsup (-inf, inf)
 
-decorated_empty_interval_double: infsupdec (empty, $DEC)
-decorated_empty_interval_float: infsupdec (empty, $DEC)
-decorated_empty_interval_long_double: infsupdec (empty, $DEC)
-
 decorated_entire_interval_double: infsupdec (entire, $DEC)
 decorated_entire_interval_float: infsupdec (entire, $DEC)
 decorated_entire_interval_long_double: infsupdec (entire, $DEC)

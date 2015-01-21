@@ -34,11 +34,17 @@ preamble: |
     using DI = p1788::infsup::decorated_interval<T, p1788::flavor::infsup::setbased::mpfr_bin_ieee754_flavor>;
 
     const double INF = std::numeric_limits<double>::infinity();
+    
+#infinity
+infinity_plus_double: INF
+infinity_plus_float: ((float) INF)
+infinity_minus_double: (-INF)
+infinity_minus_float: (-(float) INF)
 
 # intervals
-nai_interval_double: I<double>::nai()
-nai_interval_float: I<float>::nai()
-nai_interval_long_double: I<long double>::nai()
+nai_interval_double: DI<double>::nai()
+nai_interval_float: DI<float>::nai()
+nai_interval_long_double: DI<long double>::nai()
 
 empty_interval_double: I<double>::empty()
 empty_interval_float: I<float>::empty()
@@ -48,21 +54,17 @@ entire_interval_double: I<double>::entire()
 entire_interval_float: I<float>::entire()
 entire_interval_long_double: I<long double>::entire()
 
-decorated_empty_interval_double: I<double>::empty($DEC)
-decorated_empty_interval_float: I<float>::empty($DEC)
-decorated_empty_interval_long_double: I<long double>::empty($DEC)
-
-decorated_entire_interval_double: I<double>::entire($DEC)
-decorated_entire_interval_float: I<float>::entire($DEC)
-decorated_entire_interval_long_double: I<long double>::entire($DEC)
+decorated_entire_interval_double: DI<double>::entire($DEC)
+decorated_entire_interval_float: DI<float>::entire($DEC)
+decorated_entire_interval_long_double: DI<long double>::entire($DEC)
 
 inf_sup_interval_double: I<double>(${ARG1}, ${ARG2})
 inf_sup_interval_float: I<float>($ARG1, $ARG2)
 inf_sup_interval_long_double: I<long double>($ARG1, $ARG2)
 
-decorated_inf_sup_interval_double: I<double>($ARG1, $ARG2, $DEC)
-decorated_inf_sup_interval_float: I<float>($ARG1, $ARG2, $DEC)
-decorated_inf_sup_interval_long_double: I<long double>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_double: DI<double>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_float: DI<float>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_long_double: DI<long double>($ARG1, $ARG2, $DEC)
 
 
 # interval decorators
@@ -155,8 +157,3 @@ op_divToPair*: |
     div_to_pair($ARG1, $ARG2).first
     *** next output
     div_to_pair($ARG1, $ARG2).second
-#infinity
-infinity_plus_double: INF
-infinity_plus_float: ((float) INF)
-infinity_minus_double: (-INF)
-infinity_minus_float: (-(float) INF)

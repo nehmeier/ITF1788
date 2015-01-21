@@ -271,19 +271,6 @@ class EmptyIntervalNode(Node):
 
     """A Node which represents an Empty-Interval in the AST."""
 
-    def __init__(self):
-        """Initializes an EmptyIntervalNode."""
-        self.decoration = None
-
-    def setDecoration(self, dec):
-        """
-        Set a decoration for the interval.
-
-        Arguments:
-        dec -- a DecorationLiteralNode object
-        """
-        self.decoration = dec
-
     def setType(self, t):
         """
         Set the datatype of the node.
@@ -703,10 +690,7 @@ class ASTVisitor(object):
         """
         Return the translation of an EmptyIntervalNode object.
 
-        If the node is decorated, replace the 'DEC' template of the
-        output specification's arith_decorated_empty_interval attribute's value
-        and return the result.
-        Else, return the value of the output specification's
+        I.e. the value of the output specification's
         arith_empty_interval value.
 
         Arguments:
@@ -714,11 +698,7 @@ class ASTVisitor(object):
         """
         # remove 'interval<' at the beginning and '>' at the end
         innerDataType = node.getType()[9:][:-1]
-        
-        if node.decoration:
-            tmpl = getattr(self.out,
-                           'arith_decorated_empty_interval_' + innerDataType)
-            return self.replaceToken(tmpl, 'DEC', node.decoration.accept(self))
+
         return getattr(self.out, 'arith_empty_interval_' + innerDataType)
 
     def visitEntireIntervalNode(self, node):
