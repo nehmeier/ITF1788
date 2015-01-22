@@ -8,6 +8,7 @@
 #
 #   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
 #   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#   Oliver Heimlich (oheim@posteo.de)
 #
 #   Department of Computer Science
 #   University of Wuerzburg, Germany
@@ -25,12 +26,24 @@
 #   limitations under the License.
 
 imports: |
+    %!function s = to_string (x)
+    %!    if (isnumeric (x))
+    %!        s = num2str (x);
+    %!    elseif (isa (x, 'infsup'))
+    %!        s = intervaltotext (x);
+    %!    else
+    %!        # x probably is a char.
+    %!        s = x;
+    %!    endif
+    %!endfunction
+    %
+    %!function n = decval (dec)
+    %! n = find (strcmp (dec, {"ill", "trv", "def", "dac", "com"}));
+    %!endfunction
 testfile_seq: |
-    $LANGUAGE_IMPORTS    
-    $TESTLIB_IMPORTS
-    $ARITHLIB_IMPORTS 
-    $PREAMBLE 
+    $COMMENTS
     $TESTCASES
+    $TESTLIB_IMPORTS
 testcase_seq: |
     $COMMENTS
     %!test "$TC_NAME";
@@ -38,6 +51,15 @@ testcase_seq: |
 test_seq: |
     $COMMENTS
     $ASSERTS    
-assert_equals: "%! assert($ARG1 == $ARG2)"
-assert_equals_warning: "%! assert($ARG1 == $ARG2)"
-assert_true: "%! assert($ARG1 == true)" 
+
+# assert (X, Y) does not work with custom types
+# assert (X == Y) may fail when comparing decorated intervals with bare intervals, see #42735
+assert_equals: |
+    %! assert (eq (...
+    %!         $ARG1, ...
+    %!         $ARG2))
+assert_equals_warning: |
+    %! if (ne ($ARG1, $ARG2))
+    %!     warn (["expected: ", to_string($ARG1), " actual value: ", to_string($ARG2)]);
+    %! endif
+assert_true: "%! assert ($ARG1)"

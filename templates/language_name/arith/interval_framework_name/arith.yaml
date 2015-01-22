@@ -75,16 +75,6 @@ infinity_minus_float:
 infinity_minus_long_double:
 
 #
-# Decorated empty interval for different data types.
-# Use the token ${DEC} where the translation of the decoration shall be
-# inserted.
-# Example: "I<double>::empty($DEC)" and "I<float>::empty($DEC)"
-#
-decorated_empty_interval_double:
-decorated_empty_interval_float:
-decorated_empty_interval_long_double:
-
-#
 # Decorated entire interval for different data types.
 # Use the token ${DEC} where the translation of the decoration shall be
 # inserted.
@@ -92,14 +82,6 @@ decorated_empty_interval_long_double:
 decorated_entire_interval_double:
 decorated_entire_interval_float:
 decorated_entire_interval_long_double:
-
-#
-# Point interval for different data types.
-# Use the token ${ARG1} where the value of the point interval shall be inserted.
-#
-point_interval_double:
-point_interal_float:
-point_interal_long_double:
 
 #
 # Infsup interval for different data types.
@@ -110,15 +92,6 @@ point_interal_long_double:
 inf_sup_interval_double:
 inf_sup_interval_float:
 inf_sup_interval_long_double:
-
-#
-# Decorated point interval for different data types.
-# Use the tokens ${ARG1} and ${DEC} for the value and the decoration of the
-# point interval respectively.
-#
-decorated_point_interval_double:
-decorated_point_interval_float:
-decorated_point_interval_long_double:
 
 #
 # Decorated infsup interval for different data types.
@@ -138,6 +111,19 @@ decorator_dac:
 decorator_ill:
 decorator_trv:
 
+#
+# An operation which returns the decoration of a decorated interval.
+# Example: decoration(${ARG1})
+#
+decorator_get_operation:
+
+#
+# The comparison operators <= and >= for two decorations.
+# Example: (${ARG1} <= ${ARG2})
+#          (${ARG1} >= ${ARG2})
+#
+decorator_less_equals:
+decorator_greater_equals:
 
 #
 # Overlap literals
@@ -170,7 +156,20 @@ overlap_after:
 #
 # TODO: find a reasonable set of operations for this template
 #
-op_pos*:
+
+# Cancellative addition and subtraction
+op_cancelMinus*:
+op_cancelPlus*:
+
+# Set operations
+op_intersection*:
+op_convexHull*:
+
+# Constructors
+op_numsToInterval*:
+op_textToInterval*:
+
+# Basic operations
 op_neg*:
 op_add*:
 op_sub*:
@@ -180,33 +179,73 @@ op_recip*:
 op_sqr*:
 op_sqrt*:
 op_fma*:
+
+# Power functions
 op_pown*:
+op_pow*:
 op_exp*:
 op_exp2*:
 op_exp10*:
 op_log*:
 op_log2*:
 op_log10*:
+
+# Trigonometric/hyperbolic functions
 op_sin*:
 op_cos*:
 op_tan*:
 op_asin*:
 op_acos*:
 op_atan*:
+op_atan2*:
 op_sinh*:
 op_cosh*:
 op_tanh*:
 op_asinh*:
 op_acosh*:
 op_atanh*:
+
+# Integer functions
 op_sign*:
 op_ceil*:
 op_floor*:
 op_trunc*:
-op_round_ties_to_even*:
-op_round_ties_to_away*:
+op_roundTiesToEven*:
+op_roundTiesToAway*:
+
+# Absmax functions
 op_abs*:
 op_min*:
 op_max*:
+
+# Numeric functions of intervals
+op_inf*:
+op_sup*:
+op_mid*:
+op_wid*:
+op_rad*:
+op_mag*:
+op_mig*:
+
+# Boolean functions of intervals
+op_equal*:
 op_subset*:
-op_divpair*:
+op_interior*:
+op_disjoint*:
+
+# Reverse-mode elementary functions
+op_sqrRev*:
+op_absRev*:
+op_pownRev*:
+op_sinRev*:
+op_cosRev*:
+op_tanRev*:
+op_coshRev*:
+op_mulRev*:
+op_powRev1*:
+op_powRev2*:
+op_atan2Rev1*:
+op_atan2Rev2*:
+
+# Two output division
+op_mulRevToPair*:

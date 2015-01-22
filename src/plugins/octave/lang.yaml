@@ -38,15 +38,16 @@ float_type : "float"
 long_double_type: "double"
 
 # comments
-line_comment_token: "%" 
-block_comment_start: "%{"
-block_comment_intermediate: ""
-block_comment_end: "%}"
+line_comment_token: "# "
+block_comment_start: "##"
+block_comment_intermediate: "## "
+block_comment_end: "##"
 
 # misc
-line_end_token: ";"
+line_end_token: ""
+logical_and: $ARG1 & $ARG2
 imports: |
 #indentation
-spaces_indent: 2 
+spaces_indent: 4
 indent_testcases: false
 indent_tests: false 

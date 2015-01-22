@@ -114,9 +114,9 @@ nonZeroDigit = r"[1-9]"
 digit = r"[0-9]"
 decimalConstant = nonZeroDigit + r"(" + digit + r")*"
 
-unsignedSuffix = r"U"
-longSuffix = r"L"
-longLongSuffix = r"(LL)"
+unsignedSuffix = r"[Uu]"
+longSuffix = r"[Ll]"
+longLongSuffix = r"((LL) | (ll))"
 integerSuffix = r"(" + unsignedSuffix + longSuffix + r"?|" + \
     unsignedSuffix + longLongSuffix + r"|" +\
     longLongSuffix + unsignedSuffix + r"?|" + \
@@ -135,8 +135,7 @@ integerConstant = (sign + r"?(" + hexadecimalConstant + integerSuffix + r"?|" +
 # into multiple regexes to increase the legibility of this file only.
 #
 
-# allow only capital suffixes to improve readability
-floatingSuffix = r"[FL]"
+floatingSuffix = r"[FLfl]"
 
 hexadecimalDigitSequence = r"(" + hexadecimalDigit + r"(" + hexadecimalDigit + \
     r")*)"
@@ -275,9 +274,14 @@ lexer = lex.lex()
 def p_error(t):
     raise IOError("Syntax error")
 
-def p_dsl(t):
+def p_dsl_1(t):
     '''dsl : testcaseSequence'''
     t[0] = DSLNode(t[1])
+
+def p_dsl_2(t):
+    '''dsl : comment testcaseSequence'''
+    t[0] = DSLNode(t[2])
+    t[0].appendComment(t[1])
 
 
 def p_testcaseSequence_1(t):
@@ -400,6 +404,7 @@ def p_literal(t):
 
 def p_interval_1(t):
     '''intervalLiteral : notAnInterval
+                       | emptyInterval
                        | bareInterval'''
     t[0] = t[1]
 
@@ -412,25 +417,12 @@ def p_interval_2(t):
 
 def p_bareInterval(t):
     '''bareInterval : infSupInterval
-                    | specialInterval'''
+                    | entireInterval'''
     t[0] = t[1]
-
-
-def p_infSupInterval_1(t):
-    '''infSupInterval : "[" numberLiteral "]"'''
-    t[0] = InfSupIntervalNode(t[2], None)
-
 
 def p_infSupInterval_2(t):
     '''infSupInterval : "[" numberLiteral "," numberLiteral "]"'''
     t[0] = InfSupIntervalNode(t[2], t[4])
-
-
-def p_specialInterval(t):
-    '''specialInterval : emptyInterval
-                       | entireInterval'''
-    t[0] = t[1]
-
 
 def p_emptyInterval(t):
     '''emptyInterval : "[" EMPTY "]"'''

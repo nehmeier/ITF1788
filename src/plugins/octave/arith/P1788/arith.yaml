@@ -8,6 +8,7 @@
 #
 #   Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
 #   Maximilian Kiesner (maximilian.kiesner@stud-mail.uni-wuerzburg.de)
+#   Oliver Heimlich (oheim@posteo.de)
 #
 #   Department of Computer Science
 #   University of Wuerzburg, Germany
@@ -25,40 +26,44 @@
 #   limitations under the License.
 
 # intervals
-nai_interval_double: nai () 
-nai_interval_float: nai () 
+nai_interval_double: infsupdec ("ill")
+nai_interval_float: infsupdec ("ill")
+nai_interval_long_double: infsupdec ("ill")
 
 empty_interval_double: infsup ()
 empty_interval_float: infsup ()
+empty_interval_long_double: infsup ()
 
 entire_interval_double: infsup (-inf, inf)
 entire_interval_float: infsup (-inf, inf)
+entire_interval_long_double: infsup (-inf, inf)
 
-decorated_empty_interval_double: empty ($DEC)
-decorated_empty_interval_float: empty ($DEC)
+decorated_entire_interval_double: infsupdec (entire, $DEC)
+decorated_entire_interval_float: infsupdec (entire, $DEC)
+decorated_entire_interval_long_double: infsupdec (entire, $DEC)
 
-decorated_entire_interval_double: entire ($DEC)
-decorated_entire_interval_float: entire ($DEC)
-
-point_interval_double: infsup (${ARG1})
-point_interval_float: infsup ($ARG1})
-
-inf_sup_interval_double: infsup (${ARG1}, ${ARG2})
+inf_sup_interval_double: infsup ($ARG1, $ARG2)
 inf_sup_interval_float: infsup ($ARG1, $ARG2)
+inf_sup_interval_long_double: infsup ($ARG1, $ARG2)
 
-decorated_point_interval_double: infsup (${ARG1}, ${DEC})
-decorated_point_interval_float: infsup ($ARG1, $DEC)
-
-decorated_inf_sup_interval_double: infsup ($ARG1, $ARG2, $DEC)
-decorated_inf_sup_interval_float: infsup ($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_double: infsupdec ($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_float: infsupdec ($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_long_double: infsupdec ($ARG1, $ARG2, $DEC)
 
 
 # interval decorators
-decorator_com: decoration_com
-decorator_def: decoration_def
-decorator_dac: decoration_dac
-decorator_ill: decoration_ill
-decorator_trv: decoration_trv
+decorator_com: '"com"'
+decorator_def: '"def"'
+decorator_dac: '"dac"'
+decorator_ill: '"ill"'
+decorator_trv: '"trv"'
+
+# decoration getter
+decorator_get_operation: (decorationpart ($ARG1) {1})
+
+# comparison operators for decorations
+decorator_less_equals: decval ($ARG1) <= decval ($ARG2)
+decorator_greater_equals: decval ($ARG1) >= decval ($ARG2)
 
 
 # overlap literal translations
@@ -85,16 +90,16 @@ op_pos*: +$ARG1
 op_neg*: -$ARG1
 op_add*: $ARG1 + $ARG2
 op_sub*: $ARG1 - $ARG2
-op_mul*: $ARG1 * $ARG2
-op_div*: $ARG1 / $ARG2
+op_mul*: $ARG1 .* $ARG2
+op_div*: $ARG1 ./ $ARG2
 op_recip*: inv ($ARG1)
 op_sqr*: sqr ($ARG1)
 op_sqrt*: sqrt ($ARG1)
 op_fma*: fma ($ARG1, $ARG2, $ARG3)
 op_pown*: pown ($ARG1, $ARG2)
 op_exp*: exp ($ARG1)
-op_exp2*: exp2 ($ARG1)
-op_exp10*: exp10 ($ARG1)
+op_exp2*: pow2 ($ARG1)
+op_exp10*: pow10 ($ARG1)
 op_log*: log ($ARG1)
 op_log2*: log2 ($ARG1)
 op_log10*: log10 ($ARG1)
@@ -119,14 +124,17 @@ op_round_ties_to_away*: round ($ARG1)
 op_abs*: abs ($ARG1)
 op_min*: min ($ARG1, $ARG2)
 op_max*: max ($ARG1, $ARG2)
-
 op_subset*: subset ($ARG1, $ARG2)
+op_divToPair*: |
+    nthargout(1, @mulrevtopair, $ARG1, $ARG2)
+    *** next output
+    nthargout(2, @mulrevtopair, $ARG1, $ARG2)
 
 #infinity
-infinity_plus_double: inf 
-infinity_plus_float: inf 
+infinity_plus_double: inf
+infinity_plus_float: inf ('float')
 infinity_minus_double: (-inf)
-infinity_minus_float: (-inf)
+infinity_minus_float: (-inf ('float'))
 
 imports: |
 preamble: |

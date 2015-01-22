@@ -29,6 +29,7 @@ imports: |
     #include <limits>
     #include "p1788/p1788.hpp"
 testfile_seq: |
+    $COMMENTS
     $LANGUAGE_IMPORTS    
     $TESTLIB_IMPORTS
     $ARITHLIB_IMPORTS  

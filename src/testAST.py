@@ -271,19 +271,6 @@ class EmptyIntervalNode(Node):
 
     """A Node which represents an Empty-Interval in the AST."""
 
-    def __init__(self):
-        """Initializes an EmptyIntervalNode."""
-        self.decoration = None
-
-    def setDecoration(self, dec):
-        """
-        Set a decoration for the interval.
-
-        Arguments:
-        dec -- a DecorationLiteralNode object
-        """
-        self.decoration = dec
-
     def setType(self, t):
         """
         Set the datatype of the node.
@@ -335,8 +322,7 @@ class InfSupIntervalNode(Node):
 
     def __init__(self, inf, sup):
         """
-        Initialize an InfSupIntervalNode. One may create a point interval by
-        specifying 'sup' as None.
+        Initialize an InfSupIntervalNode. 
 
         Arguments:
         inf -- the lower border of the interval
@@ -347,10 +333,9 @@ class InfSupIntervalNode(Node):
         self.decoration = None
 
         # check if types of inf and sup are the same
-        if sup is not None:
-            if inf.getType() != sup.getType():
-                raise IOError('''can not instantiate infsup interval with two
-                    different data types''')
+        if inf.getType() != sup.getType():
+            raise IOError('''can not instantiate infsup interval with two
+                different data types''')
 
     def setDecoration(self, dec):
         """
@@ -394,7 +379,6 @@ class TightestOutputsNode(Node):
         literals -- list of literal nodes which represent the tightest outputs
         """
         self.literals = literals
-
 
 class InputsNode(Node):
 
@@ -471,7 +455,7 @@ class TestNode(Node):
         Arguments:
         comment -- A LineCommentNode object or a BlockCommentNode object
         """
-        self.comments += [comment]
+        self.comments = [comment] + self.comments
 
 
 class TestcaseNode(Node):
@@ -512,6 +496,16 @@ class DSLNode(Node):
         testcases -- a list of TestCaseNode objects
         """
         self.testcases = testcases
+        self.comments = []
+
+    def appendComment(self, comment):
+        """
+        Add a global comment to the DSL.
+
+        Arguments:
+        comment -- A LineCommentNode object or a BlockCommentNode object
+        """
+        self.comments += [comment]
 
     def setFileName(self, fileName):
         """
@@ -696,10 +690,7 @@ class ASTVisitor(object):
         """
         Return the translation of an EmptyIntervalNode object.
 
-        If the node is decorated, replace the 'DEC' template of the
-        output specification's arith_decorated_empty_interval attribute's value
-        and return the result.
-        Else, return the value of the output specification's
+        I.e. the value of the output specification's
         arith_empty_interval value.
 
         Arguments:
@@ -707,11 +698,7 @@ class ASTVisitor(object):
         """
         # remove 'interval<' at the beginning and '>' at the end
         innerDataType = node.getType()[9:][:-1]
-        
-        if node.decoration:
-            tmpl = getattr(self.out,
-                           'arith_decorated_empty_interval_' + innerDataType)
-            return self.replaceToken(tmpl, 'DEC', node.decoration.accept(self))
+
         return getattr(self.out, 'arith_empty_interval_' + innerDataType)
 
     def visitEntireIntervalNode(self, node):
@@ -739,56 +726,30 @@ class ASTVisitor(object):
     def visitInfSupIntervalNode(self, node):
         """
         Return the translation of an InfSupIntervalNode.
-
-        This method handles actual inf sup intervals and point intervals,
-        depending on whether node.sup is None or not.
-        The attribute name of the output specification to be used starts with
-        'arith_decorated_' for decorated intervals, or 'arith_' for undecorated
-        ones.
-        Then, either 'point_interval_' or 'inf_sup_interval_' is appended.
-        Finally, the value of node.dataType is appended.
+        
+        If the interval is decorated, we use the decorated_inf_sup_interval_TYPE
+        key, else inf_sup_interval_TYPE, where TYPE is either float, double or
+        long_double.
 
         Arguments:
         node -- an InfSupIntervalNode object
         """
-        outp1 = node.inf.accept(self)
+        inf = node.inf.accept(self)
+        sup = node.sup.accept(self)
+        arg_type = node.inf.getType()
 
-        # point interval
-        if node.sup is None:
+        if node.decoration:
+            dec = node.decoration.accept(self)
+            tmp = getattr(self.out, 'arith_decorated_inf_sup_interval_' +
+                          arg_type)
+            tmp = self.replaceToken(tmp, 'ARG1', inf)
+            tmp = self.replaceToken(tmp, 'ARG2', sup)
+            return self.replaceToken(tmp, 'DEC', dec)
 
-            # decorated
-            if node.decoration:
-                tmp = getattr(self.out, 'arith_decorated_point_interval_' +
-                              node.inf.dataType)
-                tmp = self.replaceToken(tmp, 'ARG1', outp1)
-                return self.replaceToken(tmp, 'DEC',
-                                         node.decoration.accept(self))
-
-            # undecorated
-            else:
-                tmp = getattr(self.out, 'arith_point_interval_' +
-                              node.inf.dataType)
-                return self.replaceToken(tmp, 'ARG1', outp1)
-
-        # inf sup interval
         else:
-            # decorated
-            if node.decoration:
-                outp2 = node.sup.accept(self)
-                tmp = getattr(self.out, 'arith_decorated_inf_sup_interval_' +
-                              node.inf.dataType)
-                tmp = self.replaceToken(tmp, 'ARG1', outp1)
-                tmp = self.replaceToken(tmp, 'ARG2', outp2)
-                return self.replaceToken(tmp, 'DEC',
-                                         node.decoration.accept(self))
-
-            # undecorated
-            else:
-                outp2 = node.sup.accept(self)
-                tmp = getattr(self.out, 'arith_inf_sup_interval_' +
-                              node.inf.dataType)
-                tmp = self.replaceToken(tmp, 'ARG1', outp1)
-                return self.replaceToken(tmp, 'ARG2', outp2)
+            tmp = getattr(self.out, 'arith_inf_sup_interval_' + arg_type)
+            tmp = self.replaceToken(tmp, 'ARG1', inf)
+            return self.replaceToken(tmp, 'ARG2', sup)
 
     def visitAccurateOutputsNode(self, node):
         """
@@ -799,7 +760,8 @@ class ASTVisitor(object):
         """
         outputList = []
         for n in node.literals:
-            outputList += [n.accept(self)]
+            isDecorated = isinstance(n, InfSupIntervalNode) and bool(n.decoration)
+            outputList += [(n.accept(self), isDecorated)]
         return outputList
 
     def visitTightestOutputsNode(self, node):
@@ -811,7 +773,8 @@ class ASTVisitor(object):
         """
         outputList = []
         for n in node.literals:
-            outputList += [n.accept(self)]
+            isDecorated = isinstance(n, InfSupIntervalNode) and bool(n.decoration)
+            outputList += [(n.accept(self), isDecorated)]
         return outputList
 
     def visitInputsNode(self, node):
@@ -854,20 +817,20 @@ class ASTVisitor(object):
 
         # build a list of inputs
         inputList = node.inputs.accept(self)
-        
+
         # concatenate input and output types to identify matching operations
         inputTypes = ','.join(n.getType() for n in node.inputs.literals)
-        
+
         accurateTypes = None
         tightestTypes = None
         if node.accurateOutputs:
             accurateTypes = ','.join(n.getType()
                                      for n in node.accurateOutputs.literals)
-                                     
+
         if node.tightestOutputs:
             tightestTypes = ','.join(n.getType()
                                      for n in node.tightestOutputs.literals)
-                                     
+
         if accurateTypes and tightestTypes:
             if accurateTypes != tightestTypes:
                 raise IOError('''types of accurate and tightest outputs may not
@@ -876,11 +839,11 @@ class ASTVisitor(object):
 
         # the constant part of an operation name, e.g. 'arith_op_add'
         opPrefix = 'arith_op_' + node.opName.accept(self)
-        
+
         # the full operation name, i.e. opPrefix followed by the types of
         # the parameters enclosed by angle brackets
         opName = opPrefix + '<<' + outputTypes + '>>' + '<' + inputTypes + '>'
-        
+
         # if there is no exact match for the operation, try to find
         # a matching function which uses wildcards
         if not hasattr(self.out, opName):
@@ -892,18 +855,16 @@ class ASTVisitor(object):
 
         # get the translated value of the operation
         opText = getattr(self.out, opName)
-        
+
         # replace input tokens with actual values
         for i in range(0, len(inputList)):
             opText = self.replaceToken(opText, 'ARG' + str(i + 1), inputList[i])
-        
+
         # group the operation text by the output
         xxs = opText.split('\n*** next output\n')
-        
+
         xxs = [list(filter(lambda s: s != "", el.split('\n')))
-               for el in xxs]       
-        
-        opTextLines = opText.split('\n')
+               for el in xxs]
 
         assertList = []
 
@@ -916,13 +877,21 @@ class ASTVisitor(object):
             outputList = node.tightestOutputs.accept(self)
             delim = self.out.lang_line_end_token
             for i in range(0, len(outputList)):
-                outp = outputList[i]
+                outp = outputList[i][0]
+                isDecorated = outputList[i][1]
                 for j in range(0, len(xxs[i])):                    
                     assertContent = self.replaceToken(self.out.test_assert_equals,
                                           'ARG2', outp)
                     assertContent = self.replaceToken(assertContent, 'ARG1',
                                                       xxs[i][j])
                     assertList += [assertContent + delim]
+                    if isDecorated:
+                        decGetter = self.out.arith_decorator_get_operation
+                        outpDec = self.replaceToken(decGetter, 'ARG1', outp)
+                        inpDec = self.replaceToken(decGetter, 'ARG1', xxs[i][j])
+                        assertContent = self.replaceToken(self.out.test_assert_equals, 'ARG2', outpDec)
+                        assertContent = self.replaceToken(assertContent, 'ARG1', inpDec)
+                        assertList += [assertContent + delim]
 
         # only accurate outputs present -- generate assertTrue statements
         elif node.tightestOutputs is None:
@@ -932,7 +901,8 @@ class ASTVisitor(object):
                                self.findMatchingOp('arith_op_subset',
                                                    'arith_op_subset'))
             for i in range(0, len(outputList)):
-                outp = outputList[i]
+                outp = outputList[i][0]
+                isDecorated = outputList[i][1]
                 for j in range(0, len(xxs[i])):
                     subsetContent = self.replaceToken(subsetOp, 'ARG1',
                                                       xxs[i][j])
@@ -941,7 +911,15 @@ class ASTVisitor(object):
                     assertContent = self.replaceToken(self.out.test_assert_true,
                                                       'ARG1', subsetContent)
                     assertList += [assertContent + delim]
+                    if isDecorated:
+                        decGetter = self.out.arith_decorator_get_operation
+                        outpDec = self.replaceToken(decGetter, 'ARG1', outp)
+                        inpDec = self.replaceToken(decGetter, 'ARG1', xxs[i][j])
+                        assertContent = self.replaceToken(self.out.test_assert_equals, 'ARG2', outpDec)
+                        assertContent = self.replaceToken(assertContent, 'ARG1', inpDec)
+                        assertList += [assertContent + delim]
         #
+	    # TODO: Revise this comment
         # both present. add([1, 2], [3, 4]) = [4, 6] <= [0, 7] will be
         # translated to
         # assertTrue([4, 6].isSubset(add([1,2], [3, 4])))
@@ -949,11 +927,13 @@ class ASTVisitor(object):
         # assertEqualsWarning(add([1,2], [3,4]), [0,7])
         #
         else:
-            outputList = node.tightestOutputs.accept(self)
+            tightestOutputList = node.tightestOutputs.accept(self)
+            accurateOutputList = node.accurateOutputs.accept(self)
             delim = self.out.lang_line_end_token
 
-            for i in range(0, len(outputList)):
-                outp = outputList[i]
+            # equals warning check
+            for i in range(0, len(tightestOutputList)):
+                outp = tightestOutputList[i][0]
                 for j in range(0, len(xxs[i])):
                     assertContent = self.replaceToken(
                                         self.out.test_assert_equals_warning,
@@ -965,8 +945,10 @@ class ASTVisitor(object):
             subsetOp = getattr(self.out,
                                    self.findMatchingOp('arith_op_subset',
                                                        'arith_op_subset'))
-            for i in range(0, len(outputList)):
-                outp = outputList[i]
+
+            # first subset check
+            for i in range(0, len(tightestOutputList)):
+                outp = tightestOutputList[i][0]
                 for j in range(0, len(xxs[i])):
                     subsetContent = self.replaceToken(subsetOp, 'ARG2',
                                                       xxs[i][j])
@@ -976,9 +958,9 @@ class ASTVisitor(object):
                                                       'ARG1', subsetContent)
                     assertList += [assertContent + delim]
 
-            outputList = node.accurateOutputs.accept(self)
-            for i in range(0, len(outputList)):
-                outp = outputList[i]
+            # second subset check
+            for i in range(0, len(accurateOutputList)):
+                outp = accurateOutputList[i][0]
                 for j in range(0, len(xxs[i])):
                     subsetContent = self.replaceToken(subsetOp, 'ARG1',
                                                       xxs[i][j])
@@ -987,6 +969,36 @@ class ASTVisitor(object):
                     assertContent = self.replaceToken(self.out.test_assert_true,
                                                       'ARG1', subsetContent)
                     assertList += [assertContent + delim]
+
+            # check decorations
+            for i in range(0, len(tightestOutputList)):
+                for j in range(0, len(xxs[i])):
+                    tOutpDec = tightestOutputList[i][1]
+                    aOutpDec = accurateOutputList[i][1]
+
+
+                    if tOutpDec != aOutpDec:
+                        raise IOError("either both or none of the outputs can be decorated")
+
+                    if tOutpDec == True:
+                        decLowerBound = self.replaceToken(self.out.arith_decorator_get_operation,
+                                                          'ARG1', tightestOutputList[i][0])
+                        decUpperBound = self.replaceToken(self.out.arith_decorator_get_operation,
+                                                          'ARG1', accurateOutputList[i][0])
+                        decInput = self.replaceToken(self.out.arith_decorator_get_operation,
+                                                     'ARG1', xxs[i][j])
+                        lbCheck = self.replaceToken(self.out.arith_decorator_less_equals,
+                                                    'ARG1', decLowerBound)
+                        lbCheck = self.replaceToken(lbCheck, 'ARG2', decInput)
+                        ubCheck = self.replaceToken(self.out.arith_decorator_greater_equals,
+                                                    'ARG1', decUpperBound)
+                        ubCheck = self.replaceToken(ubCheck, 'ARG2', decInput)
+                        decCheck = self.replaceToken(self.out.lang_logical_and,
+                                                     'ARG1', lbCheck)
+                        decCheck = self.replaceToken(decCheck, 'ARG2', ubCheck)
+                        decAssert = self.replaceToken(self.out.test_assert_true,
+                                                      'ARG1', decCheck)
+                        assertList += [decAssert + delim]
 
         assertTexts = '\n'.join(assertList)
 
@@ -1039,6 +1051,9 @@ class ASTVisitor(object):
         node -- a DSLNode object
         """
         tmp = self.out.test_testfile_seq
+
+        tmp = self.replaceTokenList(tmp, 'COMMENTS', [n.accept(self) for
+                                                      n in node.comments])
 
         # imports
         languageImportComment = self.out.lang_line_comment_token + \

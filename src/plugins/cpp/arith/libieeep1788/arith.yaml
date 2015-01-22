@@ -24,33 +24,47 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+# misc
+imports: |  
+preamble: |
+    template<typename T>
+    using I = p1788::infsup::interval<T, p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>>;
+
+    template<typename T>
+    using DI = p1788::infsup::decorated_interval<T, p1788::flavor::infsup::setbased::mpfr_bin_ieee754_flavor>;
+
+    const double INF = std::numeric_limits<double>::infinity();
+    
+#infinity
+infinity_plus_double: INF
+infinity_plus_float: ((float) INF)
+infinity_minus_double: (-INF)
+infinity_minus_float: (-(float) INF)
+
 # intervals
-nai_interval_double: I<double>::nai()
-nai_interval_float: I<float>::nai()
+nai_interval_double: DI<double>::nai()
+nai_interval_float: DI<float>::nai()
+nai_interval_long_double: DI<long double>::nai()
 
 empty_interval_double: I<double>::empty()
 empty_interval_float: I<float>::empty()
+empty_interval_long_double: I<long double>::empty()
 
 entire_interval_double: I<double>::entire()
 entire_interval_float: I<float>::entire()
+entire_interval_long_double: I<long double>::entire()
 
-decorated_empty_interval_double: I<double>::empty($DEC)
-decorated_empty_interval_float: I<float>::empty($DEC)
-
-decorated_entire_interval_double: I<double>::entire($DEC)
-decorated_entire_interval_float: I<float>::entire($DEC)
-
-point_interval_double: I<double>(${ARG1})
-point_interval_float: I<float>($ARG1})
+decorated_entire_interval_double: DI<double>::entire($DEC)
+decorated_entire_interval_float: DI<float>::entire($DEC)
+decorated_entire_interval_long_double: DI<long double>::entire($DEC)
 
 inf_sup_interval_double: I<double>(${ARG1}, ${ARG2})
 inf_sup_interval_float: I<float>($ARG1, $ARG2)
+inf_sup_interval_long_double: I<long double>($ARG1, $ARG2)
 
-decorated_point_interval_double: I<double>(${ARG1}, ${DEC})
-decorated_point_interval_float: I<float>($ARG1, $DEC)
-
-decorated_inf_sup_interval_double: I<double>($ARG1, $ARG2, $DEC)
-decorated_inf_sup_interval_float: I<float>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_double: DI<double>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_float: DI<float>($ARG1, $ARG2, $DEC)
+decorated_inf_sup_interval_long_double: DI<long double>($ARG1, $ARG2, $DEC)
 
 
 # interval decorators
@@ -59,6 +73,13 @@ decorator_def: p1788::decoration::decoration::def
 decorator_dac: p1788::decoration::decoration::dac
 decorator_ill: p1788::decoration::decoration::ill
 decorator_trv: p1788::decoration::decoration::trv
+
+# decoration getter
+decorator_get_operation: decoration(${ARG1})
+
+# comparison of decorations
+decorator_less_equals: ($ARG1 <= $ARG2)
+decorator_greater_equals: ($ARG1 >= $ARG2)
 
 
 # overlap literal translations
@@ -136,19 +157,3 @@ op_divToPair*: |
     div_to_pair($ARG1, $ARG2).first
     *** next output
     div_to_pair($ARG1, $ARG2).second
-#infinity
-infinity_plus_double: INF
-infinity_plus_float: ((float) INF)
-infinity_minus_double: (-INF)
-infinity_minus_float: (-(float) INF)
-
-# misc
-imports: |  
-preamble: |
-    template<typename T>
-    using flavor = p1788::flavor::infsup::mpfr_flavor<T, p1788::flavor::infsup::subnormalize::yes>;
-
-    template<typename T>
-    using I = p1788::infsup::interval<T, flavor>;
-    
-    const double INF = std::numeric_limits<double>::infinity();
