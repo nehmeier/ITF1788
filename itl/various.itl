@@ -1357,15 +1357,15 @@ testcase minimal.acosh_test {
 
 testcase minimal.atanh_test {
     atanh [empty] = [empty];
-    #atanh [0.0, inf] = [0.0, inf];
+    atanh [0.0, inf] = [0.0, inf];
     atanh [1.0, inf] = [empty];
-    #atanh [-inf, 0.0] = [-inf, 0.0];
+    atanh [-inf, 0.0] = [-inf, 0.0];
     atanh [-inf, -1.0] = [empty];
-    #atanh [-1.0, 1.0] = [entire];
+    atanh [-1.0, 1.0] = [entire];
     #atanh [0.0] = [0.0];
     #atanh [-1.0] = [empty];
     #atanh [1.0] = [empty];
-    #atanh [entire] = [entire];
+    atanh [entire] = [entire];
     atanh [0X1.4C0420F6F08CCP-2, 0X1.FFFFFFFFFFFFFP-1] = [0X1.5871DD2DF9102P-2, 0X1.2B708872320E2P+4];
     atanh [-0X1.FFB88E9EB6307P-1, 0X1.999999999999AP-4] = [-0X1.06A3A97D7979CP+2, 0X1.9AF93CD234413P-4];
 }
