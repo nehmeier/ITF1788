@@ -1,0 +1,309 @@
+/*
+Copyright 2013 - 2015 Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+Copyright 2015 Oliver Heimlich (oheim@posteo.de)
+
+Original author: Marco Nehmeier (unit tests in libieeep1788)
+Converted into portable ITL format by Oliver Heimlich with minor corrections.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+testcase minimal_cancel_plus_test {
+    cancel_plus [-inf, -1.0] [empty] = [entire];
+    cancel_plus [-1.0, inf] [empty] = [entire];
+    cancel_plus [entire] [empty] = [entire];
+    cancel_plus [-inf, -1.0] [-5.0,1.0] = [entire];
+    cancel_plus [-1.0, inf] [-5.0,1.0] = [entire];
+    cancel_plus [entire] [-5.0,1.0] = [entire];
+    cancel_plus [-inf, -1.0] [entire] = [entire];
+    cancel_plus [-1.0, inf] [entire] = [entire];
+    cancel_plus [empty] [1.0, inf] = [entire];
+    cancel_plus [empty] [-inf,1.0] = [entire];
+    cancel_plus [empty] [entire] = [entire];
+    cancel_plus [-1.0,5.0] [1.0,inf] = [entire];
+    cancel_plus [-1.0,5.0] [-inf,1.0] = [entire];
+    cancel_plus [-1.0,5.0] [entire] = [entire];
+    cancel_plus [entire] [1.0,inf] = [entire];
+    cancel_plus [entire] [-inf,1.0] = [entire];
+    cancel_plus [entire] [entire] = [entire];
+
+    cancel_plus [-5.0, -1.0] [1.0,5.1] = [entire];
+    cancel_plus [-5.0, -1.0] [0.9,5.0] = [entire];
+    cancel_plus [-5.0, -1.0] [0.9,5.1] = [entire];
+    cancel_plus [-10.0, 5.0] [-5.0,10.1] = [entire];
+    cancel_plus [-10.0, 5.0] [-5.1,10.0] = [entire];
+    cancel_plus [-10.0, 5.0] [-5.1,10.1] = [entire];
+    cancel_plus [1.0, 5.0] [-5.0,-0.9] = [entire];
+    cancel_plus [1.0, 5.0] [-5.1,-1.0] = [entire];
+    cancel_plus [1.0, 5.0] [-5.1,-0.9] = [entire];
+
+    cancel_plus [-10.0, -1.0] [empty] = [entire];
+    cancel_plus [-10.0, 5.0] [empty] = [entire];
+    cancel_plus [1.0, 5.0] [empty] = [entire];
+
+
+    cancel_plus [empty] [empty] = [empty];
+    cancel_plus [empty] [1.0,10.0] = [empty];
+    cancel_plus [empty] [-5.0,10.0] = [empty];
+    cancel_plus [empty] [-5.0,-1.0] = [empty];
+
+    cancel_plus [-5.1,-0.0] [0.0,5.0] = [-0X1.999999999998P-4,0.0];
+    cancel_plus [-5.1,-1.0] [1.0,5.0] = [-0X1.999999999998P-4,0.0];
+    cancel_plus [-5.0,-0.9] [1.0,5.0] = [0.0, 0X1.9999999999998P-4];
+    cancel_plus [-5.1,-0.9] [1.0,5.0] = [-0X1.999999999998P-4,0X1.9999999999998P-4];
+    cancel_plus [-5.0,-1.0] [1.0,5.0] = [0.0,0.0];
+    cancel_plus [-10.1, 5.0] [-5.0,10.0] = [-0X1.999999999998P-4,0.0];
+    cancel_plus [-10.0, 5.1] [-5.0,10.0] = [0.0,0X1.999999999998P-4];
+    cancel_plus [-10.1, 5.1] [-5.0,10.0] = [-0X1.999999999998P-4,0X1.999999999998P-4];
+    cancel_plus [-10.0, 5.0] [-5.0,10.0] = [0.0,0.0];
+    cancel_plus [0.9, 5.0] [-5.0,-1.0] = [-0X1.9999999999998P-4,0.0];
+    cancel_plus [1.0, 5.1] [-5.0,-1.0] = [0.0,0X1.999999999998P-4];
+    cancel_plus [0.0, 5.1] [-5.0,-0.0] = [0.0,0X1.999999999998P-4];
+    cancel_plus [0.9, 5.1] [-5.0,-1.0] = [-0X1.9999999999998P-4,0X1.999999999998P-4];
+    cancel_plus [1.0, 5.0] [-5.0,-1.0] = [0.0,0.0];
+    cancel_plus [0.0, 5.0] [-5.0,-0.0] = [0.0,0.0];
+
+    cancel_plus [0X1.FFFFFFFFFFFFP+0,0X1.FFFFFFFFFFFFP+0] [-0X1.999999999999AP-4,-0X1.999999999999AP-4] = [0X1.E666666666656P+0,0X1.E666666666657P+0];
+    cancel_plus [-0X1.999999999999AP-4,0X1.FFFFFFFFFFFFP+0] [-0X1.999999999999AP-4,0.01] = [-0X1.70A3D70A3D70BP-4,0X1.E666666666657P+0];
+
+    cancel_plus [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [0x1.FFFFFFFFFFFFFp1023,inf];
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [0.0,0.0];
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023] = [0.0,0X1P+971];
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023] = [-0X1P+971,0.0];
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023] [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [entire];
+    cancel_plus [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [entire];
+
+    cancel_plus [-0X1P+0,0X1.FFFFFFFFFFFFFP-53] [-0X1P+0,0X1.FFFFFFFFFFFFEP-53] = [-0X1.FFFFFFFFFFFFFP-1,-0X1.FFFFFFFFFFFFEP-1];
+    cancel_plus [-0X1P+0,0X1.FFFFFFFFFFFFEP-53] [-0X1P+0,0X1.FFFFFFFFFFFFFP-53] = [entire];
+}
+
+testcase minimal_cancel_plus_dec_test {
+    cancel_plus [-inf, -1.0]_dac [empty]_trv = [entire]_trv;
+    cancel_plus [-1.0, inf]_def [empty]_trv = [entire]_trv;
+    cancel_plus [entire]_def [empty]_trv = [entire]_trv;
+    cancel_plus [-inf, -1.0]_dac [-5.0,1.0]_com = [entire]_trv;
+    cancel_plus [-1.0, inf]_trv [-5.0,1.0]_def = [entire]_trv;
+    cancel_plus [entire]_def [-5.0,1.0]_def = [entire]_trv;
+    cancel_plus [-inf, -1.0]_dac [entire]_def = [entire]_trv;
+    cancel_plus [-1.0, inf]_def [entire]_def = [entire]_trv;
+    cancel_plus [empty]_trv [1.0, inf]_def = [entire]_trv;
+    cancel_plus [empty]_trv [-inf,1.0]_trv = [entire]_trv;
+    cancel_plus [empty]_trv [entire]_def = [entire]_trv;
+    cancel_plus [-1.0,5.0]_dac [1.0,inf]_dac = [entire]_trv;
+    cancel_plus [-1.0,5.0]_def [-inf,1.0]_dac = [entire]_trv;
+    cancel_plus [-1.0,5.0]_com [entire]_def = [entire]_trv;
+    cancel_plus [entire]_def [1.0,inf]_dac = [entire]_trv;
+    cancel_plus [entire]_def [-inf,1.0]_def = [entire]_trv;
+    cancel_plus [entire]_def [entire]_def = [entire]_trv;
+
+    cancel_plus [-5.0, -1.0]_com [1.0,5.1]_def = [entire]_trv;
+    cancel_plus [-5.0, -1.0]_dac [0.9,5.0]_def = [entire]_trv;
+    cancel_plus [-5.0, -1.0]_def [0.9,5.1]_def = [entire]_trv;
+    cancel_plus [-10.0, 5.0]_trv [-5.0,10.1]_dac = [entire]_trv;
+    cancel_plus [-10.0, 5.0]_com [-5.1,10.0]_dac = [entire]_trv;
+    cancel_plus [-10.0, 5.0]_dac [-5.1,10.1]_dac = [entire]_trv;
+    cancel_plus [1.0, 5.0]_def [-5.0,-0.9]_com = [entire]_trv;
+    cancel_plus [1.0, 5.0]_trv [-5.1,-1.0]_com = [entire]_trv;
+    cancel_plus [1.0, 5.0]_dac [-5.1,-0.9]_com = [entire]_trv;
+
+    cancel_plus [-10.0, -1.0]_trv [empty]_trv = [entire]_trv;
+    cancel_plus [-10.0, 5.0]_def [empty]_trv = [entire]_trv;
+    cancel_plus [1.0, 5.0]_com [empty]_trv = [entire]_trv;
+
+
+    cancel_plus [empty]_trv [empty]_trv = [empty];
+    cancel_plus [empty]_trv [1.0,10.0]_dac = [empty];
+    cancel_plus [empty]_trv [-5.0,10.0]_def = [empty];
+    cancel_plus [empty]_trv [-5.0,-1.0]_com = [empty];
+
+    cancel_plus [-5.1,-0.0]_com [0.0,5.0]_com = [-0X1.999999999998P-4,0.0]_com;
+    cancel_plus [-5.1,-1.0]_com [1.0,5.0]_dac = [-0X1.999999999998P-4,0.0]_dac;
+    cancel_plus [-5.0,-0.9]_com [1.0,5.0]_def = [0.0, 0X1.9999999999998P-4]_def;
+    cancel_plus [-5.1,-0.9]_dac [1.0,5.0]_trv = [-0X1.999999999998P-4,0X1.9999999999998P-4]_trv;
+    cancel_plus [-5.0,-1.0]_dac [1.0,5.0]_com = [0.0,0.0]_dac;
+    cancel_plus [-10.1, 5.0]_dac [-5.0,10.0]_dac = [-0X1.999999999998P-4,0.0]_dac;
+    cancel_plus [-10.0, 5.1]_def [-5.0,10.0]_def = [0.0,0X1.999999999998P-4]_def;
+    cancel_plus [-10.1, 5.1]_def [-5.0,10.0]_trv = [-0X1.999999999998P-4,0X1.999999999998P-4]_trv;
+    cancel_plus [-10.0, 5.0]_def [-5.0,10.0]_com = [0.0,0.0]_def;
+    cancel_plus [0.9, 5.0]_trv [-5.0,-1.0]_dac = [-0X1.9999999999998P-4,0.0]_trv;
+    cancel_plus [1.0, 5.1]_trv [-5.0,-1.0]_def = [0.0,0X1.999999999998P-4]_trv;
+    cancel_plus [0.0, 5.1]_trv [-5.0,-0.0]_trv = [0.0,0X1.999999999998P-4]_trv;
+    cancel_plus [0.9, 5.1]_com [-5.0,-1.0]_com = [-0X1.9999999999998P-4,0X1.999999999998P-4]_com;
+    cancel_plus [1.0, 5.0]_dac [-5.0,-1.0]_dac = [0.0,0.0]_dac;
+    cancel_plus [0.0, 5.0]_def [-5.0,-0.0]_trv = [0.0,0.0]_trv;
+
+    cancel_plus [0X1.FFFFFFFFFFFFP+0,0X1.FFFFFFFFFFFFP+0]_com [-0X1.999999999999AP-4,-0X1.999999999999AP-4]_com = [0X1.E666666666656P+0,0X1.E666666666657P+0]_com;
+    cancel_plus [-0X1.999999999999AP-4,0X1.FFFFFFFFFFFFP+0]_dac [-0X1.999999999999AP-4,0.01]_com = [-0X1.70A3D70A3D70BP-4,0X1.E666666666657P+0]_dac;
+
+    cancel_plus [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [0x1.FFFFFFFFFFFFFp1023,inf]_dac;
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [0.0,0.0]_com;
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_dac [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023]_com = [0.0,0X1P+971]_dac;
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_dac [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023]_com = [-0X1P+971,0.0]_dac;
+    cancel_plus [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023]_com [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [entire]_trv;
+    cancel_plus [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023]_com [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [entire]_trv;
+
+    cancel_plus [-0X1P+0,0X1.FFFFFFFFFFFFFP-53]_dac [-0X1P+0,0X1.FFFFFFFFFFFFEP-53]_com = [-0X1.FFFFFFFFFFFFFP-1,-0X1.FFFFFFFFFFFFEP-1]_dac;
+    cancel_plus [-0X1P+0,0X1.FFFFFFFFFFFFEP-53]_def [-0X1P+0,0X1.FFFFFFFFFFFFFP-53]_com = [entire]_trv;
+}
+
+testcase minimal_cancel_minus_test {
+    cancel_minus [-inf, -1.0] [empty] = [entire];
+    cancel_minus [-1.0, inf] [empty] = [entire];
+    cancel_minus [entire] [empty] = [entire];
+    cancel_minus [-inf, -1.0] [-1.0,5.0] = [entire];
+    cancel_minus [-1.0, inf] [-1.0,5.0] = [entire];
+    cancel_minus [entire] [-1.0,5.0] = [entire];
+    cancel_minus [-inf, -1.0] [entire] = [entire];
+    cancel_minus [-1.0, inf] [entire] = [entire];
+    cancel_minus [empty] [-inf, -1.0] = [entire];
+    cancel_minus [empty] [-1.0, inf] = [entire];
+    cancel_minus [empty] [entire] = [entire];
+    cancel_minus [-1.0,5.0] [-inf, -1.0] = [entire];
+    cancel_minus [-1.0,5.0] [-1.0, inf] = [entire];
+    cancel_minus [-1.0,5.0] [entire] = [entire];
+    cancel_minus [entire] [-inf, -1.0] = [entire];
+    cancel_minus [entire] [-1.0, inf] = [entire];
+    cancel_minus [entire] [entire] = [entire];
+
+    cancel_minus [-5.0, -1.0] [-5.1,-1.0] = [entire];
+    cancel_minus [-5.0, -1.0] [-5.0,-0.9] = [entire];
+    cancel_minus [-5.0, -1.0] [-5.1,-0.9] = [entire];
+    cancel_minus [-10.0, 5.0] [-10.1, 5.0] = [entire];
+    cancel_minus [-10.0, 5.0] [-10.0, 5.1] = [entire];
+    cancel_minus [-10.0, 5.0] [-10.1, 5.1] = [entire];
+    cancel_minus [1.0, 5.0] [0.9, 5.0] = [entire];
+    cancel_minus [1.0, 5.0] [1.0, 5.1] = [entire];
+    cancel_minus [1.0, 5.0] [0.9, 5.1] = [entire];
+
+    cancel_minus [-10.0, -1.0] [empty] = [entire];
+    cancel_minus [-10.0, 5.0] [empty] = [entire];
+    cancel_minus [1.0, 5.0] [empty] = [entire];
+
+
+    cancel_minus [empty] [empty] = [empty];
+    cancel_minus [empty] [-10.0, -1.0] = [empty];
+    cancel_minus [empty] [-10.0, 5.0] = [empty];
+    cancel_minus [empty] [1.0, 5.0] = [empty];
+
+    cancel_minus [-5.1,-0.0] [-5.0, 0.0] = [-0X1.999999999998P-4,0.0];
+    cancel_minus [-5.1,-1.0] [-5.0, -1.0] = [-0X1.999999999998P-4,0.0];
+    cancel_minus [-5.0,-0.9] [-5.0, -1.0] = [0.0, 0X1.9999999999998P-4];
+    cancel_minus [-5.1,-0.9] [-5.0, -1.0] = [-0X1.999999999998P-4,0X1.9999999999998P-4];
+    cancel_minus [-5.0,-1.0] [-5.0, -1.0] = [0.0,0.0];
+    cancel_minus [-10.1, 5.0] [-10.0, 5.0] = [-0X1.999999999998P-4,0.0];
+    cancel_minus [-10.0, 5.1] [-10.0, 5.0] = [0.0,0X1.999999999998P-4];
+    cancel_minus [-10.1, 5.1] [-10.0, 5.0] = [-0X1.999999999998P-4,0X1.999999999998P-4];
+    cancel_minus [-10.0, 5.0] [-10.0, 5.0] = [0.0,0.0];
+    cancel_minus [0.9, 5.0] [1.0, 5.0] = [-0X1.9999999999998P-4,0.0];
+    cancel_minus [-0.0, 5.1] [0.0, 5.0] = [0.0,0X1.999999999998P-4];
+    cancel_minus [1.0, 5.1] [1.0, 5.0] = [0.0,0X1.999999999998P-4];
+    cancel_minus [0.9, 5.1] [1.0, 5.0] = [-0X1.9999999999998P-4,0X1.999999999998P-4];
+    cancel_minus [1.0, 5.0] [1.0, 5.0] = [0.0,0.0];
+    cancel_minus [-5.0, 1.0] [-1.0, 5.0] = [-4.0,-4.0];
+    cancel_minus [-5.0, 0.0] [-0.0, 5.0] = [-5.0,-5.0];
+
+    cancel_minus [0X1.FFFFFFFFFFFFP+0,0X1.FFFFFFFFFFFFP+0] [0X1.999999999999AP-4,0X1.999999999999AP-4] = [0X1.E666666666656P+0,0X1.E666666666657P+0];
+    cancel_minus [-0X1.999999999999AP-4,0X1.FFFFFFFFFFFFP+0] [-0.01,0X1.999999999999AP-4] = [-0X1.70A3D70A3D70BP-4,0X1.E666666666657P+0];
+
+    cancel_minus [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,-0x1.FFFFFFFFFFFFFp1023] = [0x1.FFFFFFFFFFFFFp1023,inf];
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [0.0,0.0];
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023] = [0.0,0X1P+971];
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023] = [-0X1P+971,0.0];
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023] [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [entire];
+    cancel_minus [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023] [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023] = [entire];
+
+    cancel_minus [0x0.0000000000001p-1022,0x0.0000000000001p-1022] [0x0.0000000000001p-1022,0x0.0000000000001p-1022] = [0.0,0.0];
+    cancel_minus [0x0.0000000000001p-1022,0x0.0000000000001p-1022] [-0x0.0000000000001p-1022,-0x0.0000000000001p-1022] = [0x0.0000000000002p-1022,0x0.0000000000002p-1022];
+    cancel_minus [0X1P-1022,0X1.0000000000002P-1022] [0X1P-1022,0X1.0000000000001P-1022] = [0.0,0X0.0000000000001P-1022];
+    cancel_minus [0X1P-1022,0X1.0000000000001P-1022] [0X1P-1022,0X1.0000000000002P-1022] = [entire];
+
+
+    cancel_minus [-0X1P+0,0X1.FFFFFFFFFFFFFP-53] [-0X1.FFFFFFFFFFFFEP-53,0X1P+0] = [-0X1.FFFFFFFFFFFFFP-1,-0X1.FFFFFFFFFFFFEP-1];
+    cancel_minus [-0X1P+0,0X1.FFFFFFFFFFFFEP-53] [-0X1.FFFFFFFFFFFFFP-53,0X1P+0] = [entire];
+}
+
+testcase minimal_cancel_minus_dec_test {
+    cancel_minus [-inf, -1.0]_dac [empty]_trv = [entire]_trv;
+    cancel_minus [-1.0, inf]_def [empty]_trv = [entire]_trv;
+    cancel_minus [entire]_def [empty]_trv = [entire]_trv;
+    cancel_minus [-inf, -1.0]_trv [-1.0,5.0]_dac = [entire]_trv;
+    cancel_minus [-1.0, inf]_dac [-1.0,5.0]_com = [entire]_trv;
+    cancel_minus [entire]_def [-1.0,5.0]_def = [entire]_trv;
+    cancel_minus [-inf, -1.0]_def [entire]_def = [entire]_trv;
+    cancel_minus [-1.0, inf]_trv [entire]_def = [entire]_trv;
+    cancel_minus [empty]_trv [-inf, -1.0]_dac = [entire]_trv;
+    cancel_minus [empty]_trv [-1.0, inf]_dac = [entire]_trv;
+    cancel_minus [empty]_trv [entire]_def = [entire]_trv;
+    cancel_minus [-1.0,5.0]_dac [-inf, -1.0]_def = [entire]_trv;
+    cancel_minus [-1.0,5.0]_def [-1.0, inf]_trv = [entire]_trv;
+    cancel_minus [-1.0,5.0]_com [entire]_def = [entire]_trv;
+    cancel_minus [entire]_def [-inf, -1.0]_dac = [entire]_trv;
+    cancel_minus [entire]_def [-1.0, inf]_def = [entire]_trv;
+    cancel_minus [entire]_def [entire]_def = [entire]_trv;
+
+    cancel_minus [-5.0, -1.0]_com [-5.1,-1.0]_trv = [entire]_trv;
+    cancel_minus [-5.0, -1.0]_dac [-5.0,-0.9]_def = [entire]_trv;
+    cancel_minus [-5.0, -1.0]_def [-5.1,-0.9]_dac = [entire]_trv;
+    cancel_minus [-10.0, 5.0]_trv [-10.1, 5.0]_com = [entire]_trv;
+    cancel_minus [-10.0, 5.0]_com [-10.0, 5.1]_com = [entire]_trv;
+    cancel_minus [-10.0, 5.0]_dac [-10.1, 5.1]_trv = [entire]_trv;
+    cancel_minus [1.0, 5.0]_def [0.9, 5.0]_def = [entire]_trv;
+    cancel_minus [1.0, 5.0]_trv [1.0, 5.1]_dac = [entire]_trv;
+    cancel_minus [1.0, 5.0]_com [0.9, 5.1]_dac = [entire]_trv;
+
+    cancel_minus [-10.0, -1.0]_com [empty]_trv = [entire]_trv;
+    cancel_minus [-10.0, 5.0]_dac [empty]_trv = [entire]_trv;
+    cancel_minus [1.0, 5.0]_def [empty]_trv = [entire]_trv;
+
+
+    cancel_minus [empty]_trv [empty]_trv = [empty];
+    cancel_minus [empty]_trv [-10.0, -1.0]_com = [empty];
+    cancel_minus [empty]_trv [-10.0, 5.0]_dac = [empty];
+    cancel_minus [empty]_trv [1.0, 5.0]_def = [empty];
+
+    cancel_minus [-5.1,-0.0]_com [-5.0, 0.0]_com = [-0X1.999999999998P-4,0.0]_com;
+    cancel_minus [-5.1,-1.0]_dac [-5.0, -1.0]_com = [-0X1.999999999998P-4,0.0]_dac;
+    cancel_minus [-5.0,-0.9]_def [-5.0, -1.0]_com = [0.0, 0X1.9999999999998P-4]_def;
+    cancel_minus [-5.1,-0.9]_trv [-5.0, -1.0]_com = [-0X1.999999999998P-4,0X1.9999999999998P-4]_trv;
+    cancel_minus [-5.0,-1.0]_com [-5.0, -1.0]_dac = [0.0,0.0]_dac;
+    cancel_minus [-10.1, 5.0]_dac [-10.0, 5.0]_dac = [-0X1.999999999998P-4,0.0]_dac;
+    cancel_minus [-10.0, 5.1]_def [-10.0, 5.0]_dac = [0.0,0X1.999999999998P-4]_def;
+    cancel_minus [-10.1, 5.1]_trv [-10.0, 5.0]_def = [-0X1.999999999998P-4,0X1.999999999998P-4]_trv;
+    cancel_minus [-10.0, 5.0]_com [-10.0, 5.0]_def = [0.0,0.0]_def;
+    cancel_minus [0.9, 5.0]_dac [1.0, 5.0]_def = [-0X1.9999999999998P-4,0.0]_def;
+    cancel_minus [-0.0, 5.1]_def [0.0, 5.0]_def = [0.0,0X1.999999999998P-4]_def;
+    cancel_minus [1.0, 5.1]_trv [1.0, 5.0]_trv = [0.0,0X1.999999999998P-4]_trv;
+    cancel_minus [0.9, 5.1]_com [1.0, 5.0]_trv = [-0X1.9999999999998P-4,0X1.999999999998P-4]_trv;
+    cancel_minus [1.0, 5.0]_dac [1.0, 5.0]_com = [0.0,0.0]_dac;
+    cancel_minus [-5.0, 1.0]_def [-1.0, 5.0]_def = [-4.0,-4.0]_def;
+    cancel_minus [-5.0, 0.0]_trv [-0.0, 5.0]_trv = [-5.0,-5.0]_trv;
+
+    cancel_minus [0X1.FFFFFFFFFFFFP+0,0X1.FFFFFFFFFFFFP+0]_com [0X1.999999999999AP-4,0X1.999999999999AP-4]_com = [0X1.E666666666656P+0,0X1.E666666666657P+0]_com;
+    cancel_minus [-0X1.999999999999AP-4,0X1.FFFFFFFFFFFFP+0]_def [-0.01,0X1.999999999999AP-4]_dac = [-0X1.70A3D70A3D70BP-4,0X1.E666666666657P+0]_def;
+
+    cancel_minus [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com [-0x1.FFFFFFFFFFFFFp1023,-0x1.FFFFFFFFFFFFFp1023]_com = [0x1.FFFFFFFFFFFFFp1023,inf]_dac;
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [0.0,0.0]_com;
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023]_com = [0.0,0X1P+971]_com;
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023]_com = [-0X1P+971,0.0]_com;
+    cancel_minus [-0x1.FFFFFFFFFFFFFp1023,0X1.FFFFFFFFFFFFEP+1023]_com [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [entire]_trv;
+    cancel_minus [-0X1.FFFFFFFFFFFFEP+1023,0x1.FFFFFFFFFFFFFp1023]_com [-0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [entire]_trv;
+
+    cancel_minus [0x0.0000000000001p-1022,0x0.0000000000001p-1022]_com [0x0.0000000000001p-1022,0x0.0000000000001p-1022]_com = [0.0,0.0]_com;
+    cancel_minus [0x0.0000000000001p-1022,0x0.0000000000001p-1022]_com [-0x0.0000000000001p-1022,-0x0.0000000000001p-1022]_dac = [0x0.0000000000002p-1022,0x0.0000000000002p-1022]_dac;
+    cancel_minus [0X1P-1022,0X1.0000000000002P-1022]_dac [0X1P-1022,0X1.0000000000001P-1022]_dac = [0.0,0X0.0000000000001P-1022]_dac;
+    cancel_minus [0X1P-1022,0X1.0000000000001P-1022]_def [0X1P-1022,0X1.0000000000002P-1022]_com = [entire]_trv;
+
+
+    cancel_minus [-0X1P+0,0X1.FFFFFFFFFFFFFP-53]_com [-0X1.FFFFFFFFFFFFEP-53,0X1P+0]_dac = [-0X1.FFFFFFFFFFFFFP-1,-0X1.FFFFFFFFFFFFEP-1]_dac;
+    cancel_minus [-0X1P+0,0X1.FFFFFFFFFFFFEP-53]_def [-0X1.FFFFFFFFFFFFFP-53,0X1P+0]_dac = [entire]_trv;
+}

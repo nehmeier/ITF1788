@@ -1,0 +1,187 @@
+/*
+Copyright 2013 - 2015 Marco Nehmeier (nehmeier@informatik.uni-wuerzburg.de)
+Copyright 2015 Oliver Heimlich (oheim@posteo.de)
+
+Original author: Marco Nehmeier (unit tests in libieeep1788)
+Converted into portable ITL format by Oliver Heimlich with minor corrections.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*
+testcase minimal_inf_test {
+    inf [empty] = +inf;
+    inf [-inf,+inf] = -inf;
+    inf [1.0,2.0] = 1.0;
+    inf [-3.0,-2.0] = -3.0;
+    inf [-inf,2.0] = -inf;
+    inf [-inf,0.0] = -inf;
+    inf [-inf,-0.0] = -inf;
+    inf [-2.0,inf] = -2.0;
+    inf [0.0,inf] = -0.0;
+    inf [-0.0,inf] = -0.0;
+    inf [-0.0,0.0] = -0.0;
+    inf [0.0,-0.0] = -0.0;
+    inf [0.0,0.0] = -0.0;
+    inf [-0.0,-0.0] = -0.0;
+}
+
+testcase minimal_inf_dec_test {
+    inf [empty]_trv = +inf;
+    inf [-inf,+inf]_def = -inf;
+    inf [1.0,2.0]_com = 1.0;
+    inf [-3.0,-2.0]_trv = -3.0;
+    inf [-inf,2.0]_dac = -inf;
+    inf [-inf,0.0]_def = -inf;
+    inf [-inf,-0.0]_trv = -inf;
+    inf [-2.0,inf]_trv = -2.0;
+    inf [0.0,inf]_def = -0.0;
+    inf [-0.0,inf]_trv = -0.0;
+    inf [-0.0,0.0]_dac = -0.0;
+    inf [0.0,-0.0]_trv = -0.0;
+    inf [0.0,0.0]_trv = -0.0;
+    inf [-0.0,-0.0]_trv = -0.0;
+}
+*/
+
+testcase minimal_sup_test {
+    sup [empty] = -inf;
+    sup [-inf,+inf] = +inf;
+    sup [1.0,2.0] = 2.0;
+    sup [-3.0,-2.0] = -2.0;
+    sup [-inf,2.0] = 2.0;
+    sup [-inf,0.0] = 0.0;
+    sup [-inf,-0.0] = 0.0;
+    sup [-2.0,inf] = inf;
+    sup [0.0,inf] = inf;
+    sup [-0.0,inf] = inf;
+    sup [-0.0,0.0] = 0.0;
+    sup [0.0,-0.0] = 0.0;
+    sup [0.0,0.0] = 0.0;
+    sup [-0.0,-0.0] = 0.0;
+}
+
+testcase minimal_sup_dec_test {
+    sup [empty]_trv = -inf;
+    sup [-inf,+inf]_def = +inf;
+    sup [1.0,2.0]_com = 2.0;
+    sup [-3.0,-2.0]_trv = -2.0;
+    sup [-inf,2.0]_dac = 2.0;
+    sup [-inf,0.0]_def = 0.0;
+    sup [-inf,-0.0]_trv = 0.0;
+    sup [-2.0,inf]_trv = inf;
+    sup [0.0,inf]_def = inf;
+    sup [-0.0,inf]_trv = inf;
+    sup [-0.0,0.0]_dac = +0.0;
+    sup [0.0,-0.0]_trv = +0.0;
+    sup [0.0,0.0]_trv = +0.0;
+    sup [-0.0,-0.0]_trv = +0.0;
+}
+
+testcase minimal_mid_test {
+    mid [-inf,+inf] = 0.0;
+    mid [-0x1.FFFFFFFFFFFFFp1023,+0x1.FFFFFFFFFFFFFp1023] = 0.0;
+    mid [0.0,2.0] = 1.0;
+    mid [2.0,2.0] = 2.0;
+    mid [-2.0,2.0] = 0.0;
+    mid [-0X0.0000000000002P-1022,0X0.0000000000001P-1022] = 0.0;
+    mid [-0X0.0000000000001P-1022,0X0.0000000000002P-1022] = 0.0;
+}
+
+testcase minimal_mid_dec_test {
+    mid [-inf,+inf]_def = 0.0;
+    mid [-0x1.FFFFFFFFFFFFFp1023,+0x1.FFFFFFFFFFFFFp1023]_trv = 0.0;
+    mid [0.0,2.0]_com = 1.0;
+    mid [2.0,2.0]_dac = 2.0;
+    mid [-2.0,2.0]_trv = 0.0;
+    mid [-0X0.0000000000002P-1022,0X0.0000000000001P-1022]_trv = 0.0;
+    mid [-0X0.0000000000001P-1022,0X0.0000000000002P-1022]_trv = 0.0;
+}
+
+testcase minimal_rad_test {
+    rad [0.0,2.0] = 1.0;
+    rad [2.0,2.0] = 0.0;
+    rad [-inf,+inf] = inf;
+    rad [0.0,inf] = inf;
+    rad [-inf, 1.2] = inf;
+}
+
+testcase minimal_rad_dec_test {
+    rad [0.0,2.0]_trv = 1.0;
+    rad [2.0,2.0]_com = 0.0;
+    rad [-inf,+inf]_trv = inf;
+    rad [0.0,inf]_def = inf;
+    rad [-inf, 1.2]_trv = inf;
+}
+
+testcase minimal_wid_test {
+    wid [2.0,2.0] = 0.0;
+    wid [1.0,2.0] = 1.0;
+    wid [1.0,inf] = inf;
+    wid [-inf,2.0] = inf;
+    wid [-inf,+inf] = inf;
+}
+
+testcase minimal_wid_dec_test {
+    wid [2.0,2.0]_com = 0.0;
+    wid [1.0,2.0]_trv = 1.0;
+    wid [1.0,inf]_trv = inf;
+    wid [-inf,2.0]_def = inf;
+    wid [-inf,+inf]_trv = inf;
+}
+
+testcase minimal_mag_test {
+    mag [1.0,2.0] = 2.0;
+    mag [-4.0,2.0] = 4.0;
+    mag [-inf,2.0] = inf;
+    mag [1.0,inf] = inf;
+    mag [-inf,+inf] = inf;
+    mag [-0.0,0.0] = 0.0;
+    mag [-0.0,-0.0] = 0.0;
+}
+
+testcase minimal_mag_dec_test {
+    mag [1.0,2.0]_com = 2.0;
+    mag [-4.0,2.0]_trv = 4.0;
+    mag [-inf,2.0]_trv = inf;
+    mag [1.0,inf]_def = inf;
+    mag [-inf,+inf]_trv = inf;
+    mag [-0.0,0.0]_trv = 0.0;
+    mag [-0.0,-0.0]_trv = 0.0;
+}
+
+testcase minimal_mig_test {
+    mig [1.0,2.0] = 1.0;
+    mig [-4.0,2.0] = 0.0;
+    mig [-4.0,-2.0] = 2.0;
+    mig [-inf,2.0] = 0.0;
+    mig [-inf,-2.0] = 2.0;
+    mig [-1.0,inf] = 0.0;
+    mig [1.0,inf] = 1.0;
+    mig [-inf,+inf] = 0.0;
+    mig [-0.0,0.0] = 0.0;
+    mig [-0.0,-0.0] = 0.0;
+}
+
+testcase minimal_mig_dec_test {
+    mig [1.0,2.0]_com = 1.0;
+    mig [-4.0,2.0]_trv = 0.0;
+    mig [-4.0,-2.0]_trv = 2.0;
+    mig [-inf,2.0]_def = 0.0;
+    mig [-inf,-2.0]_trv = 2.0;
+    mig [-1.0,inf]_trv = 0.0;
+    mig [1.0,inf]_trv = 1.0;
+    mig [-inf,+inf]_trv = 0.0;
+    mig [-0.0,0.0]_trv = 0.0;
+    mig [-0.0,-0.0]_trv = 0.0;
+}
