@@ -54,8 +54,8 @@ testcase minimal_is_common_dec_test {
     is_common [-0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023]_trv = true;
 
     is_common [entire]_dac = false;
-    is_common [empty]_ill = false;
-    is_common [empty]_trv = false;
+    is_common [empty] = false;
+    is_common [empty] = false;
     is_common [-inf, 0.0]_trv = false;
     is_common [0.0, inf]_def = false;
 }
@@ -89,8 +89,8 @@ testcase minimal_is_singleton_dec_test {
     is_singleton [-0.0, 0.0]_def = true;
     is_singleton [0.0, -0.0]_dac = true;
 
-    is_singleton [empty]_trv = false;
-    is_singleton [empty]_ill = false;
+    is_singleton [empty] = false;
+    is_singleton [empty] = false;
     is_singleton [entire]_def = false;
     is_singleton [-1.0, 0.0]_dac = false;
     is_singleton [-1.0, -0.5]_com = false;
@@ -157,14 +157,14 @@ testcase minimal_is_member_dec_test {
     is_member 111110.0 [-0.0,-0.0]_trv = false;
     is_member 4.9 [5.0, 12.4]_def = false;
     is_member -6.3 [5.0, 12.4]_dac = false;
-    is_member 0.0 [empty]_ill = false;
-    is_member 0.0 [empty]_trv = false;
-    is_member -4535.3 [empty]_trv = false;
-    is_member -4535.3 [empty]_ill = false;
-    is_member -inf [empty]_trv = false;
-    is_member -inf [empty]_ill = false;
-    is_member inf [empty]_trv = false;
-    is_member inf [empty]_ill = false;
+    is_member 0.0 [empty] = false;
+    is_member 0.0 [empty] = false;
+    is_member -4535.3 [empty] = false;
+    is_member -4535.3 [empty] = false;
+    is_member -inf [empty] = false;
+    is_member -inf [empty] = false;
+    is_member inf [empty] = false;
+    is_member inf [empty] = false;
     is_member -inf [entire]_trv = false;
     is_member inf [entire]_def = false;
 }

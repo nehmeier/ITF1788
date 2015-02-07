@@ -209,9 +209,9 @@ testcase minimal_mul_rev_to_pair_test {
 }
 
 testcase minimal_mul_rev_to_pair_dec_test {
-    mul_rev_to_pair [empty]_trv [1.0, 2.0]_def = [empty] [empty];
-    mul_rev_to_pair [1.0, 2.0]_com [empty]_trv = [empty] [empty];
-    mul_rev_to_pair [empty]_trv [empty]_trv = [empty] [empty];
+    mul_rev_to_pair [empty] [1.0, 2.0]_def = [empty] [empty];
+    mul_rev_to_pair [1.0, 2.0]_com [empty] = [empty] [empty];
+    mul_rev_to_pair [empty] [empty] = [empty] [empty];
 
 
     mul_rev_to_pair [-2.0, -0.1]_com [-2.1, -0.4]_com = [0X1.999999999999AP-3, 0X1.5P+4]_com [empty];

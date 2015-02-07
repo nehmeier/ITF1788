@@ -36,8 +36,6 @@ testcase minimal_is_empty_test {
 }
 
 testcase minimal_is_empty_dec_test {
-    is_empty [empty]_ill = false;
-    is_empty [empty]_trv = true;
     is_empty [-inf,+inf]_def = false;
     is_empty [1.0,2.0]_com = false;
     is_empty [-1.0,2.0]_trv = false;
@@ -71,8 +69,8 @@ testcase minimal_is_entire_test {
 }
 
 testcase minimal_is_entire_dec_test {
-    is_entire [empty]_ill = false;
-    is_entire [empty]_trv = false;
+    is_entire [empty] = false;
+    is_entire [empty] = false;
     is_entire [-inf,+inf]_trv = true;
     is_entire [-inf,+inf]_def = true;
     is_entire [-inf,+inf]_dac = true;
@@ -91,8 +89,6 @@ testcase minimal_is_entire_dec_test {
 }
 
 testcase minimal_is_nai_dec_test {
-    is_nai [empty]_ill = true;
-    is_nai [empty]_trv = false;
     is_nai [-inf,+inf]_trv = false;
     is_nai [-inf,+inf]_def = false;
     is_nai [-inf,+inf]_dac = false;
@@ -131,12 +127,9 @@ testcase minimal_is_equal_test {
 testcase minimal_is_equal_dec_test {
     is_equal [1.0,2.0]_def [1.0,2.0]_trv = true;
     is_equal [1.0,2.1]_trv [1.0,2.0]_trv = false;
-    is_equal [empty]_trv [empty]_trv = true;
-    is_equal [empty]_trv [empty]_ill = false;
-    is_equal [empty]_ill [empty]_trv = false;
-    is_equal [empty]_ill [empty]_ill = false;
-    is_equal [empty]_trv [1.0,2.0]_trv = false;
-    is_equal [empty]_ill [1.0,2.0]_trv = false;
+    is_equal [empty] [empty] = true;
+    is_equal [empty] [1.0,2.0]_trv = false;
+    is_equal [empty] [1.0,2.0]_trv = false;
     is_equal [-inf,+inf]_def [-inf,+inf]_trv = true;
     is_equal [1.0,2.4]_trv [-inf,+inf]_trv = false;
     is_equal [1.0,inf]_trv [1.0,inf]_trv = true;
@@ -185,22 +178,17 @@ testcase minimal_subset_test {
 }
 
 testcase minimal_subset_dec_test {
-    subset [empty]_ill [empty]_ill = false;
-    subset [empty]_ill [empty]_trv = false;
-    subset [empty]_ill [0.0,4.0]_trv = false;
+    subset [empty] [0.0,4.0]_trv = true;
+    subset [empty] [-0.0,4.0]_def = true;
+    subset [empty] [-0.1,1.0]_trv = true;
+    subset [empty] [-0.1,0.0]_trv = true;
+    subset [empty] [-0.1,-0.0]_trv = true;
+    subset [empty] [-inf,+inf]_trv = true;
 
-    subset [empty]_trv [empty]_trv = true;
-    subset [empty]_trv [0.0,4.0]_trv = true;
-    subset [empty]_trv [-0.0,4.0]_def = true;
-    subset [empty]_trv [-0.1,1.0]_trv = true;
-    subset [empty]_trv [-0.1,0.0]_trv = true;
-    subset [empty]_trv [-0.1,-0.0]_trv = true;
-    subset [empty]_trv [-inf,+inf]_trv = true;
-
-    subset [0.0,4.0]_trv [empty]_trv = false;
-    subset [-0.0,4.0]_def [empty]_trv = false;
-    subset [-0.1,1.0]_trv [empty]_trv = false;
-    subset [-inf,+inf]_trv [empty]_trv = false;
+    subset [0.0,4.0]_trv [empty] = false;
+    subset [-0.0,4.0]_def [empty] = false;
+    subset [-0.1,1.0]_trv [empty] = false;
+    subset [-inf,+inf]_trv [empty] = false;
 
     subset [0.0,4.0]_trv [-inf,+inf]_trv = true;
     subset [-0.0,4.0]_trv [-inf,+inf]_trv = true;
@@ -256,14 +244,11 @@ testcase minimal_less_test {
 }
 
 testcase minimal_less_dec_test {
-    less [empty]_ill [empty]_ill = false;
-    less [empty]_trv [empty]_ill = false;
-    less [1.0,2.0]_trv [empty]_ill = false;
-    less [empty]_ill [1.0,2.0]_def = false;
+    less [1.0,2.0]_trv [empty] = false;
+    less [empty] [1.0,2.0]_def = false;
 
-    less [empty]_trv [empty]_trv = true;
-    less [1.0,2.0]_trv [empty]_trv = false;
-    less [empty]_trv [1.0,2.0]_trv = false;
+    less [1.0,2.0]_trv [empty] = false;
+    less [empty] [1.0,2.0]_trv = false;
 
     less [-inf,+inf]_trv [-inf,+inf]_trv = true;
     less [1.0,2.0]_def [-inf,+inf]_trv = false;
@@ -323,14 +308,11 @@ testcase minimal_precedes_test {
 }
 
 testcase minimal_precedes_dec_test {
-    precedes [empty]_ill [3.0,4.0]_def = false;
-    precedes [3.0,4.0]_trv [empty]_ill = false;
-    precedes [empty]_ill [empty]_trv = false;
-    precedes [empty]_ill [empty]_ill = false;
+    precedes [empty] [3.0,4.0]_def = true;
+    precedes [3.0,4.0]_trv [empty] = true;
 
-    precedes [empty]_trv [3.0,4.0]_trv = true;
-    precedes [3.0,4.0]_trv [empty]_trv = true;
-    precedes [empty]_trv [empty]_trv = true;
+    precedes [empty] [3.0,4.0]_trv = true;
+    precedes [3.0,4.0]_trv [empty] = true;
 
 
     precedes [1.0,2.0]_trv [-inf,+inf]_trv = false;
@@ -379,18 +361,14 @@ testcase minimal_is_interior_test {
 }
 
 testcase minimal_is_interior_dec_test {
-    is_interior [empty]_ill [empty]_ill = false;
-    is_interior [empty]_ill [empty]_trv = false;
-    is_interior [empty]_ill [0.0,4.0]_trv = false;
-    is_interior [0.0,4.0]_def [empty]_ill = false;
+    is_interior [empty] [0.0,4.0]_trv = true;
+    is_interior [0.0,4.0]_def [empty] = false;
 
-    is_interior [empty]_trv [empty]_trv = true;
-    is_interior [empty]_trv [0.0,4.0]_trv = true;
-    is_interior [0.0,4.0]_trv [empty]_trv = false;
+    is_interior [0.0,4.0]_trv [empty] = false;
 
     is_interior [-inf,+inf]_trv [-inf,+inf]_trv = true;
     is_interior [0.0,4.0]_trv [-inf,+inf]_trv = true;
-    is_interior [empty]_trv [-inf,+inf]_trv = true;
+    is_interior [empty] [-inf,+inf]_trv = true;
     is_interior [-inf,+inf]_trv [0.0,4.0]_trv = false;
 
     is_interior [0.0,4.0]_trv [0.0,4.0]_trv = false;
@@ -426,14 +404,11 @@ testcase minimal_strictly_less_test {
 }
 
 testcase minimal_strictly_less_dec_test {
-    strictly_less [empty]_ill [empty]_ill = false;
-    strictly_less [empty]_trv [empty]_ill = false;
-    strictly_less [1.0,2.0]_trv [empty]_ill = false;
-    strictly_less [empty]_ill [1.0,2.0]_def = false;
+    strictly_less [1.0,2.0]_trv [empty] = false;
+    strictly_less [empty] [1.0,2.0]_def = false;
 
-    strictly_less [empty]_trv [empty]_trv = true;
-    strictly_less [1.0,2.0]_def [empty]_trv = false;
-    strictly_less [empty]_trv [1.0,2.0]_def = false;
+    strictly_less [1.0,2.0]_def [empty] = false;
+    strictly_less [empty] [1.0,2.0]_def = false;
 
     strictly_less [-inf,+inf]_trv [-inf,+inf]_trv = true;
     strictly_less [1.0,2.0]_trv [-inf,+inf]_trv = false;
@@ -472,14 +447,11 @@ testcase minimal_strictly_precedes_test {
 }
 
 testcase minimal_strictly_precedes_dec_test {
-    strictly_precedes [empty]_ill [3.0,4.0]_trv = false;
-    strictly_precedes [3.0,4.0]_def [empty]_ill = false;
-    strictly_precedes [empty]_ill [empty]_trv = false;
-    strictly_precedes [empty]_ill [empty]_ill = false;
+    strictly_precedes [empty] [3.0,4.0]_trv = true;
+    strictly_precedes [3.0,4.0]_def [empty] = true;
 
-    strictly_precedes [empty]_trv [3.0,4.0]_trv = true;
-    strictly_precedes [3.0,4.0]_def [empty]_trv = true;
-    strictly_precedes [empty]_trv [empty]_trv = true;
+    strictly_precedes [empty] [3.0,4.0]_trv = true;
+    strictly_precedes [3.0,4.0]_def [empty] = true;
 
     strictly_precedes [1.0,2.0]_trv [-inf,+inf]_trv = false;
     strictly_precedes [-inf,+inf]_trv [1.0,2.0]_trv = false;
@@ -512,14 +484,11 @@ testcase minimal_are_disjoint_test {
 }
 
 testcase minimal_are_disjoint_dec_test {
-    are_disjoint [empty]_ill [3.0,4.0]_def = false;
-    are_disjoint [3.0,4.0]_trv [empty]_ill = false;
-    are_disjoint [empty]_trv [empty]_ill = false;
-    are_disjoint [empty]_ill [empty]_ill = false;
+    are_disjoint [empty] [3.0,4.0]_def = true;
+    are_disjoint [3.0,4.0]_trv [empty] = true;
 
-    are_disjoint [empty]_trv [3.0,4.0]_trv = true;
-    are_disjoint [3.0,4.0]_trv [empty]_trv = true;
-    are_disjoint [empty]_trv [empty]_trv = true;
+    are_disjoint [empty] [3.0,4.0]_trv = true;
+    are_disjoint [3.0,4.0]_trv [empty] = true;
 
     are_disjoint [3.0,4.0]_trv [1.0,2.0]_def = true;
 

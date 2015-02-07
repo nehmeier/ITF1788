@@ -33,7 +33,7 @@ testcase minimal_pos_test {
 }
 
 testcase minimal_pos_dec_test {
-    pos [empty]_trv = [empty];
+    pos [empty] = [empty];
     pos [entire]_def = [entire]_def;
     pos [1.0, 2.0]_com = [1.0, 2.0]_com;
 }
@@ -53,7 +53,7 @@ testcase minimal_neg_test {
 }
 
 testcase minimal_neg_dec_test {
-    neg [empty]_trv = [empty];
+    neg [empty] = [empty];
     neg [entire]_def = [entire]_def;
     neg [1.0, 2.0]_com = [-2.0, -1.0]_com;
 }
@@ -105,7 +105,7 @@ testcase minimal_add_dec_test {
     add [1.0,2.0]_com [5.0,7.0]_def = [6.0,9.0]_def;
     add [1.0,2.0]_com [5.0,0x1.FFFFFFFFFFFFFp1023]_com = [6.0,inf]_dac;
     add [-0x1.FFFFFFFFFFFFFp1023,2.0]_com [-0.1, 5.0]_com = [-inf,7.0]_dac;
-    add [1.0,2.0]_trv [empty]_trv = [empty];
+    add [1.0,2.0]_trv [empty] = [empty];
 }
 
 testcase minimal_sub_test {
@@ -154,7 +154,7 @@ testcase minimal_sub_dec_test {
     sub [1.0,2.0]_com [5.0,7.0]_def = [-6.0,-3.0]_def;
     sub [-1.0,2.0]_com [5.0,0x1.FFFFFFFFFFFFFp1023]_com = [-inf,-3.0]_dac;
     sub [-0x1.FFFFFFFFFFFFFp1023,2.0]_com [-1.0, 5.0]_com = [-inf,3.0]_dac;
-    sub [1.0,2.0]_trv [empty]_trv = [empty];
+    sub [1.0,2.0]_trv [empty] = [empty];
 }
 
 testcase minimal_mul_test {
@@ -297,7 +297,7 @@ testcase minimal_mul_dec_test {
     mul [1.0,2.0]_com [5.0,7.0]_def = [5.0,14.0]_def;
     mul [1.0,2.0]_com [5.0,0x1.FFFFFFFFFFFFFp1023]_com = [5.0,inf]_dac;
     mul [-0x1.FFFFFFFFFFFFFp1023,2.0]_com [-1.0, 5.0]_com = [-inf,0x1.FFFFFFFFFFFFFp1023]_dac;
-    mul [1.0,2.0]_trv [empty]_trv = [empty];
+    mul [1.0,2.0]_trv [empty] = [empty];
 }
 
 testcase minimal_div_test {
@@ -668,7 +668,7 @@ testcase minimal_div_dec_test {
     div [-200.0,-1.0]_com [0x0.0000000000001p-1022, 10.0]_com = [-inf,-0X1.9999999999999P-4]_dac;
     div [-2.0,-1.0]_com [0.0, 10.0]_com = [-inf,-0X1.9999999999999P-4]_trv;
     div [1.0,3.0]_def [-inf, -10.0]_dac = [-0X1.3333333333334P-2,0.0]_def;
-    div [1.0,2.0]_trv [empty]_trv = [empty];
+    div [1.0,2.0]_trv [empty] = [empty];
 }
 
 testcase minimal_recip_test {
@@ -3021,13 +3021,13 @@ testcase minimal_pow_dec_test {
     pow [1.1,inf]_def [-2.5,inf]_dac = [0X0P+0,inf]_def;
     pow [1.1,inf]_trv [-inf,-1.0]_def = [0X0P+0,0X1.D1745D1745D17P-1]_trv;
 
-    pow [0.0,0.5]_com [0.1,0.1]_com = [0.0,0X1.DDB680117AB13P-1]_def;
-    pow [0.0,0.5]_com [2.5,inf]_dac = [0.0,0X1.6A09E667F3BCDP-3]_def;
+    pow [0.0,0.5]_com [0.1,0.1]_com = [0.0,0X1.DDB680117AB13P-1]_com;
+    pow [0.0,0.5]_com [2.5,inf]_dac = [0.0,0X1.6A09E667F3BCDP-3]_dac;
     pow [0.0,0.5]_com [-inf,-2.5]_dac = [0X1.6A09E667F3BCCP+2,inf]_trv;
 
     pow [0.0,1.0]_com [0.0,0.0]_com = [1.0,1.0]_trv;
     pow [0.0,1.0]_def [0.0,2.5]_dac = [0.0,1.0]_trv;
-    pow [0.0,1.0]_dac [1.0,2.5]_com = [0.0,1.0]_def;
+    pow [0.0,1.0]_dac [1.0,2.5]_com = [0.0,1.0]_dac;
     pow [0.0,1.0]_com [-2.5,0.1]_dac = [0.0,inf]_trv;
     pow [0.0,1.0]_def [entire]_def = [0.0,inf]_trv;
     pow [0.0,1.0]_dac [-0.1,0.0]_com = [1.0,inf]_trv;
@@ -3039,25 +3039,25 @@ testcase minimal_pow_dec_test {
     pow [0.0,1.5]_dac [-1.0,0.0]_com = [0X1.5555555555555P-1,inf]_trv;
     pow [0.0,1.5]_com [-2.5,-2.5]_def = [0X1.7398BF1D1EE6FP-2,inf]_trv;
 
-    pow [0.0,inf]_dac [0.1,0.1]_com = [0.0,inf]_def;
+    pow [0.0,inf]_dac [0.1,0.1]_com = [0.0,inf]_dac;
     pow [0.0,inf]_def [-1.0,1.0]_dac = [0.0,inf]_trv;
     pow [0.0,inf]_trv [-inf,-1.0]_def = [0.0,inf]_trv;
     pow [0.0,inf]_dac [-2.5,-2.5]_dac = [0.0,inf]_trv;
 
     pow [-0.0,0.5]_com [0.0,inf]_dac = [0.0,1.0]_trv;
     pow [-0.0,0.5]_def [0.1,inf]_def = [0.0,0X1.DDB680117AB13P-1]_def;
-    pow [-0.0,0.5]_dac [2.5,2.5]_com = [0.0,0X1.6A09E667F3BCDP-3]_def;
+    pow [-0.0,0.5]_dac [2.5,2.5]_com = [0.0,0X1.6A09E667F3BCDP-3]_dac;
     pow [-0.0,0.5]_trv [-2.5,-0.0]_dac = [1.0,inf]_trv;
     pow [-0.0,0.5]_com [-inf,-0.1]_def = [0X1.125FBEE250664P+0,inf]_trv;
     pow [-0.0,0.5]_def [-inf,-2.5]_dac = [0X1.6A09E667F3BCCP+2,inf]_trv;
 
-    pow [-0.0,1.0]_com [2.5,2.5]_dac = [0.0,1.0]_def;
+    pow [-0.0,1.0]_com [2.5,2.5]_dac = [0.0,1.0]_dac;
     pow [-0.0,1.0]_dac [-1.0,inf]_def = [0.0,inf]_trv;
     pow [-0.0,1.0]_com [entire]_def = [0.0,inf]_trv;
     pow [-0.0,1.0]_def [-2.5,-2.5]_com = [1.0,inf]_trv;
     pow [-0.0,1.0]_dac [-inf,-2.5]_def = [1.0,inf]_trv;
 
-    pow [-0.0,1.5]_com [0.1,2.5]_dac = [0.0,0X1.60B9FD68A4555P+1]_def;
+    pow [-0.0,1.5]_com [0.1,2.5]_dac = [0.0,0X1.60B9FD68A4555P+1]_dac;
     pow [-0.0,1.5]_def [-1.0,0.0]_trv = [0X1.5555555555555P-1,inf]_trv;
     pow [-0.0,1.5]_dac [-2.5,-0.1]_def = [0X1.7398BF1D1EE6FP-2,inf]_trv;
     pow [-0.0,1.5]_com [-2.5,-2.5]_com = [0X1.7398BF1D1EE6FP-2,inf]_trv;
@@ -3362,7 +3362,7 @@ testcase minimal_sin_test {
 testcase minimal_sin_dec_test {
     sin [-0X1.921FB54442D18P+1,-0X1.921FB54442D18P+0]_def = [-0X1P+0,-0X1.1A62633145C06P-53]_def;
     sin [-inf,-0.0]_trv = [-1.0,1.0]_trv;
-    sin [entire]_def = [-1.0,1.0]_dac;
+    sin [entire]_def = [-1.0,1.0]_def;
 }
 
 testcase minimal_cos_test {
@@ -3432,7 +3432,7 @@ testcase minimal_cos_test {
 testcase minimal_cos_dec_test {
     cos [-0X1.921FB54442D18P+0,-0X1.921FB54442D18P+0]_trv = [0X1.1A62633145C06P-54,0X1.1A62633145C07P-54]_trv;
     cos [-inf,-0.0]_def = [-1.0,1.0]_def;
-    cos [entire]_def = [-1.0,1.0]_dac;
+    cos [entire]_def = [-1.0,1.0]_def;
 }
 
 testcase minimal_tan_test {
@@ -3478,7 +3478,7 @@ testcase minimal_tan_test {
 }
 
 testcase minimal_tan_dec_test {
-    tan [empty]_trv = [empty];
+    tan [empty] = [empty];
     tan [0.0,inf]_dac = [entire]_trv;
     tan [-0.0,inf]_def = [entire]_trv;
     tan [-inf,0.0]_trv = [entire]_trv;
@@ -3594,7 +3594,7 @@ testcase minimal_atan_test {
 testcase minimal_atan_dec_test {
     atan [0.0,inf]_dac = [0.0,0X1.921FB54442D19P+0]_dac;
     atan [-inf,0.0]_def = [-0X1.921FB54442D19P+0,0.0]_def;
-    atan [entire]_def = [-0X1.921FB54442D19P+0,0X1.921FB54442D19P+0]_dac;
+    atan [entire]_def = [-0X1.921FB54442D19P+0,0X1.921FB54442D19P+0]_def;
     atan [1.0,0X1.4C2463567C5ACP+25]_trv = [0X1.921FB54442D18P-1,0X1.921FB4E19ABD7P+0]_trv;
     atan [-0X1.FD219490EAAC1P+38,-0X1.1AF1C9D74F06DP+9]_com = [-0X1.921FB54440CEBP+0,-0X1.91ABE5C1E4C6DP+0]_com;
 }
@@ -3784,21 +3784,20 @@ testcase minimal_atan2_test {
 }
 
 testcase minimal_atan2_dec_test {
-    atan2 [empty]_trv [empty]_trv = [empty];
-    atan2 [empty]_trv [entire]_def = [empty];
-    atan2 [empty]_trv [0.0, 0.0]_com = [empty];
-    atan2 [empty]_trv [-0.0, 0.0]_dac = [empty];
-    atan2 [empty]_trv [0.0, -0.0]_def = [empty];
-    atan2 [empty]_trv [-0.0, -0.0]_trv = [empty];
-    atan2 [empty]_trv [-2.0, -0.1]_com = [empty];
-    atan2 [empty]_trv [-2.0, 0.0]_dac = [empty];
-    atan2 [empty]_trv [-2.0, -0.0]_def = [empty];
-    atan2 [empty]_trv [-2.0, 1.0]_trv = [empty];
-    atan2 [empty]_trv [0.0, 1.0]_com = [empty];
-    atan2 [empty]_trv [-0.0, 1.0]_dac = [empty];
-    atan2 [empty]_trv [0.1, 1.0]_def = [empty];
+    atan2 [empty] [entire]_def = [empty];
+    atan2 [empty] [0.0, 0.0]_com = [empty];
+    atan2 [empty] [-0.0, 0.0]_dac = [empty];
+    atan2 [empty] [0.0, -0.0]_def = [empty];
+    atan2 [empty] [-0.0, -0.0]_trv = [empty];
+    atan2 [empty] [-2.0, -0.1]_com = [empty];
+    atan2 [empty] [-2.0, 0.0]_dac = [empty];
+    atan2 [empty] [-2.0, -0.0]_def = [empty];
+    atan2 [empty] [-2.0, 1.0]_trv = [empty];
+    atan2 [empty] [0.0, 1.0]_com = [empty];
+    atan2 [empty] [-0.0, 1.0]_dac = [empty];
+    atan2 [empty] [0.1, 1.0]_def = [empty];
 
-    atan2 [entire]_def [empty]_trv = [empty];
+    atan2 [entire]_def [empty] = [empty];
     atan2 [entire]_def [entire]_def = [-0X1.921FB54442D19P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [entire]_def [0.0, 0.0]_com = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [entire]_def [0.0, -0.0]_def = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
@@ -3810,15 +3809,15 @@ testcase minimal_atan2_dec_test {
     atan2 [entire]_def [-2.0, 1.0]_trv = [-0X1.921FB54442D19P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [entire]_def [0.0, 1.0]_dac = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [entire]_def [-0.0, 1.0]_def = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
-    atan2 [entire]_def [0.1, 1.0]_com = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_dac;
+    atan2 [entire]_def [0.1, 1.0]_com = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_def;
 
-    atan2 [0.0, 0.0]_com [empty]_trv = [empty];
+    atan2 [0.0, 0.0]_com [empty] = [empty];
     atan2 [0.0, 0.0]_dac [entire]_def = [0.0,0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, 0.0]_def [0.0, 0.0]_trv = [empty];
     atan2 [0.0, 0.0]_trv [-0.0, 0.0]_dac = [empty];
     atan2 [0.0, 0.0]_com [0.0, -0.0]_def = [empty];
     atan2 [0.0, 0.0]_dac [-0.0, -0.0]_com = [empty];
-    atan2 [0.0, 0.0]_com [-2.0, -0.1]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_def;
+    atan2 [0.0, 0.0]_com [-2.0, -0.1]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_dac;
     atan2 [0.0, 0.0]_trv [-2.0, 0.0]_com = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, 0.0]_com [-2.0, -0.0]_trv = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, 0.0]_dac [-2.0, 1.0]_def = [0.0,0X1.921FB54442D19P+1]_trv;
@@ -3826,13 +3825,13 @@ testcase minimal_atan2_dec_test {
     atan2 [0.0, 0.0]_trv [-0.0, 1.0]_dac = [0.0,0.0]_trv;
     atan2 [0.0, 0.0]_com [0.1, 1.0]_com = [0.0,0.0]_com;
 
-    atan2 [-0.0, 0.0]_com [empty]_trv = [empty];
+    atan2 [-0.0, 0.0]_com [empty] = [empty];
     atan2 [-0.0, 0.0]_dac [entire]_def = [0.0,0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, 0.0]_def [0.0, 0.0]_com = [empty];
     atan2 [-0.0, 0.0]_trv [-0.0, 0.0]_trv = [empty];
     atan2 [-0.0, 0.0]_com [0.0, -0.0]_def = [empty];
     atan2 [-0.0, 0.0]_dac [-0.0, -0.0]_com = [empty];
-    atan2 [-0.0, 0.0]_dac [-2.0, -0.1]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_def;
+    atan2 [-0.0, 0.0]_dac [-2.0, -0.1]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_dac;
     atan2 [-0.0, 0.0]_trv [-2.0, 0.0]_com = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, 0.0]_com [-2.0, -0.0]_trv = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, 0.0]_dac [-2.0, 1.0]_def = [0.0,0X1.921FB54442D19P+1]_trv;
@@ -3840,13 +3839,13 @@ testcase minimal_atan2_dec_test {
     atan2 [-0.0, 0.0]_def [-0.0, 1.0]_dac = [0.0,0.0]_trv;
     atan2 [-0.0, 0.0]_com [0.1, 1.0]_com = [0.0,0.0]_com;
 
-    atan2 [0.0, -0.0]_com [empty]_trv = [empty];
+    atan2 [0.0, -0.0]_com [empty] = [empty];
     atan2 [0.0, -0.0]_dac [entire]_def = [0.0,0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, -0.0]_def [0.0, 0.0]_dac = [empty];
     atan2 [0.0, -0.0]_trv [-0.0, 0.0]_com = [empty];
     atan2 [0.0, -0.0]_dac [0.0, -0.0]_def = [empty];
     atan2 [0.0, -0.0]_com [-0.0, -0.0]_trv = [empty];
-    atan2 [0.0, -0.0]_com [-2.0, -0.1]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_def;
+    atan2 [0.0, -0.0]_com [-2.0, -0.1]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_dac;
     atan2 [0.0, -0.0]_def [-2.0, 0.0]_com = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, -0.0]_com [-2.0, -0.0]_dac = [0X1.921FB54442D18P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, -0.0]_dac [-2.0, 1.0]_com = [0.0,0X1.921FB54442D19P+1]_trv;
@@ -3854,7 +3853,7 @@ testcase minimal_atan2_dec_test {
     atan2 [0.0, -0.0]_def [-0.0, 1.0]_com = [0.0,0.0]_trv;
     atan2 [0.0, -0.0]_com [0.1, 1.0]_def = [0.0,0.0]_def;
 
-    atan2 [-0.0, -0.0]_com [empty]_trv = [empty];
+    atan2 [-0.0, -0.0]_com [empty] = [empty];
     atan2 [-0.0, -0.0]_def [entire]_def = [0.0,0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, -0.0]_dac [0.0, 0.0]_com = [empty];
     atan2 [-0.0, -0.0]_trv [-0.0, 0.0]_def = [empty];
@@ -3868,7 +3867,7 @@ testcase minimal_atan2_dec_test {
     atan2 [-0.0, -0.0]_trv [-0.0, 1.0]_dac = [0.0,0.0]_trv;
     atan2 [-0.0, -0.0]_com [0.1, 1.0]_com = [0.0,0.0]_com;
 
-    atan2 [-2.0, -0.1]_dac [empty]_trv = [empty];
+    atan2 [-2.0, -0.1]_dac [empty] = [empty];
     atan2 [-2.0, -0.1]_def [entire]_def = [-0X1.921FB54442D19P+1,0.0]_def;
     atan2 [-2.0, -0.1]_trv [0.0, 0.0]_com = [-0X1.921FB54442D19P+0, -0X1.921FB54442D18P+0]_trv;
     atan2 [-2.0, -0.1]_com [0.0, -0.0]_dac = [-0X1.921FB54442D19P+0, -0X1.921FB54442D18P+0]_dac;
@@ -3882,7 +3881,7 @@ testcase minimal_atan2_dec_test {
     atan2 [-2.0, -0.1]_dac [-0.0, 1.0]_com = [-0X1.921FB54442D19P+0, -0X1.983E282E2CC4CP-4]_dac;
     atan2 [-2.0, -0.1]_com [0.1, 1.0]_com = [-0X1.8555A2787982P+0, -0X1.983E282E2CC4CP-4]_com;
 
-    atan2 [-2.0, 0.0]_def [empty]_trv = [empty];
+    atan2 [-2.0, 0.0]_def [empty] = [empty];
     atan2 [-2.0, 0.0]_def [entire]_def = [-0X1.921FB54442D19P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [-2.0, 0.0]_dac [0.0, 0.0]_dac = [-0X1.921FB54442D19P+0, -0X1.921FB54442D18P+0]_trv;
     atan2 [-2.0, 0.0]_trv [-0.0, 0.0]_com = [-0X1.921FB54442D19P+0, -0X1.921FB54442D18P+0]_trv;
@@ -3896,7 +3895,7 @@ testcase minimal_atan2_dec_test {
     atan2 [-2.0, 0.0]_com [-0.0, 1.0]_dac = [-0X1.921FB54442D19P+0, 0.0]_trv;
     atan2 [-2.0, 0.0]_com [0.1, 1.0]_com = [-0X1.8555A2787982P+0, 0.0]_com;
 
-    atan2 [-2.0, -0.0]_trv [empty]_trv = [empty];
+    atan2 [-2.0, -0.0]_trv [empty] = [empty];
     atan2 [-2.0, -0.0]_dac [entire]_def = [-0X1.921FB54442D19P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [-2.0, -0.0]_com [0.0, 0.0]_com = [-0X1.921FB54442D19P+0, -0X1.921FB54442D18P+0]_trv;
     atan2 [-2.0, -0.0]_def [-0.0, 0.0]_dac = [-0X1.921FB54442D19P+0, -0X1.921FB54442D18P+0]_trv;
@@ -3910,7 +3909,7 @@ testcase minimal_atan2_dec_test {
     atan2 [-2.0, -0.0]_com [-0.0, 1.0]_com = [-0X1.921FB54442D19P+0, 0.0]_trv;
     atan2 [-2.0, -0.0]_com [0.1, 1.0]_com = [-0X1.8555A2787982P+0, 0.0]_com;
 
-    atan2 [-2.0, 1.0]_def [empty]_trv = [empty];
+    atan2 [-2.0, 1.0]_def [empty] = [empty];
     atan2 [-2.0, 1.0]_dac [entire]_def = [-0X1.921FB54442D19P+1, 0X1.921FB54442D19P+1]_trv;
     atan2 [-2.0, 1.0]_def [0.0, 0.0]_def = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [-2.0, 1.0]_com [-0.0, 0.0]_dac = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
@@ -3924,13 +3923,13 @@ testcase minimal_atan2_dec_test {
     atan2 [-2.0, 1.0]_trv [-0.0, 1.0]_dac = [-0X1.921FB54442D19P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [-2.0, 1.0]_com [0.1, 1.0]_com = [-0X1.8555A2787982P+0, 0X1.789BD2C160054P+0]_com;
 
-    atan2 [-0.0, 1.0]_com [empty]_trv = [empty];
+    atan2 [-0.0, 1.0]_com [empty] = [empty];
     atan2 [-0.0, 1.0]_dac [entire]_def = [0.0, 0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, 1.0]_def [0.0, 0.0]_def = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [-0.0, 1.0]_trv [-0.0, 0.0]_trv = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [-0.0, 1.0]_dac [0.0, -0.0]_dac = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [-0.0, 1.0]_com [-0.0, -0.0]_def = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
-    atan2 [-0.0, 1.0]_com [-2.0, -0.1]_com = [0X1.ABA397C7259DDP+0, 0X1.921FB54442D19P+1]_def;
+    atan2 [-0.0, 1.0]_com [-2.0, -0.1]_com = [0X1.ABA397C7259DDP+0, 0X1.921FB54442D19P+1]_dac;
     atan2 [-0.0, 1.0]_def [-2.0, 0.0]_com = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, 1.0]_def [-2.0, -0.0]_def = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+1]_trv;
     atan2 [-0.0, 1.0]_dac [-2.0, 1.0]_dac = [0.0, 0X1.921FB54442D19P+1]_trv;
@@ -3938,13 +3937,13 @@ testcase minimal_atan2_dec_test {
     atan2 [-0.0, 1.0]_trv [-0.0, 1.0]_com = [0.0,0X1.921FB54442D19P+0]_trv;
     atan2 [-0.0, 1.0]_trv [0.1, 1.0]_com = [0.0, 0X1.789BD2C160054P+0]_trv;
 
-    atan2 [0.0, 1.0]_def [empty]_trv = [empty];
+    atan2 [0.0, 1.0]_def [empty] = [empty];
     atan2 [0.0, 1.0]_dac [entire]_def = [0.0, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, 1.0]_dac [0.0, 0.0]_def = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [0.0, 1.0]_trv [-0.0, 0.0]_trv = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [0.0, 1.0]_trv [0.0, -0.0]_dac = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [0.0, 1.0]_def [-0.0, -0.0]_com = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
-    atan2 [0.0, 1.0]_dac [-2.0, -0.1]_dac = [0X1.ABA397C7259DDP+0, 0X1.921FB54442D19P+1]_def;
+    atan2 [0.0, 1.0]_dac [-2.0, -0.1]_dac = [0X1.ABA397C7259DDP+0, 0X1.921FB54442D19P+1]_dac;
     atan2 [0.0, 1.0]_def [-2.0, 0.0]_trv = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, 1.0]_dac [-2.0, -0.0]_dac = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+1]_trv;
     atan2 [0.0, 1.0]_dac [-2.0, 1.0]_def = [0.0, 0X1.921FB54442D19P+1]_trv;
@@ -3952,8 +3951,8 @@ testcase minimal_atan2_dec_test {
     atan2 [0.0, 1.0]_dac [-0.0, 1.0]_def = [0.0,0X1.921FB54442D19P+0]_trv;
     atan2 [0.0, 1.0]_com [0.1, 1.0]_com = [0.0,0X1.789BD2C160054P+0]_com;
 
-    atan2 [0.1, 1.0]_dac [empty]_trv = [empty];
-    atan2 [0.1, 1.0]_dac [entire]_def = [0.0, 0X1.921FB54442D19P+1]_dac;
+    atan2 [0.1, 1.0]_dac [empty] = [empty];
+    atan2 [0.1, 1.0]_dac [entire]_def = [0.0, 0X1.921FB54442D19P+1]_def;
     atan2 [0.1, 1.0]_def [0.0, 0.0]_com = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_def;
     atan2 [0.1, 1.0]_trv [-0.0, 0.0]_def = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
     atan2 [0.1, 1.0]_trv [0.0, -0.0]_def = [0X1.921FB54442D18P+0, 0X1.921FB54442D19P+0]_trv;
@@ -4007,7 +4006,7 @@ testcase minimal_cosh_test {
 testcase minimal_cosh_dec_test {
     cosh [0.0,inf]_dac = [1.0,inf]_dac;
     cosh [-inf,0.0]_def = [1.0,inf]_def;
-    cosh [entire]_def = [1.0,inf]_dac;
+    cosh [entire]_def = [1.0,inf]_def;
     cosh [1.0,0X1.2C903022DD7AAP+8]_def = [0X1.8B07551D9F55P+0,0X1.89BCA168970C6P+432]_def;
     cosh [-0X1.FD219490EAAC1P+38,-0X1.1AF1C9D74F06DP+9]_com = [0X1.53045B4F849DEP+815,inf]_dac;
 }
@@ -4029,7 +4028,7 @@ testcase minimal_tanh_test {
 testcase minimal_tanh_dec_test {
     tanh [0.0,inf]_dac = [0.0,1.0]_dac;
     tanh [-inf,0.0]_def = [-1.0,0.0]_def;
-    tanh [entire]_def = [-1.0,1.0]_dac;
+    tanh [entire]_def = [-1.0,1.0]_def;
     tanh [1.0,0X1.2C903022DD7AAP+8]_com = [0X1.85EFAB514F394P-1,0X1P+0]_com;
     tanh [-0X1.FD219490EAAC1P+38,-0X1.1AF1C9D74F06DP+9]_trv = [-0X1P+0,-0X1.FFFFFFFFFFFFFP-1]_trv;
 }
@@ -4154,7 +4153,7 @@ testcase minimal_ceil_test {
 }
 
 testcase minimal_ceil_dec_test {
-    ceil [1.1,2.0]_com = [2.0,2.0]_com;
+    ceil [1.1,2.0]_com = [2.0,2.0]_dac;
     ceil [-1.1,2.0]_com = [-1.0,2.0]_def;
     ceil [-1.1,0.0]_dac = [-1.0,0.0]_def;
     ceil [-1.1,-0.0]_trv = [-1.0,0.0]_trv;
@@ -4165,7 +4164,7 @@ testcase minimal_ceil_dec_test {
     ceil [-0.0,2.2]_def = [0.0,3.0]_def;
     ceil [-1.5,inf]_trv = [-1.0,inf]_trv;
     ceil [0x1.FFFFFFFFFFFFFp1023,inf]_dac = [0x1.FFFFFFFFFFFFFp1023,inf]_def;
-    ceil [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com;
+    ceil [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_com = [0x1.FFFFFFFFFFFFFp1023,0x1.FFFFFFFFFFFFFp1023]_dac;
     ceil [-inf,2.2]_trv = [-inf,3.0]_trv;
     ceil [-inf,-0x1.FFFFFFFFFFFFFp1023]_dac = [-inf,-0x1.FFFFFFFFFFFFFp1023]_def;
 }
@@ -4253,7 +4252,7 @@ testcase minimal_round_ties_to_even_test {
 testcase minimal_round_ties_to_even_dec_test {
     round_ties_to_even [1.1,2.1]_com = [1.0,2.0]_def;
     round_ties_to_even [-1.1,2.0]_trv = [-1.0,2.0]_trv;
-    round_ties_to_even [-1.6,-1.5]_com = [-2.0,-2.0]_com;
+    round_ties_to_even [-1.6,-1.5]_com = [-2.0,-2.0]_dac;
     round_ties_to_even [-1.6,-1.4]_com = [-2.0,-1.0]_def;
     round_ties_to_even [-1.5,inf]_dac = [-2.0,inf]_def;
     round_ties_to_even [-inf,2.2]_trv = [-inf,2.0]_trv;
@@ -4285,7 +4284,7 @@ testcase minimal_round_ties_to_away_dec_test {
     round_ties_to_away [-1.9,2.2]_com = [-2.0,2.0]_def;
     round_ties_to_away [1.9,2.2]_com = [2.0,2.0]_com;
     round_ties_to_away [-1.0,2.2]_trv = [-1.0,2.0]_trv;
-    round_ties_to_away [2.5,2.6]_com = [3.0,3.0]_com;
+    round_ties_to_away [2.5,2.6]_com = [3.0,3.0]_dac;
     round_ties_to_away [-1.5,inf]_dac = [-2.0,inf]_def;
     round_ties_to_away [-inf,2.2]_def = [-inf,2.0]_def;
 }
@@ -4335,7 +4334,7 @@ testcase minimal_min_test {
 }
 
 testcase minimal_min_dec_test {
-    min [entire]_def [1.0,2.0]_com = [-inf,2.0]_dac;
+    min [entire]_def [1.0,2.0]_com = [-inf,2.0]_def;
     min [-7.0,-5.0]_trv [2.0,4.0]_def = [-7.0,-5.0]_trv;
     min [-7.0,0.0]_dac [2.0,4.0]_def = [-7.0,0.0]_def;
     min [-7.0,-0.0]_com [2.0,4.0]_com = [-7.0,0.0]_com;
@@ -4360,7 +4359,7 @@ testcase minimal_max_test {
 }
 
 testcase minimal_max_dec_test {
-    max [entire]_def [1.0,2.0]_com = [1.0,inf]_dac;
+    max [entire]_def [1.0,2.0]_com = [1.0,inf]_def;
     max [-7.0,-5.0]_trv [2.0,4.0]_def = [2.0,4.0]_trv;
     max [-7.0,5.0]_dac [2.0,4.0]_def = [2.0,5.0]_def;
     max [3.0,3.5]_com [2.0,4.0]_com = [3.0,4.0]_com;
