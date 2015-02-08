@@ -44,11 +44,11 @@ testfile_seq: |
     $COMMENTS
     %!shared
     %!  ## Disable warnings when creating NaIs
-    %!  warning ("off", "interval:infsupdec")
+    %!  warning ("off", "interval:NaI")
     $TESTCASES
     %!shared
     %!  ## Re-Enable warnings when creating NaIs
-    %!  warning ("on", "interval:infsupdec")
+    %!  warning ("on", "interval:NaI")
     $TESTLIB_IMPORTS
 testcase_seq: |
     $COMMENTS
