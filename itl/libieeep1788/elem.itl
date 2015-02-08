@@ -4228,65 +4228,65 @@ testcase minimal_trunc_dec_test {
     trunc [-inf,2.2]_trv = [-inf,2.0]_trv;
 }
 
-testcase minimal_round_ties_to_even_test {
-    round_ties_to_even [empty] = [empty];
-    round_ties_to_even [entire] = [entire];
-    round_ties_to_even [1.1,2.1] = [1.0,2.0];
-    round_ties_to_even [-1.1,2.0] = [-1.0,2.0];
-    round_ties_to_even [-1.1,-0.4] = [-1.0,0.0];
-    round_ties_to_even [-1.1,0.0] = [-1.0,0.0];
-    round_ties_to_even [-1.1,-0.0] = [-1.0,0.0];
-    round_ties_to_even [-1.9,2.2] = [-2.0,2.0];
-    round_ties_to_even [-1.0,2.2] = [-1.0,2.0];
-    round_ties_to_even [1.5,2.1] = [2.0,2.0];
-    round_ties_to_even [-1.5,2.0] = [-2.0,2.0];
-    round_ties_to_even [-1.1,-0.5] = [-1.0,0.0];
-    round_ties_to_even [-1.9,2.5] = [-2.0,2.0];
-    round_ties_to_even [0.0,2.5] = [0.0,2.0];
-    round_ties_to_even [-0.0,2.5] = [0.0,2.0];
-    round_ties_to_even [-1.5,2.5] = [-2.0,2.0];
-    round_ties_to_even [-1.5,inf] = [-2.0,inf];
-    round_ties_to_even [-inf,2.2] = [-inf,2.0];
+testcase minimal_roundTiesToEven_test {
+    roundTiesToEven [empty] = [empty];
+    roundTiesToEven [entire] = [entire];
+    roundTiesToEven [1.1,2.1] = [1.0,2.0];
+    roundTiesToEven [-1.1,2.0] = [-1.0,2.0];
+    roundTiesToEven [-1.1,-0.4] = [-1.0,0.0];
+    roundTiesToEven [-1.1,0.0] = [-1.0,0.0];
+    roundTiesToEven [-1.1,-0.0] = [-1.0,0.0];
+    roundTiesToEven [-1.9,2.2] = [-2.0,2.0];
+    roundTiesToEven [-1.0,2.2] = [-1.0,2.0];
+    roundTiesToEven [1.5,2.1] = [2.0,2.0];
+    roundTiesToEven [-1.5,2.0] = [-2.0,2.0];
+    roundTiesToEven [-1.1,-0.5] = [-1.0,0.0];
+    roundTiesToEven [-1.9,2.5] = [-2.0,2.0];
+    roundTiesToEven [0.0,2.5] = [0.0,2.0];
+    roundTiesToEven [-0.0,2.5] = [0.0,2.0];
+    roundTiesToEven [-1.5,2.5] = [-2.0,2.0];
+    roundTiesToEven [-1.5,inf] = [-2.0,inf];
+    roundTiesToEven [-inf,2.2] = [-inf,2.0];
 }
 
-testcase minimal_round_ties_to_even_dec_test {
-    round_ties_to_even [1.1,2.1]_com = [1.0,2.0]_def;
-    round_ties_to_even [-1.1,2.0]_trv = [-1.0,2.0]_trv;
-    round_ties_to_even [-1.6,-1.5]_com = [-2.0,-2.0]_dac;
-    round_ties_to_even [-1.6,-1.4]_com = [-2.0,-1.0]_def;
-    round_ties_to_even [-1.5,inf]_dac = [-2.0,inf]_def;
-    round_ties_to_even [-inf,2.2]_trv = [-inf,2.0]_trv;
+testcase minimal_roundTiesToEven_dec_test {
+    roundTiesToEven [1.1,2.1]_com = [1.0,2.0]_def;
+    roundTiesToEven [-1.1,2.0]_trv = [-1.0,2.0]_trv;
+    roundTiesToEven [-1.6,-1.5]_com = [-2.0,-2.0]_dac;
+    roundTiesToEven [-1.6,-1.4]_com = [-2.0,-1.0]_def;
+    roundTiesToEven [-1.5,inf]_dac = [-2.0,inf]_def;
+    roundTiesToEven [-inf,2.2]_trv = [-inf,2.0]_trv;
 }
 
-testcase minimal_round_ties_to_away_test {
-    round_ties_to_away [empty] = [empty];
-    round_ties_to_away [entire] = [entire];
-    round_ties_to_away [1.1,2.1] = [1.0,2.0];
-    round_ties_to_away [-1.1,2.0] = [-1.0,2.0];
-    round_ties_to_away [-1.1,0.0] = [-1.0,0.0];
-    round_ties_to_away [-1.1,-0.0] = [-1.0,-0.0];
-    round_ties_to_away [-1.1,-0.4] = [-1.0,0.0];
-    round_ties_to_away [-1.9,2.2] = [-2.0,2.0];
-    round_ties_to_away [-1.0,2.2] = [-1.0,2.0];
-    round_ties_to_away [0.5,2.1] = [1.0,2.0];
-    round_ties_to_away [-2.5,2.0] = [-3.0,2.0];
-    round_ties_to_away [-1.1,-0.5] = [-1.0,-1.0];
-    round_ties_to_away [-1.9,2.5] = [-2.0,3.0];
-    round_ties_to_away [-1.5,2.5] = [-2.0,3.0];
-    round_ties_to_away [0.0,2.5] = [0.0,3.0];
-    round_ties_to_away [-0.0,2.5] = [0.0,3.0];
-    round_ties_to_away [-1.5,inf] = [-2.0,inf];
-    round_ties_to_away [-inf,2.2] = [-inf,2.0];
+testcase minimal_roundTiesToAway_test {
+    roundTiesToAway [empty] = [empty];
+    roundTiesToAway [entire] = [entire];
+    roundTiesToAway [1.1,2.1] = [1.0,2.0];
+    roundTiesToAway [-1.1,2.0] = [-1.0,2.0];
+    roundTiesToAway [-1.1,0.0] = [-1.0,0.0];
+    roundTiesToAway [-1.1,-0.0] = [-1.0,-0.0];
+    roundTiesToAway [-1.1,-0.4] = [-1.0,0.0];
+    roundTiesToAway [-1.9,2.2] = [-2.0,2.0];
+    roundTiesToAway [-1.0,2.2] = [-1.0,2.0];
+    roundTiesToAway [0.5,2.1] = [1.0,2.0];
+    roundTiesToAway [-2.5,2.0] = [-3.0,2.0];
+    roundTiesToAway [-1.1,-0.5] = [-1.0,-1.0];
+    roundTiesToAway [-1.9,2.5] = [-2.0,3.0];
+    roundTiesToAway [-1.5,2.5] = [-2.0,3.0];
+    roundTiesToAway [0.0,2.5] = [0.0,3.0];
+    roundTiesToAway [-0.0,2.5] = [0.0,3.0];
+    roundTiesToAway [-1.5,inf] = [-2.0,inf];
+    roundTiesToAway [-inf,2.2] = [-inf,2.0];
 }
 
-testcase minimal_round_ties_to_away_dec_test {
-    round_ties_to_away [1.1,2.1]_com = [1.0,2.0]_def;
-    round_ties_to_away [-1.9,2.2]_com = [-2.0,2.0]_def;
-    round_ties_to_away [1.9,2.2]_com = [2.0,2.0]_com;
-    round_ties_to_away [-1.0,2.2]_trv = [-1.0,2.0]_trv;
-    round_ties_to_away [2.5,2.6]_com = [3.0,3.0]_dac;
-    round_ties_to_away [-1.5,inf]_dac = [-2.0,inf]_def;
-    round_ties_to_away [-inf,2.2]_def = [-inf,2.0]_def;
+testcase minimal_roundTiesToAway_dec_test {
+    roundTiesToAway [1.1,2.1]_com = [1.0,2.0]_def;
+    roundTiesToAway [-1.9,2.2]_com = [-2.0,2.0]_def;
+    roundTiesToAway [1.9,2.2]_com = [2.0,2.0]_com;
+    roundTiesToAway [-1.0,2.2]_trv = [-1.0,2.0]_trv;
+    roundTiesToAway [2.5,2.6]_com = [3.0,3.0]_dac;
+    roundTiesToAway [-1.5,inf]_dac = [-2.0,inf]_def;
+    roundTiesToAway [-inf,2.2]_def = [-inf,2.0]_def;
 }
 
 testcase minimal_abs_test {

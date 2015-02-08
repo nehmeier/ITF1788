@@ -219,7 +219,7 @@ op_min*:
 op_max*:
 
 # Numeric functions of intervals
-op_inf*:
+#op_inf*:
 op_sup*:
 op_mid*:
 op_wid*:
@@ -228,20 +228,38 @@ op_mag*:
 op_mig*:
 
 # Boolean functions of intervals
-op_equal*:
+op_isEqual*:
 op_subset*:
 op_interior*:
 op_disjoint*:
+op_isEmpty*:
+op_isEntire*:
+op_isNaI*:
+op_less*:
+op_strictLess*:
+op_precedes*:
+op_strictPrecedes*:
+op_isCommonInterval*:
+op_isSingleton*:
+op_isMember*:
 
 # Reverse-mode elementary functions
-op_sqrRev*:
 op_absRev*:
+op_absRevBin*: # binary version with two parameters
+op_sqrRev*:
+op_sqrRevBin*:
 op_pownRev*:
+op_pownRevBin*:
 op_sinRev*:
+op_sinRevBin*:
 op_cosRev*:
+op_cosRevBin*:
 op_tanRev*:
+op_tanRevBin*:
 op_coshRev*:
+op_coshRevBin*:
 op_mulRev*:
+op_mulRevTen*: # ternary version with three parameters
 op_powRev1*:
 op_powRev2*:
 op_atan2Rev1*:
@@ -249,3 +267,4 @@ op_atan2Rev2*:
 
 # Two output division
 op_mulRevToPair*:
+

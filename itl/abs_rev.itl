@@ -14,29 +14,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-testcase minimal.abs_rev_bin_test {
-	abs_rev_bin [empty] [entire] = [empty];
-	abs_rev_bin [0.0, 1.0] [empty] = [empty];
-	abs_rev_bin [0.0, 1.0] [7.0, 9.0] = [empty];
-	abs_rev_bin [empty] [0.0, 1.0] = [empty];
-	abs_rev_bin [-2.0, -1.0] [entire] = [empty];
-	abs_rev_bin [1.0, 1.0] [entire] = [-1.0, 1.0];
-	abs_rev_bin [0.0, 0.0] [entire] = [0.0, 0.0];
-	abs_rev_bin [-1.0, -1.0] [entire] = [empty];
-	abs_rev_bin [0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023] [entire] = [-0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023];
-	abs_rev_bin [0x1p-1022, 0x1p-1022] [entire] = [-0x1p-1022, 0x1p-1022];
-	abs_rev_bin [-0x1p-1022, -0x1p-1022] [entire] = [empty];
-	abs_rev_bin [-0x1.FFFFFFFFFFFFFp1023, -0x1.FFFFFFFFFFFFFp1023] [entire] = [empty];
-	abs_rev_bin [1.0, 2.0] [entire] = [-2.0, 2.0];
-	abs_rev_bin [1.0, 2.0] [0.0, 2.0] = [1.0, 2.0];
-	abs_rev_bin [0.0, 1.0] [-0.5, 2.0] = [-0.5, 1.0];
-	abs_rev_bin [-1.0, 1.0] [entire] = [-1.0, 1.0];
-	abs_rev_bin [-1.0, 0.0] [entire] = [0.0, 0.0];
-	abs_rev_bin [0.0, inf] [entire] = [entire];
-	abs_rev_bin [entire] [entire] = [entire];
-	abs_rev_bin [-inf, 0.0] [entire] = [0.0, 0.0];
-	abs_rev_bin [1.0, inf] [-inf, 0.0] = [-inf, -1.0];
-	abs_rev_bin [-1.0, inf] [entire] = [entire];
-	abs_rev_bin [-inf, -1.0] [entire] = [empty];
-	abs_rev_bin [-inf, 1.0] [entire] = [-1.0, 1.0];
+testcase minimal.absRevBin_test {
+	absRevBin [empty] [entire] = [empty];
+	absRevBin [0.0, 1.0] [empty] = [empty];
+	absRevBin [0.0, 1.0] [7.0, 9.0] = [empty];
+	absRevBin [empty] [0.0, 1.0] = [empty];
+	absRevBin [-2.0, -1.0] [entire] = [empty];
+	absRevBin [1.0, 1.0] [entire] = [-1.0, 1.0];
+	absRevBin [0.0, 0.0] [entire] = [0.0, 0.0];
+	absRevBin [-1.0, -1.0] [entire] = [empty];
+	absRevBin [0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023] [entire] = [-0x1.FFFFFFFFFFFFFp1023, 0x1.FFFFFFFFFFFFFp1023];
+	absRevBin [0x1p-1022, 0x1p-1022] [entire] = [-0x1p-1022, 0x1p-1022];
+	absRevBin [-0x1p-1022, -0x1p-1022] [entire] = [empty];
+	absRevBin [-0x1.FFFFFFFFFFFFFp1023, -0x1.FFFFFFFFFFFFFp1023] [entire] = [empty];
+	absRevBin [1.0, 2.0] [entire] = [-2.0, 2.0];
+	absRevBin [1.0, 2.0] [0.0, 2.0] = [1.0, 2.0];
+	absRevBin [0.0, 1.0] [-0.5, 2.0] = [-0.5, 1.0];
+	absRevBin [-1.0, 1.0] [entire] = [-1.0, 1.0];
+	absRevBin [-1.0, 0.0] [entire] = [0.0, 0.0];
+	absRevBin [0.0, inf] [entire] = [entire];
+	absRevBin [entire] [entire] = [entire];
+	absRevBin [-inf, 0.0] [entire] = [0.0, 0.0];
+	absRevBin [1.0, inf] [-inf, 0.0] = [-inf, -1.0];
+	absRevBin [-1.0, inf] [entire] = [entire];
+	absRevBin [-inf, -1.0] [entire] = [empty];
+	absRevBin [-inf, 1.0] [entire] = [-1.0, 1.0];
 }
