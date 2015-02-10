@@ -272,6 +272,7 @@ lexer = lex.lex()
 #
 
 def p_error(t):
+    print("Illegal character '%s' in line %d" % (t.value[0], t.lexer.lineno))
     raise IOError("Syntax error")
 
 def p_dsl_1(t):

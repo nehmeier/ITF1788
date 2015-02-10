@@ -42,7 +42,13 @@ imports: |
     %!endfunction
 testfile_seq: |
     $COMMENTS
+    %!shared
+    %!  ## Disable warnings when creating NaIs
+    %!  warning ("off", "interval:NaI")
     $TESTCASES
+    %!shared
+    %!  ## Re-Enable warnings when creating NaIs
+    %!  warning ("on", "interval:NaI")
     $TESTLIB_IMPORTS
 testcase_seq: |
     $COMMENTS
@@ -60,6 +66,6 @@ assert_equals: |
     %!         $ARG2))
 assert_equals_warning: |
     %! if (ne ($ARG1, $ARG2))
-    %!     warn (["expected: ", to_string($ARG1), " actual value: ", to_string($ARG2)]);
+    %!     warning (["expected: ", to_string($ARG1), " actual value: ", to_string($ARG2)]);
     %! endif
 assert_true: "%! assert ($ARG1)"

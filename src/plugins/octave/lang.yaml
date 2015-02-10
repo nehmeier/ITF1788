@@ -38,7 +38,7 @@ float_type : "float"
 long_double_type: "double"
 
 # comments
-line_comment_token: "# "
+line_comment_token: "%! ## "
 block_comment_start: "##"
 block_comment_intermediate: "## "
 block_comment_end: "##"

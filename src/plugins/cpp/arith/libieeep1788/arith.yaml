@@ -100,8 +100,19 @@ overlap_overlappedBy: Overlap.OverlappedBy
 overlap_metBy: Overlap.MetBy
 overlap_after: Overlap.After
 
+# Cancellative addition and subtraction
+op_cancelMinus*: cancel_minus($ARG1, $ARG2)
+op_cancelPlus*: cancel_plus($ARG1, $ARG2)
 
-# operations
+# Set operations
+op_intersection*: intersect($ARG1, $ARG2)
+op_convexHull*: hull($ARG1, $ARG2)
+
+# Constructors
+op_numsToInterval*:
+op_textToInterval*:
+
+# Basic operations
 op_pos*: |
     pos($ARG1)
     +$ARG1
@@ -124,36 +135,94 @@ op_recip*: recip($ARG1)
 op_sqr*: sqr($ARG1)
 op_sqrt*: sqrt($ARG1)
 op_fma*: fma($ARG1, $ARG2, $ARG3)
+
+# Power functions
 op_pown*: pown($ARG1, $ARG2)
+op_pow*: pow($ARG1, $ARG2)
 op_exp*: exp($ARG1)
 op_exp2*: exp2($ARG1)
 op_exp10*: exp10($ARG1)
 op_log*: log($ARG1)
 op_log2*: log2($ARG1)
 op_log10*: log10($ARG1)
+
+# Trigonometric/hyperbolic functions
 op_sin*: sin($ARG1)
 op_cos*: cos($ARG1)
 op_tan*: tan($ARG1)
 op_asin*: asin($ARG1)
 op_acos*: acos($ARG1)
 op_atan*: atan($ARG1)
+op_atan2*: atan2($ARG1, $ARG2)
 op_sinh*: sinh($ARG1)
 op_cosh*: cosh($ARG1)
 op_tanh*: tanh($ARG1)
 op_asinh*: asinh($ARG1)
 op_acosh*: acosh($ARG1)
 op_atanh*: atanh($ARG1)
+
+# Integer functions
 op_sign*: sign($ARG1)
 op_ceil*: ceil($ARG1)
 op_floor*: floor($ARG1)
 op_trunc*: trunc($ARG1)
-op_round_ties_to_even*: round_ties_to_even($ARG1)
-op_round_ties_to_away*: round_ties_to_away($ARG1)
+op_roundTiesToEven*: round_ties_to_even($ARG1)
+op_roundTiesToAway*: round_ties_to_away($ARG1)
+
+# Absmax functions
 op_abs*: abs($ARG1)
 op_min*: min($ARG1, $ARG2)
 op_max*: max($ARG1, $ARG2)
+
+# Numeric functions of intervals
+#op_inf*: inf($ARG1)
+op_sup*: sup($ARG1)
+op_mid*: mid($ARG1)
+op_wid*: wid($ARG1)
+op_rad*: rad($ARG1)
+op_mag*: mag($ARG1)
+op_mig*: mig($ARG1)
+
+# Boolean functions of intervals
+op_isEqual*: is_equal($ARG1, $ARG2)
 op_subset*: subset($ARG1, $ARG2)
-op_divToPair*: |
-    div_to_pair($ARG1, $ARG2).first
+op_interior*: is_interior($ARG1, $ARG2)
+op_disjoint*: are_disjoint($ARG1, $ARG2)
+op_isEmpty*: is_empty($ARG1)
+op_isEntire*: is_entire($ARG1)
+op_isNaI*: is_nai($ARG1)
+op_less*: less($ARG1, $ARG2)
+op_strictLess*: strictly_less($ARG1, $ARG2)
+op_precedes*: precedes($ARG1, $ARG2)
+op_strictPrecedes*: strictly_precedes($ARG1, $ARG2)
+op_isCommonInterval*: is_common($ARG1)
+op_isSingleton*: is_singleton($ARG1)
+op_isMember*: is_member($ARG1, $ARG2)
+
+# Reverse-mode elementary functions
+op_absRev*: abs_rev($ARG1)
+op_absRevBin*: abs_rev($ARG1, $ARG2)
+op_sqrRev*: sqr_rev($ARG1)
+op_sqrRevBin*: sqr_rev($ARG1, $ARG2)
+op_pownRev*: pown_rev($ARG1, $ARG2)
+op_pownRevBin*: pown_rev($ARG1, $ARG2, $ARG3)
+op_sinRev*: sin_rev($ARG1)
+op_sinRevBin*: sin_rev($ARG1, $ARG2)
+op_cosRev*: cos_rev($ARG1)
+op_cosRevBin*: cos_rev($ARG1, $ARG2)
+op_tanRev*: tan_rev($ARG1)
+op_tanRevBin*: tan_rev($ARG1, $ARG2)
+op_coshRev*: cosh_rev($ARG1)
+op_coshRevBin*: cosh_rev($ARG1, $ARG2)
+op_mulRev*: mul_rev($ARG1, $ARG2)
+op_mulRevTen*: mul_rev($ARG1, $ARG2, $ARG3)
+op_powRev1*: pow_rev1($ARG1, $ARG2, $ARG3)
+op_powRev2*: pow_rev2($ARG1, $ARG2, $ARG3)
+op_atan2Rev1*: atan2_rev1($ARG1, $ARG2, $ARG3)
+op_atan2Rev2*: atan2_rev2($ARG1, $ARG2, $ARG3)
+
+op_mulRevToPair*: |
+    mul_rev_to_pair($ARG1, $ARG2).first
     *** next output
-    div_to_pair($ARG1, $ARG2).second
+    mul_rev_to_pair($ARG1, $ARG2).second
+
