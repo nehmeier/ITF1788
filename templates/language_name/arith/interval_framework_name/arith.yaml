@@ -219,7 +219,7 @@ op_min*:
 op_max*:
 
 # Numeric functions of intervals
-#op_inf*:
+op_inf*:
 op_sup*:
 op_mid*:
 op_wid*:

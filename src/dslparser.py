@@ -165,7 +165,7 @@ floatingConstant = sign + r"?(" + hexadecimalFloatingConstant + r"|" + \
 ident = r"[a-zA-Z][a-zA-Z0-9_]*"
 string = r'"([^\\\n]|(\\(.|\n)))*?\"'
 # infinity may be float or double
-inf = sign + r"?inf" + floatingSuffix + r"?"
+inf = sign + r"?infinity" + floatingSuffix + r"?"
 
 # special intervals
 nai = r"nai" + floatingSuffix + r"?"
