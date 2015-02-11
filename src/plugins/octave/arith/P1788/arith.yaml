@@ -149,7 +149,7 @@ op_min*: min ($ARG1, $ARG2)
 op_max*: max ($ARG1, $ARG2)
 
 # Numeric functions of intervals
-#op_inf*: inf ($ARG1)
+op_inf*: inf ($ARG1)
 op_sup*: sup ($ARG1)
 op_mid*: mid ($ARG1)
 op_wid*: wid ($ARG1)

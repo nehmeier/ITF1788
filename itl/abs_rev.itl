@@ -32,11 +32,11 @@ testcase minimal.absRevBin_test {
 	absRevBin [0.0, 1.0] [-0.5, 2.0] = [-0.5, 1.0];
 	absRevBin [-1.0, 1.0] [entire] = [-1.0, 1.0];
 	absRevBin [-1.0, 0.0] [entire] = [0.0, 0.0];
-	absRevBin [0.0, inf] [entire] = [entire];
+	absRevBin [0.0, infinity] [entire] = [entire];
 	absRevBin [entire] [entire] = [entire];
-	absRevBin [-inf, 0.0] [entire] = [0.0, 0.0];
-	absRevBin [1.0, inf] [-inf, 0.0] = [-inf, -1.0];
-	absRevBin [-1.0, inf] [entire] = [entire];
-	absRevBin [-inf, -1.0] [entire] = [empty];
-	absRevBin [-inf, 1.0] [entire] = [-1.0, 1.0];
+	absRevBin [-infinity, 0.0] [entire] = [0.0, 0.0];
+	absRevBin [1.0, infinity] [-infinity, 0.0] = [-infinity, -1.0];
+	absRevBin [-1.0, infinity] [entire] = [entire];
+	absRevBin [-infinity, -1.0] [entire] = [empty];
+	absRevBin [-infinity, 1.0] [entire] = [-1.0, 1.0];
 }
