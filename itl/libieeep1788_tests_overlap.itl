@@ -23,61 +23,61 @@ testcase minimal_overlap_test {
     overlap [empty] [1.0,2.0] = firstEmpty;
     overlap [1.0,2.0] [empty] = secondEmpty;
 
-    overlap [-inf,2.0] [3.0,inf] = before;
-    overlap [-inf,2.0] [3.0,4.0] = before;
+    overlap [-infinity,2.0] [3.0,infinity] = before;
+    overlap [-infinity,2.0] [3.0,4.0] = before;
     overlap [2.0,2.0] [3.0,4.0] = before;
     overlap [1.0,2.0] [3.0,4.0] = before;
     overlap [1.0,2.0] [3.0,3.0] = before;
     overlap [2.0,2.0] [3.0,3.0] = before;
-    overlap [2.0,2.0] [3.0,inf] = before;
+    overlap [2.0,2.0] [3.0,infinity] = before;
 
-    overlap [-inf,2.0] [2.0,3.0] = meets;
+    overlap [-infinity,2.0] [2.0,3.0] = meets;
     overlap [1.0,2.0] [2.0,3.0] = meets;
-    overlap [1.0,2.0] [2.0,inf] = meets;
+    overlap [1.0,2.0] [2.0,infinity] = meets;
 
     overlap [1.0,2.0] [1.5,2.5] = overlaps;
 
-    overlap [1.0,2.0] [1.0,inf] = starts;
+    overlap [1.0,2.0] [1.0,infinity] = starts;
     overlap [1.0,2.0] [1.0,3.0] = starts;
     overlap [1.0,1.0] [1.0,3.0] = starts;
 
     overlap [1.0,2.0] [entire] = containedBy;
-    overlap [1.0,2.0] [-inf,3.0] = containedBy;
+    overlap [1.0,2.0] [-infinity,3.0] = containedBy;
     overlap [1.0,2.0] [0.0,3.0] = containedBy;
     overlap [2.0,2.0] [0.0,3.0] = containedBy;
-    overlap [2.0,2.0] [0.0,inf] = containedBy;
+    overlap [2.0,2.0] [0.0,infinity] = containedBy;
 
-    overlap [1.0,2.0] [-inf,2.0] = finishes;
+    overlap [1.0,2.0] [-infinity,2.0] = finishes;
     overlap [1.0,2.0] [0.0,2.0] = finishes;
     overlap [2.0,2.0] [0.0,2.0] = finishes;
 
     overlap [1.0,2.0] [1.0,2.0] = equal;
     overlap [1.0,1.0] [1.0,1.0] = equal;
-    overlap [-inf,1.0] [-inf,1.0] = equal;
+    overlap [-infinity,1.0] [-infinity,1.0] = equal;
     overlap [entire] [entire] = equal;
 
     overlap [3.0,4.0] [2.0,2.0] = after;
     overlap [3.0,4.0] [1.0,2.0] = after;
     overlap [3.0,3.0] [1.0,2.0] = after;
     overlap [3.0,3.0] [2.0,2.0] = after;
-    overlap [3.0,inf] [2.0,2.0] = after;
+    overlap [3.0,infinity] [2.0,2.0] = after;
 
     overlap [2.0,3.0] [1.0,2.0] = metBy;
-    overlap [2.0,3.0] [-inf,2.0] = metBy;
+    overlap [2.0,3.0] [-infinity,2.0] = metBy;
 
     overlap [1.5,2.5] [1.0,2.0] = overlappedBy;
-    overlap [1.5,2.5] [-inf,2.0] = overlappedBy;
+    overlap [1.5,2.5] [-infinity,2.0] = overlappedBy;
 
-    overlap [1.0,inf] [1.0,2.0] = startedBy;
+    overlap [1.0,infinity] [1.0,2.0] = startedBy;
     overlap [1.0,3.0] [1.0,2.0] = startedBy;
     overlap [1.0,3.0] [1.0,1.0] = startedBy;
 
-    overlap [-inf,3.0] [1.0,2.0] = contains;
+    overlap [-infinity,3.0] [1.0,2.0] = contains;
     overlap [entire] [1.0,2.0] = contains;
     overlap [0.0,3.0] [1.0,2.0] = contains;
     overlap [0.0,3.0] [2.0,2.0] = contains;
 
-    overlap [-inf,2.0] [1.0,2.0] = finishedBy;
+    overlap [-infinity,2.0] [1.0,2.0] = finishedBy;
     overlap [0.0,2.0] [1.0,2.0] = finishedBy;
     overlap [0.0,2.0] [2.0,2.0] = finishedBy;
 }
