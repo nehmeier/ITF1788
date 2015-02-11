@@ -199,6 +199,9 @@ op_isCommonInterval*: is_common($ARG1)
 op_isSingleton*: is_singleton($ARG1)
 op_isMember*: is_member($ARG1, $ARG2)
 
+# Extended interval comparison
+op_overlap*: overlap($ARG1, $ARG2)
+
 # Reverse-mode elementary functions
 op_absRev*: abs_rev($ARG1)
 op_absRevBin*: abs_rev($ARG1, $ARG2)
