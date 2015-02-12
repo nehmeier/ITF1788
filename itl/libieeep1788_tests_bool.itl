@@ -106,41 +106,41 @@ testcase minimal_nai_dec_test {
     isNaI [-0.0,-0.0]_trv = false;
 }
 
-testcase minimal_isEqual_test {
-    isEqual [1.0,2.0] [1.0,2.0] = true;
-    isEqual [1.0,2.1] [1.0,2.0] = false;
-    isEqual [empty] [empty] = true;
-    isEqual [empty] [1.0,2.0] = false;
-    isEqual [-infinity,+infinity] [-infinity,+infinity] = true;
-    isEqual [1.0,2.4] [-infinity,+infinity] = false;
-    isEqual [1.0,infinity] [1.0,infinity] = true;
-    isEqual [1.0,2.4] [1.0,infinity] = false;
-    isEqual [-infinity,2.0] [-infinity,2.0] = true;
-    isEqual [-infinity,2.4] [-infinity,2.0] = false;
-    isEqual [-2.0,0.0] [-2.0,0.0] = true;
-    isEqual [-0.0,2.0] [0.0,2.0] = true;
-    isEqual [-0.0,-0.0] [0.0,0.0] = true;
-    isEqual [-0.0,0.0] [0.0,0.0] = true;
-    isEqual [0.0,-0.0] [0.0,0.0] = true;
+testcase minimal_equal_test {
+    equal [1.0,2.0] [1.0,2.0] = true;
+    equal [1.0,2.1] [1.0,2.0] = false;
+    equal [empty] [empty] = true;
+    equal [empty] [1.0,2.0] = false;
+    equal [-infinity,+infinity] [-infinity,+infinity] = true;
+    equal [1.0,2.4] [-infinity,+infinity] = false;
+    equal [1.0,infinity] [1.0,infinity] = true;
+    equal [1.0,2.4] [1.0,infinity] = false;
+    equal [-infinity,2.0] [-infinity,2.0] = true;
+    equal [-infinity,2.4] [-infinity,2.0] = false;
+    equal [-2.0,0.0] [-2.0,0.0] = true;
+    equal [-0.0,2.0] [0.0,2.0] = true;
+    equal [-0.0,-0.0] [0.0,0.0] = true;
+    equal [-0.0,0.0] [0.0,0.0] = true;
+    equal [0.0,-0.0] [0.0,0.0] = true;
 }
 
-testcase minimal_isEqual_dec_test {
-    isEqual [1.0,2.0]_def [1.0,2.0]_trv = true;
-    isEqual [1.0,2.1]_trv [1.0,2.0]_trv = false;
-    isEqual [empty] [empty] = true;
-    isEqual [empty] [1.0,2.0]_trv = false;
-    isEqual [empty] [1.0,2.0]_trv = false;
-    isEqual [-infinity,+infinity]_def [-infinity,+infinity]_trv = true;
-    isEqual [1.0,2.4]_trv [-infinity,+infinity]_trv = false;
-    isEqual [1.0,infinity]_trv [1.0,infinity]_trv = true;
-    isEqual [1.0,2.4]_def [1.0,infinity]_trv = false;
-    isEqual [-infinity,2.0]_trv [-infinity,2.0]_trv = true;
-    isEqual [-infinity,2.4]_def [-infinity,2.0]_trv = false;
-    isEqual [-2.0,0.0]_trv [-2.0,0.0]_trv = true;
-    isEqual [-0.0,2.0]_def [0.0,2.0]_trv = true;
-    isEqual [-0.0,-0.0]_trv [0.0,0.0]_trv = true;
-    isEqual [-0.0,0.0]_def [0.0,0.0]_trv = true;
-    isEqual [0.0,-0.0]_trv [0.0,0.0]_trv = true;
+testcase minimal_equal_dec_test {
+    equal [1.0,2.0]_def [1.0,2.0]_trv = true;
+    equal [1.0,2.1]_trv [1.0,2.0]_trv = false;
+    equal [empty] [empty] = true;
+    equal [empty] [1.0,2.0]_trv = false;
+    equal [empty] [1.0,2.0]_trv = false;
+    equal [-infinity,+infinity]_def [-infinity,+infinity]_trv = true;
+    equal [1.0,2.4]_trv [-infinity,+infinity]_trv = false;
+    equal [1.0,infinity]_trv [1.0,infinity]_trv = true;
+    equal [1.0,2.4]_def [1.0,infinity]_trv = false;
+    equal [-infinity,2.0]_trv [-infinity,2.0]_trv = true;
+    equal [-infinity,2.4]_def [-infinity,2.0]_trv = false;
+    equal [-2.0,0.0]_trv [-2.0,0.0]_trv = true;
+    equal [-0.0,2.0]_def [0.0,2.0]_trv = true;
+    equal [-0.0,-0.0]_trv [0.0,0.0]_trv = true;
+    equal [-0.0,0.0]_def [0.0,0.0]_trv = true;
+    equal [0.0,-0.0]_trv [0.0,0.0]_trv = true;
 }
 
 testcase minimal_subset_test {

@@ -92,7 +92,7 @@ overlap_overlaps: Overlap.Overlaps
 overlap_starts: Overlap.Starts
 overlap_containedBy: Overlap.ContainedBy
 overlap_finishes: Overlap.Finishes
-overlap_equal: Overlap.Equal
+overlap_equals: Overlap.Equal
 overlap_finishedBy: Overlap.FinishedBy
 overlap_contains: Overlap.Contains
 overlap_startedBy: Overlap.StartedBy
@@ -184,7 +184,7 @@ op_mag*: mag($ARG1)
 op_mig*: mig($ARG1)
 
 # Boolean functions of intervals
-op_isEqual*: is_equal($ARG1, $ARG2)
+op_equal*: is_equal($ARG1, $ARG2)
 op_subset*: subset($ARG1, $ARG2)
 op_interior*: is_interior($ARG1, $ARG2)
 op_disjoint*: are_disjoint($ARG1, $ARG2)
@@ -225,4 +225,6 @@ op_mulRevToPair*: |
     mul_rev_to_pair($ARG1, $ARG2).first
     *** next output
     mul_rev_to_pair($ARG1, $ARG2).second
+
+op_overlap*: overlap($ARG1, $ARG2)
 
