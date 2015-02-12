@@ -51,10 +51,10 @@ testcase minimal_overlap_test {
     overlap [1.0,2.0] [0.0,2.0] = finishes;
     overlap [2.0,2.0] [0.0,2.0] = finishes;
 
-    overlap [1.0,2.0] [1.0,2.0] = equal;
-    overlap [1.0,1.0] [1.0,1.0] = equal;
-    overlap [-infinity,1.0] [-infinity,1.0] = equal;
-    overlap [entire] [entire] = equal;
+    overlap [1.0,2.0] [1.0,2.0] = equals;
+    overlap [1.0,1.0] [1.0,1.0] = equals;
+    overlap [-infinity,1.0] [-infinity,1.0] = equals;
+    overlap [entire] [entire] = equals;
 
     overlap [3.0,4.0] [2.0,2.0] = after;
     overlap [3.0,4.0] [1.0,2.0] = after;
@@ -105,8 +105,8 @@ testcase minimal_overlap_dec_test {
     overlap [1.0,2.0]_trv [0.0,2.0]_com = finishes;
     overlap [2.0,2.0]_def [0.0,2.0]_dac = finishes;
 
-    overlap [1.0,2.0]_def [1.0,2.0]_def = equal;
-    overlap [1.0,1.0]_dac [1.0,1.0]_dac = equal;
+    overlap [1.0,2.0]_def [1.0,2.0]_def = equals;
+    overlap [1.0,1.0]_dac [1.0,1.0]_dac = equals;
 
     overlap [3.0,4.0]_trv [2.0,2.0]_trv = after;
     overlap [3.0,4.0]_def [1.0,2.0]_def = after;
