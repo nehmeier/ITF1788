@@ -137,7 +137,7 @@ overlap_overlaps:
 overlap_starts:
 overlap_containedBy:
 overlap_finishes:
-overlap_equal:
+overlap_equals:
 overlap_finishedBy:
 overlap_contains:
 overlap_startedBy:
@@ -228,7 +228,7 @@ op_mag*:
 op_mig*:
 
 # Boolean functions of intervals
-op_isEqual*:
+op_equal*:
 op_subset*:
 op_interior*:
 op_disjoint*:
@@ -270,4 +270,7 @@ op_atan2Rev2*:
 
 # Two output division
 op_mulRevToPair*:
+
+# Extended interval comparison
+op_overlap*:
 

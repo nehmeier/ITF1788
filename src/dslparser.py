@@ -59,7 +59,7 @@ reserved = {
     "starts": "STARTS",
     "containedBy": "CONTAINEDBY",
     "finishes": "FINISHES",
-    "equal": "EQUAL",
+    "equals": "EQUALS",
     "finishedBy": "FINISHEDBY",
     "contains": "CONTAINS",
     "startedBy": "STARTEDBY",
@@ -556,7 +556,7 @@ def p_overlapLiteral(t):
                        | STARTS
                        | CONTAINEDBY
                        | FINISHES
-                       | EQUAL
+                       | EQUALS
                        | FINISHEDBY
                        | CONTAINS
                        | STARTEDBY
