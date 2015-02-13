@@ -243,6 +243,9 @@ op_isCommonInterval*:
 op_isSingleton*:
 op_isMember*:
 
+# Extended interval comparison
+op_overlap*:
+
 # Reverse-mode elementary functions
 op_absRev*:
 op_absRevBin*: # binary version with two parameters

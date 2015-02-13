@@ -37,6 +37,14 @@ imports: |
     %!    endif
     %!endfunction
     %
+    %!function assert_equals (x, y)
+    %!    if (isa (x, "infsup"))
+    %!        assert (eq (x, y));
+    %!    else
+    %!        assert (isequal (x, y));
+    %!    endif
+    %!endfunction
+    %
     %!function n = decval (dec)
     %! n = find (strcmp (dec, {"ill", "trv", "def", "dac", "com"}));
     %!endfunction
@@ -45,11 +53,11 @@ testfile_seq: |
     %!shared
     %!  ## Disable warnings when creating NaIs
     %!  warning ("off", "interval:NaI")
+    $TESTLIB_IMPORTS
     $TESTCASES
     %!shared
     %!  ## Re-Enable warnings when creating NaIs
     %!  warning ("on", "interval:NaI")
-    $TESTLIB_IMPORTS
 testcase_seq: |
     $COMMENTS
     %!test "$TC_NAME";
@@ -60,10 +68,12 @@ test_seq: |
 
 # assert (X, Y) does not work with custom types
 # assert (X == Y) may fail when comparing decorated intervals with bare intervals, see #42735
+# assert (eq (X, Y)) fails if X and Y are strings of different length
+# assert (isequal (X, Y)) fails if X and Y are empty intervals, but only one is decorated
 assert_equals: |
-    %! assert (eq (...
-    %!         $ARG1, ...
-    %!         $ARG2))
+    %! assert_equals (...
+    %!    $ARG1, ...
+    %!    $ARG2)
 assert_equals_warning: |
     %! if (ne ($ARG1, $ARG2))
     %!     warning (["expected: ", to_string($ARG1), " actual value: ", to_string($ARG2)]);
