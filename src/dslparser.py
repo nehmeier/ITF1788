@@ -59,7 +59,7 @@ reserved = {
     "starts": "STARTS",
     "containedBy": "CONTAINEDBY",
     "finishes": "FINISHES",
-    "equal": "EQUAL",
+    "equals": "EQUALS",
     "finishedBy": "FINISHEDBY",
     "contains": "CONTAINS",
     "startedBy": "STARTEDBY",
@@ -165,7 +165,7 @@ floatingConstant = sign + r"?(" + hexadecimalFloatingConstant + r"|" + \
 ident = r"[a-zA-Z][a-zA-Z0-9_]*"
 string = r'"([^\\\n]|(\\(.|\n)))*?\"'
 # infinity may be float or double
-inf = sign + r"?inf" + floatingSuffix + r"?"
+inf = sign + r"?infinity" + floatingSuffix + r"?"
 
 # special intervals
 nai = r"nai" + floatingSuffix + r"?"
@@ -556,7 +556,7 @@ def p_overlapLiteral(t):
                        | STARTS
                        | CONTAINEDBY
                        | FINISHES
-                       | EQUAL
+                       | EQUALS
                        | FINISHEDBY
                        | CONTAINS
                        | STARTEDBY
