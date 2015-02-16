@@ -549,13 +549,20 @@ testcase minimal.powRev2_test {
 	powRev2 [0.0, 0.25] [0.0, 1.0] [-infinity, 0.0] = [0.0, 0.0];
 	// x overlaps/starts [0, 1], z contains/startedBy [0, 1]
 	powRev2 [0.0, 0.25] [0.0, 2.0] [entire] = [-0.5, infinity];
+	powRev2 [0.0, 0.25] [0.0, infinity] [entire] = [entire];
 	// x overlaps/starts [0, 1], z overlappedBy [0, 1]
 	powRev2 [0.0, 0.25] [0.5, 2.0] [entire] = [-0.5, 0.5];
+	powRev2 [0.0, 0.25] [0.5, infinity] [entire] = [-infinity, 0.5];
 	// x overlaps/starts [0, 1], z metBy [0, 1]
 	powRev2 [0.0, 0.25] [1.0, 2.0] [entire] = [-0.5, 0.0];
+	powRev2 [0.0, 0.25] [1.0, 2.0] [0.0, infinity] = [0.0, 0.0];
+	powRev2 [0.0, 0.25] [1.0, infinity] [entire] = [-infinity, 0.0];
+	powRev2 [0.0, 0.25] [1.0, infinity] [0.0, infinity] = [0.0, 0.0];
 	// x overlaps/starts [0, 1], z after [0, 1]
 	powRev2 [0.0, 0.25] [2.0, 4.0] [entire] = [-1.0, 0.0];
 	powRev2 [0.0, 0.25] [2.0, 4.0] [0.0, infinity] = [empty];
+	powRev2 [0.0, 0.25] [2.0, infinity] [entire] = [-infinity, 0.0];
+	powRev2 [0.0, 0.25] [2.0, infinity] [0.0, infinity] = [empty];
 	// x containedBy [0, 1], z overlaps/starts [0, 1]
 	powRev2 [0.25, 0.5] [0.0, 0.5] [entire] = [0.5, infinity];
 	// x containedBy [0, 1], z containedBy [0, 1]
@@ -568,12 +575,16 @@ testcase minimal.powRev2_test {
 	powRev2 [0.25, 0.5] [0.0, 1.0] [-infinity, 0.0] = [0.0, 0.0];
 	// x containedBy [0, 1], z contains/startedBy [0, 1]
 	powRev2 [0.25, 0.5] [0.0, 2.0] [entire] = [-1.0, infinity];
+	powRev2 [0.25, 0.5] [0.0, infinity] [entire] = [entire];
 	// x containedBy [0, 1], z overlappedBy [0, 1]
 	powRev2 [0.25, 0.5] [0.5, 2.0] [entire] = [-1.0, 1.0];
+	powRev2 [0.25, 0.5] [0.5, infinity] [entire] = [-infinity, 1.0];
 	// x containedBy [0, 1], z metBy [0, 1]
 	powRev2 [0.25, 0.5] [1.0, 2.0] [entire] = [-1.0, 0.0];
+	powRev2 [0.25, 0.5] [1.0, infinity] [entire] = [-infinity, 0.0];
 	// x containedBy [0, 1], z after [0, 1]
 	powRev2 [0.25, 0.5] [2.0, 4.0] [entire] = [-2.0, -0.5];
+	powRev2 [0.25, 0.5] [2.0, infinity] [entire] = [entire];
 	// x finishes [0, 1], z overlaps/starts [0, 1]
 	powRev2 [0.25, 1.0] [0.0, 0.5] [entire] = [0.5, infinity];
 	powRev2 [1.0, 1.0] [0.0, 0.5] [entire] = [empty];
@@ -591,15 +602,23 @@ testcase minimal.powRev2_test {
 	// x finishes [0, 1], z contains/startedBy [0, 1]
 	powRev2 [0.25, 1.0] [0.0, 2.0] [entire] = [entire];
 	powRev2 [1.0, 1.0] [0.0, 2.0] [entire] = [entire];
+	powRev2 [0.25, 1.0] [0.0, infinity] [entire] = [entire];
+	powRev2 [1.0, 1.0] [0.0, infinity] [entire] = [entire];
 	// x finishes [0, 1], z overlappedBy [0, 1]
 	powRev2 [0.25, 1.0] [0.5, 2.0] [entire] = [entire];
 	powRev2 [1.0, 1.0] [0.5, 2.0] [entire] = [entire];
+	powRev2 [0.25, 1.0] [0.5, infinity] [entire] = [entire];
+	powRev2 [1.0, 1.0] [0.5, infinity] [entire] = [entire];
 	// x finishes [0, 1], z metBy [0, 1]
 	powRev2 [0.25, 1.0] [1.0, 2.0] [entire] = [entire];
 	powRev2 [1.0, 1.0] [1.0, 2.0] [entire] = [entire];
+	powRev2 [0.25, 1.0] [1.0, infinity] [entire] = [entire];
+	powRev2 [1.0, 1.0] [1.0, infinity] [entire] = [entire];
 	// x finishes [0, 1], z after [0, 1]
 	powRev2 [0.25, 1.0] [2.0, 4.0] [entire] = [-infinity, -0.5];
 	powRev2 [1.0, 1.0] [2.0, 4.0] [entire] = [empty];
+	powRev2 [0.25, 1.0] [2.0, infinity] [entire] = [-infinity, 0.0];
+	powRev2 [1.0, 1.0] [2.0, infinity] [entire] = [empty];
 	// x equals/finishedBy [0, 1], z overlaps/starts [0, 1]
 	powRev2 [0.0, 1.0] [0.0, 0.5] [entire] = [0.0, infinity];
 	powRev2 [0.0, 1.0] [0.0, 0.5] [-infinity, 0.0] = [empty];
@@ -623,26 +642,44 @@ testcase minimal.powRev2_test {
 	powRev2 [0.0, 1.0] [0.0, 2.0] [entire] = [entire];
 	powRev2 [0.0, 1.0] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 1.0] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 1.0] [0.0, infinity] [entire] = [entire];
+	powRev2 [0.0, 1.0] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 1.0] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x equals/finishedBy [0, 1], z overlappedBy [0, 1]
 	powRev2 [0.0, 1.0] [0.5, 2.0] [entire] = [entire];
 	powRev2 [0.0, 1.0] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 1.0] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 1.0] [0.5, infinity] [entire] = [entire];
+	powRev2 [0.0, 1.0] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 1.0] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
 	// x equals/finishedBy [0, 1], z metBy [0, 1]
 	powRev2 [0.0, 1.0] [1.0, 2.0] [entire] = [entire];
 	powRev2 [0.0, 1.0] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 1.0] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 1.0] [1.0, infinity] [entire] = [entire];
+	powRev2 [0.0, 1.0] [1.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 1.0] [1.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x equals/finishedBy [0, 1], z after [0, 1]
 	powRev2 [0.0, 1.0] [2.0, 4.0] [entire] = [-infinity, 0.0];
 	powRev2 [0.0, 1.0] [2.0, 4.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 1.0] [2.0, 4.0] [0.0, infinity] = [empty];
+	powRev2 [0.0, 1.0] [2.0, infinity] [entire] = [-infinity, 0.0];
+	powRev2 [0.0, 1.0] [2.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 1.0] [2.0, infinity] [0.0, infinity] = [empty];
 	// x contains/startedBy [0, 1], z overlaps/starts [0, 1]
 	powRev2 [0.0, 2.0] [0.0, 0.5] [entire] = [entire];
 	powRev2 [0.0, 2.0] [0.0, 0.5] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [0.0, 2.0] [0.0, 0.5] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.0, 0.5] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.0, 0.5] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.0, 0.5] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z containedBy [0, 1]
 	powRev2 [0.0, 2.0] [0.25, 0.5] [entire] = [entire];
 	powRev2 [0.0, 2.0] [0.25, 0.5] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [0.0, 2.0] [0.25, 0.5] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.25, 0.5] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.25, 0.5] [-infinity, 0.0] = [-infinity, -0.0];
+	powRev2 [0.0, infinity] [0.25, 0.5] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z finishes [0, 1]
 	powRev2 [0.0, 2.0] [0.5, 1.0] [entire] = [entire];
 	powRev2 [0.0, 2.0] [1.0, 1.0] [entire] = [entire];
@@ -650,34 +687,85 @@ testcase minimal.powRev2_test {
 	powRev2 [0.0, 2.0] [1.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 2.0] [0.5, 1.0] [0.0, infinity] = [0.0, infinity];
 	powRev2 [0.0, 2.0] [1.0, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.5, 1.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [1.0, 1.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.5, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [1.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.5, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [1.0, 1.0] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z equals/finishedBy [0, 1]
 	powRev2 [0.0, 2.0] [0.0, 1.0] [entire] = [entire];
 	powRev2 [0.0, 2.0] [0.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 2.0] [0.0, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.0, 1.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.0, 1.0] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z contains/startedBy [0, 1]
 	powRev2 [0.0, 2.0] [0.0, 2.0] [entire] = [entire];
 	powRev2 [0.0, 2.0] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 2.0] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.0, 2.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 2.0] [0.0, infinity] [entire] = [entire];
+	powRev2 [0.0, 2.0] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 2.0] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.0, infinity] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z overlappedBy [0, 1]
 	powRev2 [0.0, 2.0] [0.5, 2.0] [entire] = [entire];
 	powRev2 [0.0, 2.0] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 2.0] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.5, 2.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 2.0] [0.5, infinity] [entire] = [entire];
+	powRev2 [0.0, 2.0] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 2.0] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [0.5, infinity] [entire] = [entire];
+	powRev2 [0.0, infinity] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z metBy [0, 1]
 	powRev2 [0.0, 2.0] [1.0, 2.0] [entire] = [entire];
 	powRev2 [0.0, 2.0] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 2.0] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [1.0, 2.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 2.0] [1.0, infinity] [entire] = [entire];
+	powRev2 [0.0, 2.0] [1.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 2.0] [1.0, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, infinity] [1.0, infinity] [entire] = [entire];
+	powRev2 [0.0, infinity] [1.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [1.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x contains/startedBy [0, 1], z after [0, 1]
 	powRev2 [0.0, 2.0] [2.0, 4.0] [entire] = [entire];
 	powRev2 [0.0, 2.0] [2.0, 4.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.0, 2.0] [2.0, 4.0] [0.0, infinity] = [1.0, infinity];
+	powRev2 [0.0, infinity] [2.0, 4.0] [entire] = [entire];
+	powRev2 [0.0, infinity] [2.0, 4.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [2.0, 4.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.0, 2.0] [2.0, infinity] [entire] = [entire];
+	powRev2 [0.0, 2.0] [2.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, 2.0] [2.0, infinity] [0.0, infinity] = [1.0, infinity];
+	powRev2 [0.0, infinity] [2.0, infinity] [entire] = [entire];
+	powRev2 [0.0, infinity] [2.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.0, infinity] [2.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x overlappedBy [0, 1], z overlaps/starts [0, 1]
 	powRev2 [0.5, 2.0] [0.0, 0.5] [entire] = [entire];
 	powRev2 [0.5, 2.0] [0.0, 0.5] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [0.5, 2.0] [0.0, 0.5] [0.0, infinity] = [1.0, infinity];
+	powRev2 [0.5, infinity] [0.0, 0.5] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.0, 0.5] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.0, 0.5] [0.0, infinity] = [1.0, infinity];
 	// x overlappedBy [0, 1], z containedBy [0, 1]
 	powRev2 [0.5, 2.0] [0.25, 0.5] [entire] = [entire];
 	powRev2 [0.5, 2.0] [0.25, 0.5] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [0.5, 2.0] [0.25, 0.5] [0.0, infinity] = [1.0, infinity];
+	powRev2 [0.5, infinity] [0.25, 0.5] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.25, 0.5] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.25, 0.5] [0.0, infinity] = [1.0, infinity];
 	// x overlappedBy [0, 1], z finishes [0, 1]
 	powRev2 [0.5, 2.0] [0.5, 1.0] [entire] = [entire];
 	powRev2 [0.5, 2.0] [1.0, 1.0] [entire] = [entire];
@@ -685,34 +773,79 @@ testcase minimal.powRev2_test {
 	powRev2 [0.5, 2.0] [1.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.5, 2.0] [0.5, 1.0] [0.0, infinity] = [0.0, infinity];
 	powRev2 [0.5, 2.0] [1.0, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [0.5, 1.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [1.0, 1.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.5, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [1.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.5, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [1.0, 1.0] [0.0, infinity] = [0.0, infinity];
 	// x overlappedBy [0, 1], z equals/finishedBy [0, 1]
 	powRev2 [0.5, 2.0] [0.0, 1.0] [entire] = [entire];
 	powRev2 [0.5, 2.0] [0.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.5, 2.0] [0.0, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [0.0, 1.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.0, 1.0] [0.0, infinity] = [0.0, infinity];
 	// x overlappedBy [0, 1], z contains/startedBy [0, 1]
 	powRev2 [0.5, 2.0] [0.0, 2.0] [entire] = [entire];
 	powRev2 [0.5, 2.0] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.5, 2.0] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [0.0, 2.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, 2.0] [0.0, infinity] [entire] = [entire];
+	powRev2 [0.5, 2.0] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, 2.0] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [0.0, infinity] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x overlappedBy [0, 1], z overlappedBy [0, 1]
 	powRev2 [0.5, 2.0] [0.5, 2.0] [entire] = [entire];
 	powRev2 [0.5, 2.0] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.5, 2.0] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [0.5, 2.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, 2.0] [0.5, infinity] [entire] = [entire];
+	powRev2 [0.5, 2.0] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, 2.0] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [0.5, infinity] [entire] = [entire];
+	powRev2 [0.5, infinity] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
 	// x overlappedBy [0, 1], z metBy [0, 1]
 	powRev2 [0.5, 2.0] [1.0, 2.0] [entire] = [entire];
 	powRev2 [0.5, 2.0] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [0.5, 2.0] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [1.0, 2.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, 2.0] [1.0, infinity] [entire] = [entire];
+	powRev2 [0.5, 2.0] [1.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, 2.0] [1.0, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [0.5, infinity] [1.0, infinity] [entire] = [entire];
+	powRev2 [0.5, infinity] [1.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [0.5, infinity] [1.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x overlappedBy [0, 1], z after [0, 1]
 	powRev2 [0.5, 2.0] [2.0, 4.0] [entire] = [entire];
 	powRev2 [0.5, 2.0] [2.0, 4.0] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [0.5, 2.0] [2.0, 4.0] [0.0, infinity] = [1.0, infinity];
+	powRev2 [0.5, infinity] [2.0, 4.0] [entire] = [entire];
+	powRev2 [0.5, infinity] [2.0, 4.0] [-infinity, 0.0] = [-infinity, -1.0];
+	powRev2 [0.5, infinity] [2.0, 4.0] [0.0, infinity] = [0.0, infinity];
 	// x metBy [0, 1], z overlaps/starts [0, 1]
 	powRev2 [1.0, 2.0] [0.0, 0.5] [entire] = [-infinity, -1.0];
 	powRev2 [1.0, 2.0] [0.0, 0.5] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [1.0, 2.0] [0.0, 0.5] [0.0, infinity] = [empty];
+	powRev2 [1.0, infinity] [0.0, 0.5] [entire] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.0, 0.5] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.0, 0.5] [0.0, infinity] = [empty];
 	// x metBy [0, 1], z containedBy [0, 1]
 	powRev2 [1.0, 2.0] [0.25, 0.5] [entire] = [-infinity, -1.0];
 	powRev2 [1.0, 2.0] [0.25, 0.5] [-infinity, 0.0] = [-infinity, -1.0];
 	powRev2 [1.0, 2.0] [0.25, 0.5] [0.0, infinity] = [empty];
+	powRev2 [1.0, infinity] [0.25, 0.5] [entire] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.25, 0.5] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.25, 0.5] [0.0, infinity] = [empty];
 	// x metBy [0, 1], z finishes [0, 1]
 	powRev2 [1.0, 2.0] [0.5, 1.0] [entire] = [entire];
 	powRev2 [1.0, 2.0] [1.0, 1.0] [entire] = [entire];
@@ -720,44 +853,95 @@ testcase minimal.powRev2_test {
 	powRev2 [1.0, 2.0] [1.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [1.0, 2.0] [0.5, 1.0] [0.0, infinity] = [0.0, infinity];
 	powRev2 [1.0, 2.0] [1.0, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [0.5, 1.0] [entire] = [entire];
+	powRev2 [1.0, infinity] [1.0, 1.0] [entire] = [entire];
+	powRev2 [1.0, infinity] [0.5, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [1.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.5, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [1.0, 1.0] [0.0, infinity] = [0.0, infinity];
 	// x metBy [0, 1], z equals/finishedBy [0, 1]
 	powRev2 [1.0, 2.0] [0.0, 1.0] [entire] = [entire];
 	powRev2 [1.0, 2.0] [0.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [1.0, 2.0] [0.0, 1.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [0.0, 1.0] [entire] = [entire];
+	powRev2 [1.0, infinity] [0.0, 1.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.0, 1.0] [0.0, infinity] = [0.0, infinity];
 	// x metBy [0, 1], z contains/startedBy [0, 1]
 	powRev2 [1.0, 2.0] [0.0, 2.0] [entire] = [entire];
 	powRev2 [1.0, 2.0] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [1.0, 2.0] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [0.0, 2.0] [entire] = [entire];
+	powRev2 [1.0, infinity] [0.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, 2.0] [0.0, infinity] [entire] = [entire];
+	powRev2 [1.0, 2.0] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, 2.0] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [0.0, infinity] [entire] = [entire];
+	powRev2 [1.0, infinity] [0.0, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.0, infinity] [0.0, infinity] = [0.0, infinity];
 	// x metBy [0, 1], z overlappedBy [0, 1]
 	powRev2 [1.0, 2.0] [0.5, 2.0] [entire] = [entire];
 	powRev2 [1.0, 2.0] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [1.0, 2.0] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [0.5, 2.0] [entire] = [entire];
+	powRev2 [1.0, infinity] [0.5, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.5, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, 2.0] [0.5, infinity] [entire] = [entire];
+	powRev2 [1.0, 2.0] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, 2.0] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [0.5, infinity] [entire] = [entire];
+	powRev2 [1.0, infinity] [0.5, infinity] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [0.5, infinity] [0.0, infinity] = [0.0, infinity];
 	// x metBy [0, 1], z metBy [0, 1]
 	powRev2 [1.0, 2.0] [1.0, 2.0] [entire] = [entire];
+	powRev2 [1.0, 2.0] [1.0, infinity] [entire] = [entire];
+	powRev2 [1.0, infinity] [1.0, infinity] [entire] = [entire];
+	powRev2 [1.0, infinity] [1.0, 2.0] [entire] = [entire];
 	powRev2 [1.0, 2.0] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
+	powRev2 [1.0, infinity] [1.0, 2.0] [-infinity, 0.0] = [-infinity, 0.0];
 	powRev2 [1.0, 2.0] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
+	powRev2 [1.0, infinity] [1.0, 2.0] [0.0, infinity] = [0.0, infinity];
 	// x metBy [0, 1], z after [0, 1]
 	powRev2 [1.0, 2.0] [2.0, 4.0] [entire] = [1.0, infinity];
+	powRev2 [1.0, infinity] [2.0, 4.0] [entire] = [0.0, infinity];
 	powRev2 [1.0, 2.0] [2.0, 4.0] [-infinity, 0.0] = [empty];
+	powRev2 [1.0, infinity] [2.0, 4.0] [-infinity, 0.0] = [empty];
 	powRev2 [1.0, 2.0] [2.0, 4.0] [0.0, infinity] = [1.0, infinity];
+	powRev2 [1.0, infinity] [2.0, 4.0] [0.0, infinity] = [0.0, infinity];
 	// x after [0, 1], z overlaps/starts [0, 1]
 	powRev2 [2.0, 4.0] [0.0, 0.5] [entire] = [-infinity, -0.5];
+	powRev2 [2.0, infinity] [0.0, 0.5] [entire] = [-infinity, 0.0];
+	powRev2 [2.0, infinity] [0.0, 0.5] [0.0, infinity] = [empty];
 	// x after [0, 1], z containedBy [0, 1]
 	powRev2 [2.0, 4.0] [0.25, 0.5] [entire] = [-2.0, -0.5];
+	powRev2 [2.0, infinity] [0.25, 0.5] [entire] = [-2.0, 0.0];
+	powRev2 [2.0, infinity] [0.25, 0.5] [0.0, infinity] = [empty];
 	// x after [0, 1], z finishes [0, 1]
 	powRev2 [2.0, 4.0] [0.5, 1.0] [entire] = [-1.0, 0.0];
+	powRev2 [2.0, infinity] [0.5, 1.0] [entire] = [-1.0, 0.0];
 	powRev2 [2.0, 4.0] [1.0, 1.0] [entire] = [0.0, 0.0];
+	powRev2 [2.0, infinity] [1.0, 1.0] [entire] = [0.0, 0.0];
 	// x after [0, 1], z equals/finishedBy [0, 1]
 	powRev2 [2.0, 4.0] [0.0, 1.0] [entire] = [-infinity, 0.0];
+	powRev2 [2.0, infinity] [0.0, 1.0] [entire] = [-infinity, 0.0];
 	powRev2 [2.0, 4.0] [0.0, 1.0] [0.0, infinity] = [0.0, 0.0];
+	powRev2 [2.0, infinity] [0.0, 1.0] [0.0, infinity] = [0.0, 0.0];
 	// x after [0, 1], z contains/startedBy [0, 1]
 	powRev2 [2.0, 4.0] [0.0, 2.0] [entire] = [-infinity, 1.0];
+	powRev2 [2.0, infinity] [0.0, 2.0] [entire] = [-infinity, 1.0];
 	// x after [0, 1], z overlappedBy [0, 1]
 	powRev2 [2.0, 4.0] [0.5, 2.0] [entire] = [-1.0, 1.0];
+	powRev2 [2.0, infinity] [0.5, 2.0] [entire] = [-1.0, 1.0];
 	// x after [0, 1], z metBy [0, 1]
 	powRev2 [2.0, 4.0] [1.0, 2.0] [entire] = [0.0, 1.0];
+	powRev2 [2.0, infinity] [1.0, 2.0] [entire] = [0.0, 1.0];
 	powRev2 [2.0, 4.0] [1.0, 2.0] [-infinity, 0.0] = [0.0, 0.0];
+	powRev2 [2.0, infinity] [1.0, 2.0] [-infinity, 0.0] = [0.0, 0.0];
 	// x after [0, 1], z after [0, 1]
 	powRev2 [2.0, 4.0] [2.0, 4.0] [entire] = [0.5, 2.0];
-
+	powRev2 [2.0, infinity] [2.0, 4.0] [entire] = [0.0, 2.0];
+	powRev2 [2.0, infinity] [2.0, 4.0] [-infinity, 0.0] = [empty];
+    powRev2 [2.0, 4.0] [2.0, infinity] [entire] = [0.5, infinity];
+	powRev2 [2.0, infinity] [2.0, infinity] [entire] = [0.0, infinity];
+	powRev2 [2.0, infinity] [2.0, infinity] [-infinity, 0.0] = [empty];
 }
